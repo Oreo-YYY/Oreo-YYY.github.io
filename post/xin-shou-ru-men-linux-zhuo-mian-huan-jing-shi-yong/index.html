@@ -2,24 +2,25 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于 | Gridea</title>
+<title>新手入门-Linux桌面环境使用 | Gridea</title>
 <link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1607422937139">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="关于 | Gridea - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="新手入门-Linux桌面环境使用 | Gridea - Atom Feed" href="https://y-rui.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="
-欢迎来到我的小站呀，很高兴遇见你！🤝
+    <meta name="description" content="1. 打开终端
+cd Code
+//进入Code文件夹
+touch hello_shiyanlou.c
+//创建hello_shiyanlou.c文件
 
-🏠 关于本站
-👨‍💻 博主是谁
-⛹ 兴趣爱好
-📬 联系我呀
-..." />
-    <meta name="keywords" content="" />
+2. 输入C语言代码
+gedit hello_shiyanlou.c
+//用gedit..." />
+    <meta name="keywords" content="Linux,实验楼" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -81,37 +82,64 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于
+              新手入门-Linux桌面环境使用
             </h2>
             <div class="post-info">
               <span>
-                2019-01-25
+                2020-12-07
               </span>
               <span>
                 1 min read
               </span>
               
+                <a href="https://y-rui.github.io/tag/QuWrUmSsX/" class="post-tag">
+                  # Linux
+                </a>
+              
+                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
+                  # 实验楼
+                </a>
+              
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
+                <h2 id="1-打开终端">1. 打开终端</h2>
+<pre><code>cd Code
+//进入Code文件夹
+touch hello_shiyanlou.c
+//创建hello_shiyanlou.c文件
+</code></pre>
+<h2 id="2-输入c语言代码">2. 输入C语言代码</h2>
+<pre><code>gedit hello_shiyanlou.c
+//用gedit编辑器将hello_shiyanlou.c文件打开
+</code></pre>
+<p>在gedit里面输入以下代码</p>
+<pre><code>#include&lt;stdio.h&gt;
+int main()
+{
+    printf(&quot;Hello,Shiyanlou.&quot;);
+    return 0;
+}
+</code></pre>
+<h2 id="3-编译程序">3. 编译程序</h2>
+<pre><code>gcc -o hello_shiyanlou hello_shiyanlou.c
+//编译hello_shiyanlou.c程序并且生成hello_shiyanlou文件
+</code></pre>
+<h2 id="4-执行程序">4. 执行程序</h2>
+<pre><code>./hello_shiyanlou
+//执行hello_shiyanlou程序
+</code></pre>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99">🏠 关于本站</a></li>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">👨‍💻 博主是谁</a></li>
-<li><a href="#%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD">⛹ 兴趣爱好</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80">📬 联系我呀</a></li>
+<li><a href="#1-%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF">1. 打开终端</a></li>
+<li><a href="#2-%E8%BE%93%E5%85%A5c%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81">2. 输入C语言代码</a></li>
+<li><a href="#3-%E7%BC%96%E8%AF%91%E7%A8%8B%E5%BA%8F">3. 编译程序</a></li>
+<li><a href="#4-%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F">4. 执行程序</a></li>
 </ul>
 </li>
 </ul>
@@ -121,6 +149,15 @@
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/hello-gridea/">
+              <h3 class="post-title">
+                Hello Gridea
+              </h3>
+            </a>
+          </div>
         
 
         

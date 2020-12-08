@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://y-rui.github.io</id>
     <title>Gridea</title>
-    <updated>2020-12-07T11:29:56.978Z</updated>
+    <updated>2020-12-08T10:22:42.051Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://y-rui.github.io"/>
     <link rel="self" href="https://y-rui.github.io/atom.xml"/>
@@ -10,6 +10,56 @@
     <logo>https://y-rui.github.io/images/avatar.png</logo>
     <icon>https://y-rui.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[Jupyter Notebook 快捷键]]></title>
+        <id>https://y-rui.github.io/post/jupyter-notebook-kuai-jie-jian/</id>
+        <link href="https://y-rui.github.io/post/jupyter-notebook-kuai-jie-jian/">
+        </link>
+        <updated>2020-12-08T10:18:30.000Z</updated>
+        <content type="html"><![CDATA[<ul>
+<li><code>B</code>：在当前单元格下方新建空白单元格。</li>
+<li><code>M</code>：将单元格格式转换为 Markdown。</li>
+<li><code>Y</code>：将单元格格式转换为 Code。</li>
+<li>连续按 <code>D</code>+<code>D</code>：删除当前单元格。（慎用，推荐使用 X 剪切单元格代替，因为其可以起到删除效果，且删错了还可以粘贴回来）</li>
+<li><code>Shift + Enter</code>：运行当前单元格内容。（当 Markdown 单元格处于编辑状态时，运行即可复原）</li>
+<li><code>Tab</code>: 代码补全</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[新手入门-Linux桌面环境使用]]></title>
+        <id>https://y-rui.github.io/post/xin-shou-ru-men-linux-zhuo-mian-huan-jing-shi-yong/</id>
+        <link href="https://y-rui.github.io/post/xin-shou-ru-men-linux-zhuo-mian-huan-jing-shi-yong/">
+        </link>
+        <updated>2020-12-07T12:03:17.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="1-打开终端">1. 打开终端</h2>
+<pre><code>cd Code
+//进入Code文件夹
+touch hello_shiyanlou.c
+//创建hello_shiyanlou.c文件
+</code></pre>
+<h2 id="2-输入c语言代码">2. 输入C语言代码</h2>
+<pre><code>gedit hello_shiyanlou.c
+//用gedit编辑器将hello_shiyanlou.c文件打开
+</code></pre>
+<p>在gedit里面输入以下代码</p>
+<pre><code>#include&lt;stdio.h&gt;
+int main()
+{
+    printf(&quot;Hello,Shiyanlou.&quot;);
+    return 0;
+}
+</code></pre>
+<h2 id="3-编译程序">3. 编译程序</h2>
+<pre><code>gcc -o hello_shiyanlou hello_shiyanlou.c
+//编译hello_shiyanlou.c程序并且生成hello_shiyanlou文件
+</code></pre>
+<h2 id="4-执行程序">4. 执行程序</h2>
+<pre><code>./hello_shiyanlou
+//执行hello_shiyanlou程序
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://y-rui.github.io/post/hello-gridea/</id>
