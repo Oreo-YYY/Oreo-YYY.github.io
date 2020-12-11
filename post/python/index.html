@@ -2,25 +2,26 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>新手入门-Linux桌面环境使用 | Gridea</title>
+<title>Python | Gridea</title>
 <link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1607697670977">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="新手入门-Linux桌面环境使用 | Gridea - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="Python | Gridea - Atom Feed" href="https://y-rui.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="1. 打开终端
-cd Code
-//进入Code文件夹
-touch hello_shiyanlou.c
-//创建hello_shiyanlou.c文件
+    <meta name="description" content="逢7就跳过
 
-2. 输入C语言代码
-gedit hello_shiyanlou.c
-//用gedit..." />
-    <meta name="keywords" content="Linux,实验楼" />
+while
+
+a = 0
+while a &lt; 100:
+    a = a + 1
+    if a % 7 == 0 or a % 10 == 7 or a // 10 == 7:
+        continue
+ ..." />
+    <meta name="keywords" content="Python" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -82,53 +83,44 @@ gedit hello_shiyanlou.c
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              新手入门-Linux桌面环境使用
+              Python
             </h2>
             <div class="post-info">
               <span>
-                2020-05-07
+                2020-05-08
               </span>
               <span>
                 1 min read
               </span>
               
-                <a href="https://y-rui.github.io/tag/QuWrUmSsX/" class="post-tag">
-                  # Linux
-                </a>
-              
-                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
-                  # 实验楼
+                <a href="https://y-rui.github.io/tag/uGwwKRarA/" class="post-tag">
+                  # Python
                 </a>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h2 id="1-打开终端">1. 打开终端</h2>
-<pre><code>cd Code
-//进入Code文件夹
-touch hello_shiyanlou.c
-//创建hello_shiyanlou.c文件
+                <h2 id="逢7就跳过">逢7就跳过</h2>
+<ul>
+<li>while</li>
+</ul>
+<pre><code>a = 0
+while a &lt; 100:
+    a = a + 1
+    if a % 7 == 0 or a % 10 == 7 or a // 10 == 7:
+        continue
+    else:
+        print(a)
 </code></pre>
-<h2 id="2-输入c语言代码">2. 输入C语言代码</h2>
-<pre><code>gedit hello_shiyanlou.c
-//用gedit编辑器将hello_shiyanlou.c文件打开
-</code></pre>
-<p>在gedit里面输入以下代码</p>
-<pre><code>#include&lt;stdio.h&gt;
-int main()
-{
-    printf(&quot;Hello,Shiyanlou.&quot;);
-    return 0;
-}
-</code></pre>
-<h2 id="3-编译程序">3. 编译程序</h2>
-<pre><code>gcc -o hello_shiyanlou hello_shiyanlou.c
-//编译hello_shiyanlou.c程序并且生成hello_shiyanlou文件
-</code></pre>
-<h2 id="4-执行程序">4. 执行程序</h2>
-<pre><code>./hello_shiyanlou
-//执行hello_shiyanlou程序
+<ul>
+<li>for</li>
+</ul>
+<pre><code>for a in range(1,101):
+    if a % 7 == 0 or a % 10 == 7 or a // 10 == 7:
+        continue
+    else:
+        print(a)
 </code></pre>
 
               </div>
@@ -136,10 +128,7 @@ int main()
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#1-%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF">1. 打开终端</a></li>
-<li><a href="#2-%E8%BE%93%E5%85%A5c%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81">2. 输入C语言代码</a></li>
-<li><a href="#3-%E7%BC%96%E8%AF%91%E7%A8%8B%E5%BA%8F">3. 编译程序</a></li>
-<li><a href="#4-%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F">4. 执行程序</a></li>
+<li><a href="#%E9%80%A27%E5%B0%B1%E8%B7%B3%E8%BF%87">逢7就跳过</a></li>
 </ul>
 </li>
 </ul>
@@ -152,9 +141,9 @@ int main()
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://y-rui.github.io/post/hello-gridea/">
+            <a href="https://y-rui.github.io/post/jupyter-notebook-kuai-jie-jian/">
               <h3 class="post-title">
-                Hello Gridea
+                Jupyter Notebook 快捷键
               </h3>
             </a>
           </div>

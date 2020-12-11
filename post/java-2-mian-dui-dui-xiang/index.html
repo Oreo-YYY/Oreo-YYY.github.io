@@ -1,0 +1,723 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Java-2-面对对象 | Gridea</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1607697670977">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Java-2-面对对象 | Gridea - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="类
+定义类
+
+定义类名，用于区分不同的类。如下代码中 public class 后面跟的就是类名。class是声明类的关键字，类名后面跟上大括号，大括号里面就是类的一些信息。public 为权限修饰符
+编写类的属性。对象有什么，需要通过属性..." />
+    <meta name="keywords" content="Java,实验楼" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1607697670977" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Java-2-面对对象
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-07-18
+              </span>
+              <span>
+                16 min read
+              </span>
+              
+                <a href="https://y-rui.github.io/tag/6kU31awxe/" class="post-tag">
+                  # Java
+                </a>
+              
+                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
+                  # 实验楼
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="类">类</h2>
+<p>定义类</p>
+<ul>
+<li>定义类名，用于区分不同的类。如下代码中 public class 后面跟的就是类名。class是声明类的关键字，类名后面跟上大括号，大括号里面就是类的一些信息。public 为权限修饰符</li>
+<li>编写类的属性。对象有什么，需要通过属性来表示。属性的定义是写在类名后面的大括号里，在定义属性时，要明确属性的类型。在一个类当中可以写一个或多个属性。当然也可以不定义属性</li>
+<li>编写类的方法。方法也是写在大括号里面。可以定义一个方法或多个方法，当然也可以不定义方法</li>
+</ul>
+<pre><code>public class People {
+//属性（成员变量） 有什么
+    double height;  //身高
+    int age;     //年龄
+    int sex;    //性别，0为男性，非0为女性
+
+//方法 干什么
+    void cry(){
+        System.out.println(&quot;我在哭！&quot;);
+    }
+    void laugh(){
+        System.out.println(&quot;我在笑！&quot;);
+    }
+    void printBaseMes(){
+        System.out.println(&quot;我的身高是&quot;+height+&quot;cm&quot;);
+        System.out.println(&quot;我的年龄是&quot;+age+&quot;岁&quot;);
+        if(this.sex==0)
+            System.out.println(&quot;我是男性！&quot;);
+        else
+            System.out.println(&quot;我是女性！&quot;);
+
+    }
+}
+</code></pre>
+<p>一个类可以包含以下<strong>类型变量</strong></p>
+<ul>
+<li>局部变量：在方法、构造方法或者语句块中定义的变量被称为局部变量。变量声明和初始化都是在方法中，方法结束后，变量就会自动销毁</li>
+<li>成员变量：成员变量是定义在类中，方法体之外的变量。这种变量在创建对象的时候实例化。成员变量可以被类中方法、构造方法和特定类的语句块访问</li>
+<li>类变量：也叫静态变量，类变量也声明在类中，方法体之外，但必须声明为 static 类型</li>
+</ul>
+<h2 id="对象">对象</h2>
+<pre><code>People LiLei = new People();
+</code></pre>
+<pre><code>public class NewObject {
+    public static void main(String[] args) {
+        People LiLei = new People(); //创建一个People对象LiLei
+
+        LiLei.height =170;
+        LiLei.age = 20;
+        LiLei.sex = 1;
+
+        LiLei.printBaseMes();
+    }
+}
+</code></pre>
+<pre><code>$ javac NewObject.java People.java
+$ java NewObject
+我的身高是170.0cm
+我的年龄是20岁
+我是女性！
+</code></pre>
+<h2 id="构造方法">构造方法</h2>
+<pre><code>public class People{
+    //无参构造方法
+    public People(){
+
+    }
+    //有一个参数的构造方法
+    public People(int age){
+
+    }
+}
+</code></pre>
+<pre><code>public class People {
+//属性（成员变量）有什么
+    double height;     //身高
+    int age;           //年龄
+    int sex;       //性别，0为男性，非0为女性
+
+    //构造方法，初始化了所有属性
+    public People(double h, int a, int s){
+        height = h;
+        age = a;
+        sex = s;
+    }
+}
+</code></pre>
+<pre><code>//创建对象，调用我们自己定义的有参构造方法
+People XiaoMing = new People(168, 21, 1);
+</code></pre>
+<ul>
+<li>上面的例子中通过 new 关键字将类实例化成对象，而 new 后面跟的就是构造方法。于是可以知道 new + 构造方法 可以创建一个新的对象</li>
+</ul>
+<h2 id="引用与对象实例">引用与对象实例</h2>
+<ul>
+<li>在新建对象实例时，需要为对象实例设置一个对象名，就像这样</li>
+</ul>
+<pre><code>Object object=new Object();
+</code></pre>
+<ul>
+<li>那么变量 object 就真的是 Object 对象么，这里其实只是创建了一个 object 对象的引用。如果同学们学过 C 语言，这里就和指针一样，变量 object 保存的其实 Object 对象的引用，指向了 Object 对象</li>
+</ul>
+<pre><code> ----------           ----------
+ | object |---------&gt; | Object |
+ ----------           ----------
+ |        |           |        |
+ ----------           ----------
+ |        |           |        |
+ ----------           ----------
+ |        |           |        |
+ ----------           ----------
+ |        |           |        |
+ ----------           ----------
+</code></pre>
+<ul>
+<li>再看下面的例子</li>
+</ul>
+<pre><code>Object object1 = new Object();
+Object object2 = object1;
+System.out.println(object1 == object2);
+</code></pre>
+<ul>
+<li>运行得到的结果为 true，说明 object1 和 object2 的内存地址相同 (== 会比较两个对象的内存地址是否相同），它们实际上是引用同一对象，如果改变 object1 对象内部的属性，那么 object2 的属性同样会改变</li>
+</ul>
+<h2 id="static">static</h2>
+<p><strong>静态成员</strong></p>
+<ul>
+<li>Java 中被 static 修饰的成员称为静态成员或类成员。它属于整个类所有，而不是某个对象所有，即被类的所有对象所共享。静态成员可以使用类名直接访问，也可以使用对象名进行访问</li>
+</ul>
+<pre><code>public class StaticTest{
+    public static String string=&quot;shiyanlou&quot;;
+    public static void main(String[] args){
+        //静态成员不需要实例化 直接就可以访问
+        System.out.println(StaticTest.string);
+        //如果不加static关键字 需要这样访问
+        StaticTest staticTest=new StaticTest();
+        System.out.println(staticTest.string);
+        //如果加上static关键字，上面的两种方法都可以使用
+    }
+}
+</code></pre>
+<p><strong>静态方法</strong></p>
+<ul>
+<li>被 static 修饰的方法是静态方法，静态方法不依赖于对象，不需要将类实例化便可以调用，由于不实例化也可以调用，所以不能有 this，也不能访问非静态成员变量和非静态方法。但是非静态成员变量和非静态方法可以访问静态方法</li>
+</ul>
+<h2 id="final">final</h2>
+<p>final 关键字可以修饰类、方法、属性和变量</p>
+<ol>
+<li>final 修饰类，则该类不允许被继承，为最终类</li>
+<li>final 修饰方法，则该方法不允许被覆盖（重写）</li>
+<li>final 修饰属性：则该类的属性不会进行隐式的初始化（类的初始化属性必须有值）或在构造方法中赋值（但只能选其一）</li>
+<li>final 修饰变量，则该变量的值只能赋一次值，即常量</li>
+</ol>
+<pre><code>//静态常量
+public final static String SHI_YAN_LOU=&quot;shiyanlou&quot;;
+</code></pre>
+<h2 id="权限修饰符">权限修饰符</h2>
+<table>
+<thead>
+<tr>
+<th>访问修饰符</th>
+<th>本类</th>
+<th>同包</th>
+<th>子类</th>
+<th>其他</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>private</td>
+<td>✔️</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>默认</td>
+<td>✔️</td>
+<td>✔️</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>protected</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td></td>
+</tr>
+<tr>
+<td>public</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>不同的访问修饰符的访问范围，比如 private 修饰的属性或者方法，只能在当前类中访问或者使用。默认 是什么修饰符都不加，默认在当前类中和同一包下都可以访问和使用。protected 修饰的属性或者方法，对同一包内的类和所有子类可见。public 修饰的属性或者方法，对所有类可见</li>
+</ul>
+<h2 id="封装">封装</h2>
+<ul>
+<li>封装，即隐藏对象的属性和实现细节，仅对外公开接口，控制在程序中属性的读和修改的访问级别</li>
+</ul>
+<p>这样做有什么好处？</p>
+<ol>
+<li>只能通过规定的方法访问数据</li>
+<li>隐藏类的实例细节，方便修改和实现</li>
+</ol>
+<p>如何去实现类的封装呢？</p>
+<ol>
+<li>修改属性的可见性，在属性的前面添加修饰符 (private)</li>
+<li>对每个值属性提供对外的公共方法访问，如创建 getter/setter（取值和赋值）方法，用于对私有属性的访问</li>
+<li>在 getter/setter 方法里加入属性的控制语句，例如我们可以加一个判断语句，对于非法输入给予否定</li>
+</ol>
+<pre><code>public class People {
+    //属性（成员变量）有什么，前面添加了访问修饰符private
+    //变成了私有属性，必须通过方法调用
+    private double height;     //身高
+
+    //属性已经封装好了，如果用户需要调用属性
+    //必须用getter和setter方法进行调用
+    //getter和setter方法需要程序员自己定义
+    public double getHeight(){
+    //getter 方法命名是get关键字加属性名（属性名首字母大写）
+    //getter 方法一般是为了得到属性值
+      return height;
+    }
+
+    //同理设置我们的setter方法
+    //setter 方法命名是set关键字加属性名（首字母大写）
+    //setter 方法一般是给属性值赋值，所以有一个参数
+    public void setHeight(double newHeight){
+      height = newHeight;
+    }
+}
+</code></pre>
+<pre><code>public class NewObject {
+
+    public static void main(String[] args) {
+        People LiLei = new People();    //创建了一个People对象LiLei
+
+        //利用setter方法为属性赋值
+        LiLei.setHeight(170.0);
+
+        //利用getter方法取属性值
+        System.out.println(&quot;LiLei的身高是&quot;+LiLei.getHeight());
+    }
+}
+</code></pre>
+<pre><code>$ javac NewObject.java People.java
+$ java NewObject
+LiLei的身高是170.0
+</code></pre>
+<h2 id="this">this</h2>
+<ul>
+<li>this 关键字代表当前对象。使用 this.属性 操作当前对象的属性，this.方法 调用当前对象的方法</li>
+</ul>
+<pre><code>public void setAge(int age) {
+  this.age = age;
+}
+public int getAge() {
+  return age;
+}
+</code></pre>
+<ul>
+<li>当成员变量和局部变量之间发生冲突时，在属性名前面添加了 this 关键字。 此时就代表将一个参数的值赋给当前对象的属性。同理 this 关键字可以调用当前对象的方法</li>
+</ul>
+<h2 id="继承">继承</h2>
+<pre><code>public class Animal {
+    public int legNum;     //动物四肢的数量
+
+    //类方法
+    public void bark() {
+        System.out.println(&quot;动物叫！&quot;);
+    }
+}
+</code></pre>
+<pre><code>public class Dog extends Animal {
+}
+</code></pre>
+<pre><code>public class Test{
+    public static void main(String[] args) {
+        Dog a = new Dog();
+        a.legNum = 4;
+        a.bark();
+    }
+}
+</code></pre>
+<pre><code>$ javac Test.java Animal.java Dog.java
+$ java Test
+动物叫！
+</code></pre>
+<p>继承的特点</p>
+<ol>
+<li>子类拥有父类除 private 以外的所有属性和方法</li>
+<li>子类可以拥有自己的属性和方法</li>
+<li>子类可以重写实现父类的方法</li>
+<li>Java 中的继承是单继承，一个类只有一个父类</li>
+</ol>
+<ul>
+<li>Java 实现多继承的一个办法是 implements（实现）接口，但接口不能有非静态的属性</li>
+</ul>
+<h2 id="super">super</h2>
+<p>super 关键字在子类内部使用，代表父类对象</p>
+<ol>
+<li>访问父类的属性 super.属性名</li>
+<li>访问父类的方法 super.bark()</li>
+<li>子类构造方法需要调用父类的构造方法时，在子类的构造方法体里最前面的位置：super()</li>
+</ol>
+<h2 id="方法重载与重写">方法重载与重写</h2>
+<p><strong>方法重载</strong></p>
+<ul>
+<li>方法重载是指在一个类中定义多个同名的方法，但要求每个方法具有不同的参数的类型或参数的个数。方法重载一般用于创建一组任务相似但是参数不同的方法</li>
+</ul>
+<pre><code>public class Test {
+    void f(int i) {
+        System.out.println(&quot;i=&quot; + i);
+    }
+
+    void f(float f) {
+        System.out.println(&quot;f=&quot; + f);
+    }
+
+    void f(String s) {
+        System.out.println(&quot;s=&quot; + s);
+    }
+
+    void f(String s1, String s2){
+        System.out.println(&quot;s1+s2=&quot;+(s1+s2));
+    }
+
+    void f(String s, int i){
+        System.out.println(&quot;s=&quot;+s+&quot;,i=&quot;+i);
+    }
+
+    public static void main(String[] args) {
+        Test test = new Test();
+        test.f(3456);
+        test.f(34.56f);
+        test.f(&quot;abc&quot;);
+        test.f(&quot;abc&quot;,&quot;def&quot;);
+        test.f(&quot;abc&quot;,3456);
+    }
+}
+</code></pre>
+<pre><code>$ javac Test.java
+$ java Test
+i=3456
+f=34.56
+s=abc
+s1+s2=abcdef
+s=abc,i=3456
+</code></pre>
+<p>方法重载有以下几种规则</p>
+<ol>
+<li>方法中的参数列表必须不同。比如：参数个数不同或者参数类型不同</li>
+<li>重载的方法中允许抛出不同的异常</li>
+<li>可以有不同的返回值类型，但是参数列表必须不同</li>
+<li>可以有不同的访问修饰符</li>
+</ol>
+<p><strong>方法重写</strong></p>
+<ul>
+<li>子类可以继承父类的方法，但如果子类对父类的方法不满意，想在里面加入适合自己的一些操作时，就需要将方法进行重写。并且子类在调用方法中，优先调用子类的方法</li>
+<li>当然在方法重写时要注意，重写的方法一定要与原父类的方法语法保持一致，比如返回值类型，参数类型及个数，和方法名都必须一致</li>
+</ul>
+<p>比如 Animal 类中有 bark() 这个方法代表了动物叫，但是不同的动物有不同的叫法，比如狗是汪汪汪，猫是喵喵喵</p>
+<pre><code>public class Animal {
+    //类方法
+    public void bark() {
+        System.out.println(&quot;动物叫！&quot;);
+    }
+}
+</code></pre>
+<pre><code>public class Dog extends Animal {
+       //重写父类的bark方法
+        public void bark() {
+        System.out.println(&quot;汪！汪！汪！&quot;);
+    }
+}
+</code></pre>
+<pre><code>public class Test{
+    public static void main(String args[]){
+           Animal a = new Animal(); // Animal 对象
+        Dog d = new Dog();   // Dog 对象
+
+          Animal b = new Dog(); // Dog 对象,向上转型为Animal类型，具体会在后面的内容进行详解
+
+          a.bark();// 执行 Animal 类的方法
+         d.bark();//执行 Dog 类的方法
+          b.bark();//执行 Dog 类的方法
+       }
+}
+</code></pre>
+<pre><code>$ javac Test.java Dog.java Animal.java
+$ java Test
+动物叫！
+汪！汪！汪！
+汪！汪！汪！
+</code></pre>
+<h2 id="多态">多态</h2>
+<ul>
+<li>多态是指允许不同类的对象对同一消息做出响应。即同一消息可以根据发送对象的不同而采用多种不同的行为方式。多态也称作动态绑定（dynamic binding），是指在执行期间判断所引用对象的实际类型，根据其实际的类型调用其相应的方法</li>
+<li>通俗地讲，只通过父类就能够引用不同的子类，这就是多态，我们只有在运行的时候才会知道引用变量所指向的具体实例对象</li>
+</ul>
+<p>多态的实现条件</p>
+<ul>
+<li>Java 实现多态有三个必要条件：继承、重写和向上转型（即父类引用指向子类对象）</li>
+<li>只有满足上述三个条件，才能够在同一个继承结构中使用统一的逻辑实现代码处理不同的对象，从而达到执行不同的行为</li>
+</ul>
+<p>多态的实现方式</p>
+<ul>
+<li>Java 中多态的实现方式：继承父类进行方法重写，抽象类和抽象方法，接口实现</li>
+</ul>
+<p><strong>向上转型</strong></p>
+<pre><code>Animal a = new Animal();  //a是父类的引用指向的是本类的对象
+
+Animal b = new Dog(); //b是父类的引用指向的是子类的对象
+</code></pre>
+<p>在这里，可以认为由于 Dog 继承于 Animal，所以 Dog 可以自动向上转型为 Animal，所以 b 是可以指向 Dog 实例对象的</p>
+<ul>
+<li>注：不能使用一个子类的引用去指向父类的对象，因为子类对象中可能会含有父类对象中所没有的属性和方法。</li>
+</ul>
+<p>如果定义了一个指向子类对象的父类引用类型，那么它除了能够引用父类中定义的所有属性和方法外，还可以使用子类强大的功能。但是对于只存在于子类的方法和属性就不能获取</p>
+<pre><code>class Animal {
+    //父类方法
+    public void bark() {
+        System.out.println(&quot;动物叫！&quot;);
+    }
+}
+
+class Dog extends Animal {
+
+    //子类重写父类的bark方法
+    public void bark() {
+        System.out.println(&quot;汪、汪、汪！&quot;);
+    }
+    //子类自己的方法
+    public void dogType() {
+        System.out.println(&quot;这是什么品种的狗？&quot;);
+    }
+}
+
+
+public class Test {
+
+    public static void main(String[] args) {
+        Animal a = new Animal();
+        Animal b = new Dog();
+        Dog d = new Dog();
+
+        a.bark();
+        b.bark();
+        //b.dogType();
+        //b.dogType()编译不通过
+        d.bark();
+        d.dogType();
+    }
+
+}
+</code></pre>
+<pre><code>$ javac Test.java
+$ java Test
+动物叫！
+汪、汪、汪！
+汪、汪、汪！
+这是什么品种的狗？
+</code></pre>
+<p>在这里，由于 b 是父类的引用，指向子类的对象，因此不能获取子类的方法（dogType() 方法）, 同时当调用 bark() 方法时，由于子类重写了父类的 bark() 方法，所以调用子类中的 bark() 方法</p>
+<ul>
+<li>因此，向上转型，在运行时，会遗忘子类对象中与父类对象中不同的方法，也会覆盖与父类中相同的方法——重写（方法名，参数都相同）</li>
+</ul>
+<h2 id="抽象类">抽象类</h2>
+<ul>
+<li>在定义类时，前面加上 abstract 关键字修饰的类叫抽象类</li>
+</ul>
+<p>抽象类中有抽象方法，这种方法是不完整的，仅有声明而没有方法体。抽象方法声明语法如下</p>
+<pre><code>abstract void f();  //f()方法是抽象方法
+</code></pre>
+<p>那我们什么时候会用到抽象类呢？</p>
+<ol>
+<li>在某些情况下，某个父类只是知道其子类应该包含怎样的方法，但无法准确知道这些子类如何实现这些方法。也就是说抽象类是约束子类必须要实现哪些方法，而并不关注方法如何去实现</li>
+<li>从多个具有相同特征的类中抽象出一个抽象类，以这个抽象类作为子类的模板，从而避免了子类设计的随意性</li>
+</ol>
+<p>所以由上可知，抽象类是限制规定子类必须实现某些方法，但不关注实现细节<br>
+那抽象类如何用代码实现呢，它的规则如下：</p>
+<ol>
+<li>用 abstract 修饰符定义抽象类</li>
+<li>用 abstract 修饰符定义抽象方法，只用声明，不需要实现</li>
+<li>包含抽象方法的类就是抽象类</li>
+<li>抽象类中可以包含普通的方法，也可以没有抽象方法</li>
+<li>抽象类的对象不能直接创建，通常是定义引用变量指向子类对象</li>
+</ol>
+<p>需要子类实现的抽象方法</p>
+<pre><code>//抽象方法
+public abstract class TelePhone {
+    public abstract void call();  //抽象方法,打电话
+    public abstract void message(); //抽象方法，发短信
+}
+</code></pre>
+<p>构建子类，并实现抽象方法</p>
+<pre><code>public class CellPhone extends TelePhone {
+
+    @Override
+    public void call() {
+        System.out.println(&quot;我可以打电话！&quot;);
+    }
+
+    @Override
+    public void message() {
+        System.out.println(&quot;我可以发短信！&quot;);
+    }
+
+    public static void main(String[] args) {
+        CellPhone cp = new CellPhone();
+        cp.call();
+        cp.message();
+    }
+
+}
+</code></pre>
+<pre><code>$ javac CellPhone.java TelePhone.java
+$ java CellPhone
+
+我可以打电话！
+我可以发短信！
+</code></pre>
+<h2 id="接口">接口</h2>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E7%B1%BB">类</a></li>
+<li><a href="#%E5%AF%B9%E8%B1%A1">对象</a></li>
+<li><a href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95">构造方法</a></li>
+<li><a href="#%E5%BC%95%E7%94%A8%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%AE%9E%E4%BE%8B">引用与对象实例</a></li>
+<li><a href="#static">static</a></li>
+<li><a href="#final">final</a></li>
+<li><a href="#%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6">权限修饰符</a></li>
+<li><a href="#%E5%B0%81%E8%A3%85">封装</a></li>
+<li><a href="#this">this</a></li>
+<li><a href="#%E7%BB%A7%E6%89%BF">继承</a></li>
+<li><a href="#super">super</a></li>
+<li><a href="#%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD%E4%B8%8E%E9%87%8D%E5%86%99">方法重载与重写</a></li>
+<li><a href="#%E5%A4%9A%E6%80%81">多态</a></li>
+<li><a href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB">抽象类</a></li>
+<li><a href="#%E6%8E%A5%E5%8F%A3">接口</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/java-stringbuilder/">
+              <h3 class="post-title">
+                Java - StringBuilder
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
