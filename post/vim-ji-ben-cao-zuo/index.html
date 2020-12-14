@@ -1,0 +1,679 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vim基本操作 | Gridea</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1607965906290">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Vim基本操作 | Gridea - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="
+vim 启动进入普通模式，处于插入模式或命令行模式时只需要按 Esc 或者 Ctrl+[（这在 vim 课程环境中不管用）即可进入普通模式。普通模式中按 i（插入）或 a（附加）键都可以进入插入模式，普通模式中按 : 进入命令行模式。命令..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1607965906290" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Vim基本操作
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-12-13
+              </span>
+              <span>
+                14 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <ul>
+<li>vim 启动进入普通模式，处于插入模式或命令行模式时只需要按 Esc 或者 Ctrl+[（这在 vim 课程环境中不管用）即可进入普通模式。普通模式中按 i（插入）或 a（附加）键都可以进入插入模式，普通模式中按 : 进入命令行模式。命令行模式中输入 wq 回车后保存并退出 vim</li>
+</ul>
+<h2 id="进入vim">进入Vim</h2>
+<ul>
+<li>vim 后面加上你要打开的已存在的文件名或者不存在（则作为新建文件）的文件名</li>
+</ul>
+<pre><code>vim practice_1.txt
+</code></pre>
+<ul>
+<li>直接使用 vim 也可以打开 vim 编辑器，但是不会打开任何文件</li>
+</ul>
+<pre><code>vim
+</code></pre>
+<ul>
+<li>进入命令行模式后输入 <code>:e &lt;filepath&gt;</code> 同样可以打开相应文件</li>
+<li>按Esc进入普通模式，在该模式下使用方向键或者 h，j，k，l 键可以移动游标</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>h</td>
+<td>左</td>
+</tr>
+<tr>
+<td>l</td>
+<td>右</td>
+</tr>
+<tr>
+<td>j</td>
+<td>下</td>
+</tr>
+<tr>
+<td>k</td>
+<td>上</td>
+</tr>
+<tr>
+<td>w</td>
+<td>移动到下一个单词</td>
+</tr>
+<tr>
+<td>b</td>
+<td>移动到上一个单词</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>在普通模式下使用下面的键将进入插入模式，并可以从相应的位置开始输入</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>i</td>
+<td>在当前光标处进行编辑</td>
+</tr>
+<tr>
+<td>I</td>
+<td>在行首插入</td>
+</tr>
+<tr>
+<td>A</td>
+<td>在行末插入</td>
+</tr>
+<tr>
+<td>a</td>
+<td>在光标后插入编辑</td>
+</tr>
+<tr>
+<td>o</td>
+<td>在当前行后插入一个新行</td>
+</tr>
+<tr>
+<td>O</td>
+<td>在当前行前插入一个新行</td>
+</tr>
+<tr>
+<td>cw</td>
+<td>替换从光标所在位置后到一个单词结尾的字符</td>
+</tr>
+</tbody>
+</table>
+<h2 id="退出-vim">退出 vim</h2>
+<ul>
+<li>从普通模式输入 : 进入命令行模式，输入 w 回车，保存文档。输入 :w <filename> 可以将文档另存为其他文件名或存到其它路径下</li>
+<li>从普通模式输入 : 进入命令行模式，输入 wq 回车，保存并退出编辑</li>
+<li>普通模式下按下 Shift+zz 即可保存退出 vim</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>:q!</td>
+<td>强制退出，不保存</td>
+</tr>
+<tr>
+<td>:q</td>
+<td>退出</td>
+</tr>
+<tr>
+<td>:wq!</td>
+<td>强制保存并退出</td>
+</tr>
+<tr>
+<td>:w &lt;文件路径&gt;</td>
+<td>另存为</td>
+</tr>
+<tr>
+<td>:saveas 文件路径</td>
+<td>另存为</td>
+</tr>
+<tr>
+<td>:x</td>
+<td>保存并退出</td>
+</tr>
+<tr>
+<td>:wq</td>
+<td>保存并退出</td>
+</tr>
+</tbody>
+</table>
+<h2 id="删除文本">删除文本</h2>
+<p>进入普通模式，使用下列命令可以进行文本快速删除</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>删除游标所在的字符</td>
+</tr>
+<tr>
+<td>X</td>
+<td>删除游标所在前一个字符</td>
+</tr>
+<tr>
+<td>Delete</td>
+<td>同 x</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>删除整行</td>
+</tr>
+<tr>
+<td>dw</td>
+<td>删除一个单词（不适用中文）</td>
+</tr>
+<tr>
+<td>d$或D</td>
+<td>删除至行尾</td>
+</tr>
+<tr>
+<td>d^</td>
+<td>删除至行首</td>
+</tr>
+<tr>
+<td>dG</td>
+<td>删除到文档结尾处</td>
+</tr>
+<tr>
+<td>d1G</td>
+<td>删至文档首部</td>
+</tr>
+</tbody>
+</table>
+<p>除此之外，你还可以在命令之前加上数字，表示一次删除多行，如</p>
+<ul>
+<li>2dd 表示一次删除 2 行</li>
+</ul>
+<h2 id="重复执行上次命令">重复执行上次命令</h2>
+<ul>
+<li>在普通模式下 .(小数点)表示重复上一次的命令操作</li>
+</ul>
+<h2 id="执行指定次数相同的命令">执行指定次数相同的命令</h2>
+<ul>
+<li>进入普通模式输入 <code>N&lt;command&gt;</code>，N 表示重复后面的次数</li>
+</ul>
+<p>实例</p>
+<ul>
+<li>输入 10x，删除 10 个连续字符</li>
+<li>输入 3dd，将会删除 3 行文本</li>
+<li>在普通模式下，你还可以使用 dw 或者 daw(delete a word)删除一个单词，所以你可以很容易的联想到 dnw(n 替换为相应数字) 表示删除 n 个单词</li>
+</ul>
+<h2 id="游标的快速跳转">游标的快速跳转</h2>
+<p><strong>行间跳转</strong></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nG(n Shift+g) / ngg</td>
+<td>游标移动到第 n 行 (如果默认没有显示行号，请先进入命令模式，输入 :set nu 以显示行号)</td>
+</tr>
+<tr>
+<td>gg</td>
+<td>游标移动到到第一行</td>
+</tr>
+<tr>
+<td>G(Shift+g)</td>
+<td>到最后一行</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>小技巧：你在完成依次跳转后，可以使用 Ctrl+o 快速回到上一次(跳转前)光标所在位置</li>
+</ul>
+<p><strong>行内跳转</strong></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>w</td>
+<td>到下一个单词的开头</td>
+</tr>
+<tr>
+<td>e</td>
+<td>到当前单词的结尾</td>
+</tr>
+<tr>
+<td>b</td>
+<td>到前一个单词的开头</td>
+</tr>
+<tr>
+<td>ge</td>
+<td>到前一个单词的结尾</td>
+</tr>
+<tr>
+<td>0或^</td>
+<td>到行头</td>
+</tr>
+<tr>
+<td>$</td>
+<td>到行尾</td>
+</tr>
+<tr>
+<td>f&lt;字母&gt;</td>
+<td>向后搜索&lt;字母&gt;并跳转到第一个匹配的位置(非常实用)</td>
+</tr>
+<tr>
+<td>F&lt;字母&gt;</td>
+<td>向前搜索&lt;字母&gt;并跳转到第一个匹配的位置</td>
+</tr>
+<tr>
+<td>t&lt;字母&gt;</td>
+<td>向后搜索&lt;字母&gt;并跳转到第一个匹配位置之前的一个字母(不常用)</td>
+</tr>
+<tr>
+<td>T&lt;字母&gt;&gt;</td>
+<td>向前搜索&lt;字母&gt;并跳转到第一个匹配位置之后的一个字母(不常用)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="复制粘贴和剪切">复制粘贴和剪切</h2>
+<p><strong>复制及粘贴文本</strong></p>
+<ul>
+<li>普通模式中使用 y 复制</li>
+<li>普通模式中，yy 复制游标所在的整行（3yy 表示复制 3 行）</li>
+<li>普通模式中，y^ 复制至行首，或 y0。不含光标所在处字符。</li>
+<li>普通模式中，y$ 复制至行尾。含光标所在处字符。</li>
+<li>普通模式中，yw 复制一个单词。</li>
+<li>普通模式中，y2w 复制两个单词。</li>
+<li>普通模式中，yG 复制至文本末。</li>
+<li>普通模式中，y1G 复制至文本开头。</li>
+<li>普通模式中使用 p 粘贴</li>
+<li>普通模式中，p(小写)代表粘贴至光标后（下）</li>
+<li>普通模式中，P(大写)代表粘贴至光标前（上）</li>
+</ul>
+<p><strong>剪切及粘贴</strong></p>
+<ul>
+<li>其实前面讲得 dd 删除命令就是剪切，你每次 dd 删除文档内容后，便可以使用 p 来粘贴，也这一点可以让我们实现一个很爽快的功能——交换上下行<code>ddp</code>即实现了快速交换光标所在行与它下面的行</li>
+</ul>
+<h2 id="替换和撤销undo命令">替换和撤销(Undo)命令</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r+&lt;待替换字母&gt;</td>
+<td>将游标所在字母替换为指定字母</td>
+</tr>
+<tr>
+<td>R</td>
+<td>连续替换，直到按下 Esc</td>
+</tr>
+<tr>
+<td>cc</td>
+<td>替换整行，即删除游标所在行，并进入插入模式</td>
+</tr>
+<tr>
+<td>cw</td>
+<td>替换一个单词，即删除一个单词，并进入插入模式</td>
+</tr>
+<tr>
+<td>C(大写)</td>
+<td>替换游标以后至行末</td>
+</tr>
+<tr>
+<td>~</td>
+<td>反转游标所在字母大小写</td>
+</tr>
+<tr>
+<td><code>{n}u</code></td>
+<td>撤销一次或 n 次操作</td>
+</tr>
+<tr>
+<td>U(大写)</td>
+<td>撤销当前行的所有修改</td>
+</tr>
+<tr>
+<td>Ctrl+r</td>
+<td>redo，即撤销 undo 的操作</td>
+</tr>
+</tbody>
+</table>
+<h2 id="快速缩进">快速缩进</h2>
+<p><strong>使用命令进行快速调整缩进操作</strong></p>
+<ul>
+<li>普通模式下输入 &gt;&gt; 整行将向右缩进</li>
+<li>普通模式下输入 &lt;&lt; 整行向左回退</li>
+<li>普通模式下输入 : 进入命令行模式下对 shiftwidth 值进行设置可以控制缩进和回退的字符数</li>
+</ul>
+<p><strong>shiftwidth 命令</strong></p>
+<ul>
+<li>shiftwidth 命令是指上一节 &gt;&gt; 命令产生的缩进（可以简写成sw），普通模式下输入 : 进入命令行模式下对 shiftwidth 值进行设置可以控制缩进和回退的字符数</li>
+</ul>
+<p>获取目前的设定值 <code>:set shiftwidth?</code><br>
+设置缩进为 10 个字符 <code>:set shiftwidth=10</code></p>
+<p><strong>调整文本位置</strong><br>
+命令行模式下输入 <code>:ce</code>(center)命令使本行内容居中<br>
+命令行模式下输入 <code>:ri</code>(right)命令使本行文本靠右<br>
+命令行模式下输入 <code>:le</code>(left)命令使本行内容靠左</p>
+<p>##查找<br>
+<strong>快速查找</strong></p>
+<ul>
+<li>普通模式下输入 / 然后键入需要查找的字符串，按回车后就会进行查找。? 与/ 功能相同，只不过 ? 是向上而 / 是向下查找</li>
+<li>进入查找之后，输入 n 和 N 可以继续查找。n 是查找下一个内容，N 查找上一个内容</li>
+</ul>
+<p><strong>高级查找</strong></p>
+<ul>
+<li>普通模式下输入 * 寻找游标所在处的单词</li>
+<li>普通模式下输入 # 同上，但 # 是向前（上）找，* 则是向后（下）找</li>
+<li>普通模式下输入 g* 同 *，但部分符合该单词即可</li>
+<li>普通模式下输入 g# 同 #，但部分符合该单词即可</li>
+</ul>
+<h2 id="多文件编辑">多文件编辑</h2>
+<p><strong>使用 vim 编辑多个文件</strong></p>
+<ul>
+<li>编辑多个文件有两种形式，一种是在进入 vim 前使用的参数就是多个文件。另一种就是进入 vim 后再编辑其他的文件。 同时创建两个新文件并编辑<code>vim 1.txt 2.txt</code></li>
+</ul>
+<p>默认进入1.txt文件的编辑界面</p>
+<ul>
+<li>命令行模式下输入 <code>:n</code> 编辑 2.txt 文件，可以加 ! 即 <code>:n!</code> 强制切换，之前一个文件的输入没有保存，仅仅切换到另一个文件</li>
+<li>命令行模式下输入 <code>:N</code> 编辑 1.txt 文件，可以加 ! 即 <code>:N!</code> 强制切换，之前文件内的输入没有保存，仅仅是切换到另一个文件</li>
+</ul>
+<p><strong>进入 vim 后打开新文件</strong></p>
+<ul>
+<li>命令行模式下输入<code>:e 3.txt</code> 打开新文件 3.txt</li>
+<li>命令行模式下输入<code>:e#</code> 回到前一个文件</li>
+<li>命令行模式下输入<code>:ls</code> 可以列出以前编辑过的文档</li>
+<li>命令行模式下输入<code>:b 2.txt</code>（或者编号）可以直接进入文件 2.txt 编辑</li>
+<li>命令行模式下输入<code>:bd 2.txt</code>（或者编号）可以删除以前编辑过的列表中的文件项目</li>
+<li>命令行模式下输入<code>:e! 4.txt</code> 新打开文件 4.txt，放弃正在编辑的文件</li>
+<li>命令行模式下输入<code>:f</code> 显示正在编辑的文件名</li>
+<li>命令行模式下输入<code>:f new.txt</code> 改变正在编辑的文件名字为 new.txt</li>
+</ul>
+<p><strong>恢复文件</strong></p>
+<ul>
+<li>如果因为断电，终端意外关闭等原因造成文档没有保存，可以采用恢复方式</li>
+<li>vim 在编辑的时候会自动在当前文件目录下生成一个交换文件，一般以 <code>&lt;filename&gt;.swp</code> 的格式保存，如果有多个版本的交换文件，还可能是 .swn，.swm 等字母。注意这个交换文件的更新不是实时的，因为实时的更新会占用磁盘，影响系统其他正常进程的速度</li>
+<li>当 vim 意外终止且没有保存已编辑的内容时，可以使用交换文件对文件进行恢复，注意需要在编辑这个文件的地方进行编辑，因为交换文件默认在编辑的目录生成</li>
+<li>例如假设 1.txt 意外关闭，我们可以输入 vim 然后输入 <code>:recover 1.txt</code></li>
+</ul>
+<pre><code>vim
+:recover 1.txt
+
+# 出现如下提示按下回车即可恢复，如果有多个版本需要输入对应的交换文件前的数字选择要恢复的版本。
+Using swap file &quot;.1.txt.swp&quot;
+Original file &quot;~/test/1.txt&quot;
+Recovery completed. You should check if everything is OK.
+(You might want to write out this file under another name
+and run diff with the original file to check for changes)
+You may want to delete the .swp file now.
+</code></pre>
+<ul>
+<li>或者输入 vim -r 后直接选择用于恢复的文档的交换文件即可</li>
+</ul>
+<pre><code>vim -r 1.txt
+</code></pre>
+<h2 id="可视模式">可视模式</h2>
+<p><strong>可视模式命令简介</strong></p>
+<ul>
+<li>在普通模式下输入 v（小写），进入字符选择模式，就可以移动光标，光标走过的地方就会选取。再次按下 v 后就会取消选取</li>
+<li>在普通模式下输入 Shift+v（小写），进入行选择模式，按下 V 之后就会把整行选取，您可以上下移动光标选更多的行，同样，再按一次 Shift+v 就可以取消选取</li>
+<li>在普通模式下输入 Ctrl+v（小写），这是区域选择模式，可以进行矩形区域选择，再按一次 Ctrl+v 取消选取</li>
+<li>在可视模式下输入 d 删除选取区域内容</li>
+<li>在可视模式下输入 y 复制选取区域内容</li>
+</ul>
+<h2 id="视窗操作">视窗操作</h2>
+<p>vim 可以在一个界面里打开多个窗口进行编辑，这些编辑窗口称为 vim 的视窗。 打开方法有很多种，例如可以使用在命令行模式下输入 <code>:new</code> 打开一个新的 vim 视窗，并进入视窗编辑一个新文件（普通模式下输入 Ctrl+w 也可以），除了 <code>:new</code> 命令，下述列举的多种方法也可以在命令模式或普通模式下打开新的视窗</p>
+<ul>
+<li>命令行模式下输入 <code>:sp 1.txt</code> 打开新的水平分屏视窗来编辑 1.txt</li>
+<li>命令行模式下输入 <code>:vsp 2.txt</code> 打开新的垂直分屏视窗来编辑 2.txt</li>
+<li>普通模式下 Ctrl+w s 将当前窗口分割成两个水平的窗口</li>
+<li>普通模式下 Ctrl+w v 将当前窗口分割成两个垂直的窗口</li>
+<li>普通模式下 Ctrl+w q 即 :q 结束分割出来的视窗。如果在新视窗中有输入需要使用强制符！即:q!</li>
+<li>普通模式下 Ctrl+w o 打开一个视窗并且隐藏之前的所有视窗</li>
+<li>普通模式下 Ctrl+w j 移至下面视窗</li>
+<li>普通模式下 Ctrl+w k 移至上面视窗</li>
+<li>普通模式下 Ctrl+w h 移至左边视窗</li>
+<li>普通模式下 Ctrl+w l 移至右边视窗</li>
+<li>普通模式下 Ctrl+w J 将当前视窗移至下面</li>
+<li>普通模式下 Ctrl+w K 将当前视窗移至上面</li>
+<li>普通模式下 Ctrl+w H 将当前视窗移至左边</li>
+<li>普通模式下 Ctrl+w L 将当前视窗移至右边</li>
+<li>普通模式下 Ctrl+w - 减小视窗的高度</li>
+<li>普通模式下 Ctrl+w + 增加视窗的高度</li>
+</ul>
+<h2 id="文档加密">文档加密</h2>
+<p><strong>创建加密文档</strong></p>
+<pre><code>vim -x file1
+</code></pre>
+<ul>
+<li>输入您的密码，确认密码，这样在下一次打开时，vim 就会要求你输入密码</li>
+</ul>
+<h2 id="在-vim-执行外部命令">在 vim 执行外部命令</h2>
+<p>在命令行模式中输入 ! 可以执行外部的 shell 命令</p>
+<ul>
+<li><code>:!ls</code> 用于显示当前目录的内容</li>
+<li><code>:!rm FILENAME</code> 用于删除名为 FILENAME 的文件</li>
+<li><code>:w FILENAME</code> 可将当前 VIM 中正在编辑的文件另存为 FILENAME 文件</li>
+</ul>
+<h2 id="帮助系统">帮助系统</h2>
+<p>vim 中的查看帮助</p>
+<ul>
+<li>普通模式下按 F1 打开 vim 自己预设的帮助文档</li>
+<li>命令行模式下输入 <code>:h shiftwidth</code> 打开名为 shiftwidth 的帮助文件</li>
+<li>命令行模式下输入 <code>:ver</code> 显示版本及参数</li>
+</ul>
+<h2 id="功能设定">功能设定</h2>
+<p><strong>vim 的功能设定</strong></p>
+<ul>
+<li>可以在编辑文件的时候进行功能设定，如命令行模式下输入 <code>:set nu</code>（显示行数），设定值退出 vim 后不会保存。要永久保存配置需要修改 vim 配置文件。</li>
+<li>vim 的配置文件 ~/.vimrc（实验楼环境中配置文件在 /etc/vim/vimrc），可以打开文件进行修改，不过务必小心不要影响 vim 正常使用。</li>
+</ul>
+<p><strong>获取目前的设定</strong></p>
+<ul>
+<li>命令行模式下输入 <code>:set</code> 或者 <code>:se</code> 显示所有修改过的配置</li>
+<li>命令行模式下输入 <code>:set all</code> 显示所有的设定值</li>
+<li>命令行模式下输入 <code>:set &lt;option&gt;?</code> 显示 option 的设定值</li>
+<li>命令行模式下输入 <code>:set nooption</code> 取消当前设定值</li>
+</ul>
+<p><strong>set 功能的说明</strong></p>
+<ul>
+<li>命令行模式下输入 <code>:set autoindent(ai)</code> 设置自动缩进</li>
+<li>命令行模式下输入 <code>:set autowrite(aw)</code> 设置自动存档，默认未打开</li>
+<li>命令行模式下输入 <code>:set background=dark</code> 或 <code>light</code>，设置背景风格</li>
+<li>命令行模式下输入 <code>:set backup(bk)</code> 设置自动备份，默认未打开</li>
+<li>命令行模式下输入 <code>: set cindent(cin)</code> 设置 C 语言风格缩进</li>
+</ul>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E8%BF%9B%E5%85%A5vim">进入Vim</a></li>
+<li><a href="#%E9%80%80%E5%87%BA-vim">退出 vim</a></li>
+<li><a href="#%E5%88%A0%E9%99%A4%E6%96%87%E6%9C%AC">删除文本</a></li>
+<li><a href="#%E9%87%8D%E5%A4%8D%E6%89%A7%E8%A1%8C%E4%B8%8A%E6%AC%A1%E5%91%BD%E4%BB%A4">重复执行上次命令</a></li>
+<li><a href="#%E6%89%A7%E8%A1%8C%E6%8C%87%E5%AE%9A%E6%AC%A1%E6%95%B0%E7%9B%B8%E5%90%8C%E7%9A%84%E5%91%BD%E4%BB%A4">执行指定次数相同的命令</a></li>
+<li><a href="#%E6%B8%B8%E6%A0%87%E7%9A%84%E5%BF%AB%E9%80%9F%E8%B7%B3%E8%BD%AC">游标的快速跳转</a></li>
+<li><a href="#%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%E5%92%8C%E5%89%AA%E5%88%87">复制粘贴和剪切</a></li>
+<li><a href="#%E6%9B%BF%E6%8D%A2%E5%92%8C%E6%92%A4%E9%94%80undo%E5%91%BD%E4%BB%A4">替换和撤销(Undo)命令</a></li>
+<li><a href="#%E5%BF%AB%E9%80%9F%E7%BC%A9%E8%BF%9B">快速缩进</a></li>
+<li><a href="#%E5%A4%9A%E6%96%87%E4%BB%B6%E7%BC%96%E8%BE%91">多文件编辑</a></li>
+<li><a href="#%E5%8F%AF%E8%A7%86%E6%A8%A1%E5%BC%8F">可视模式</a></li>
+<li><a href="#%E8%A7%86%E7%AA%97%E6%93%8D%E4%BD%9C">视窗操作</a></li>
+<li><a href="#%E6%96%87%E6%A1%A3%E5%8A%A0%E5%AF%86">文档加密</a></li>
+<li><a href="#%E5%9C%A8-vim-%E6%89%A7%E8%A1%8C%E5%A4%96%E9%83%A8%E5%91%BD%E4%BB%A4">在 vim 执行外部命令</a></li>
+<li><a href="#%E5%B8%AE%E5%8A%A9%E7%B3%BB%E7%BB%9F">帮助系统</a></li>
+<li><a href="#%E5%8A%9F%E8%83%BD%E8%AE%BE%E5%AE%9A">功能设定</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/java-2-chang-yong-lei/">
+              <h3 class="post-title">
+                Java基础3-常用类
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
