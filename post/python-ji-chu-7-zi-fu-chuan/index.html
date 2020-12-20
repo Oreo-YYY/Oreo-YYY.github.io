@@ -1,0 +1,339 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python基础7-字符串 | NoteForStudy</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1608466007398">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Python基础7-字符串 | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="字符串表示
+
+可以通过几种不同的方式表示字符串。如单引号（'...'）或双引号（&quot;...&quot;）
+
+&gt;&gt;&gt; s = &quot;I am Chinese&quot;
+&gt;&gt;&gt; s
+'I am..." />
+    <meta name="keywords" content="Python,实验楼" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1608466007398" alt="">
+  </a>
+  <h1 class="site-title">
+    NoteForStudy
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/y-rui" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Python基础7-字符串
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-16
+              </span>
+              <span>
+                7 min read
+              </span>
+              
+                <a href="https://y-rui.github.io/tag/uGwwKRarA/" class="post-tag">
+                  # Python
+                </a>
+              
+                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
+                  # 实验楼
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="字符串表示">字符串表示</h2>
+<ul>
+<li>可以通过几种不同的方式表示字符串。如单引号（'...'）或双引号（&quot;...&quot;）</li>
+</ul>
+<pre><code>&gt;&gt;&gt; s = &quot;I am Chinese&quot;
+&gt;&gt;&gt; s
+'I am Chinese'
+&gt;&gt;&gt; s = 'I am Chinese'
+&gt;&gt;&gt; s = &quot;Here is a line \
+... split in two lines&quot;
+&gt;&gt;&gt; s
+'Here is a line split in two lines'
+&gt;&gt;&gt; s = &quot;Here is a line \n split in two lines&quot;
+&gt;&gt;&gt; s
+'Here is a line \n split in two lines'
+&gt;&gt;&gt; print(s)
+Here is a line
+ split in two lines
+</code></pre>
+<p>如果你想要分几行输入字符串，并且希望行尾的换行符自动包含到字符串当中，可以使用三对引号：&quot;&quot;&quot;...&quot;&quot;&quot; 或 '''...'''</p>
+<pre><code>&gt;&gt;&gt; print(&quot;&quot;&quot;\
+... Usage: thingy [OPTIONS]
+...      -h                        Display this usage message
+...      -H hostname               Hostname to connect to
+... &quot;&quot;&quot;)
+Usage: thingy [OPTIONS]
+    -h                        Display this usage message
+    -H hostname               Hostname to connect to
+</code></pre>
+<h2 id="字符串的方法">字符串的方法</h2>
+<p>每一个字符串对象都有几个可用的内建方法，我们已经使用过一些了，比如 <code>s.split()</code></p>
+<pre><code>&gt;&gt;&gt; s = &quot;shi yan lou&quot;
+&gt;&gt;&gt; s.title()
+'Shi Yan Lou'
+</code></pre>
+<p>方法 title() 返回字符串的标题版本，即单词首字母大写其余字母小写</p>
+<pre><code>&gt;&gt;&gt; z = s.upper()
+&gt;&gt;&gt; z
+'SHI YAN LOU'
+&gt;&gt;&gt; z.lower()
+'shi yan lou'
+</code></pre>
+<p>方法 upper() 返回字符串全部大写的版本，反之 lower() 返回字符串的全部小写版本</p>
+<pre><code>&gt;&gt;&gt; s = &quot;I am A pRoGraMMer&quot;
+&gt;&gt; s.swapcase()
+'i AM a PrOgRAmmER'
+</code></pre>
+<p>方法 swapcase() 返回字符串大小写交换后的版本</p>
+<pre><code>&gt;&gt;&gt; s = &quot;jdwb 2323bjb&quot;
+&gt;&gt;&gt; s.isalnum()
+False
+&gt;&gt;&gt; s = &quot;jdwb2323bjb&quot;
+&gt;&gt;&gt; s.isalnum()
+True
+</code></pre>
+<p>方法 isalnum() 检查所有字符是否只有字母和数字，上面的代码中第一行的字符串 s 中包含空格字符，所以返回 False</p>
+<pre><code>&gt;&gt;&gt; s = &quot;SankarshanSir&quot;
+&gt;&gt;&gt; s.isalpha()
+True
+&gt;&gt;&gt; s = &quot;Sankarshan Sir&quot;
+&gt;&gt;&gt; s.isalpha()
+False
+</code></pre>
+<p>方法 isalpha() 检查字符串之中是否只有字母</p>
+<pre><code>&gt;&gt;&gt; s = &quot;1234&quot;
+&gt;&gt;&gt; s.isdigit() # 检查字符串是否所有字符为数字
+True
+&gt;&gt;&gt; s = &quot;ShiYanLou is coming&quot;
+&gt;&gt;&gt; s.islower() # 检查字符串是否所有字符为小写
+False
+&gt;&gt;&gt; s = &quot;Shiyanlou Is Coming&quot;
+&gt;&gt;&gt; s.istitle() # To 检查字符串是否为标题样式
+True
+&gt;&gt;&gt; s = &quot;CHINA&quot;
+&gt;&gt;&gt; s.isupper() # 检查字符串是否所有字符为大写
+True
+</code></pre>
+<p>我们可以使用 split() 分割任意字符串，split() 允许有一个参数，用来指定字符串以什么字符分隔（默认为 &quot; &quot;），它返回一个包含所有分割后的字符串的列表</p>
+<pre><code>&gt;&gt;&gt; s = &quot;We all love Python&quot;
+&gt;&gt;&gt; s.split()
+['We', 'all', 'love', 'Python']
+&gt;&gt;&gt; x = &quot;shiyanlou:is:waiting&quot;
+&gt;&gt;&gt; x.split(':')
+['shiyanlou', 'is', 'waiting']
+</code></pre>
+<p>相反的，方法 join() 使用指定字符连接多个字符串，它需要一个包含字符串元素的列表作为输入然后连接列表内的字符串元素</p>
+<pre><code>&gt;&gt;&gt; &quot;-&quot;.join(&quot;GNU/Linux is great&quot;.split())
+'GNU/Linux-is-great'
+</code></pre>
+<p>在上面的例子中，我们基于空格 &quot; &quot; 分割字符串 &quot;GNU/Linux is great&quot;，然后用 &quot;-&quot; 连接它们</p>
+<h2 id="字符串剥离">字符串剥离</h2>
+<p>字符串有几个进行剥离操作的方法。最简单的一个是 strip(chars)，用来剥离字符串首尾中指定的字符，它允许有一个字符串参数，这个参数为剥离哪些字符提供依据。不指定参数则默认剥离掉首尾的空格和换行符，代码如下</p>
+<pre><code>&gt;&gt;&gt; s = &quot;  a bc\n &quot;
+&gt;&gt;&gt; s.strip()
+'a bc'
+</code></pre>
+<p>你可以使用 lstrip(chars) 或 rstrip(chars) 只对字符串左或右剥离</p>
+<pre><code>&gt;&gt;&gt; s = &quot;www.foss.in&quot;
+&gt;&gt;&gt; s.lstrip(&quot;cwsd.&quot;) #删除在字符串左边出现的'c','w','s','d','.'字符
+'foss.in'
+&gt;&gt;&gt; s.rstrip(&quot;cnwdi.&quot;) #删除在字符串右边出现的'c','n','w','d','i','.'字符
+'www.foss'
+</code></pre>
+<h2 id="文本搜索">文本搜索</h2>
+<p>字符串有一些方法能够帮助你搜索字符串里的文本或子字符串。下面给出示例</p>
+<pre><code>&gt;&gt;&gt; s = &quot;faulty for a reason&quot;
+&gt;&gt;&gt; s.find(&quot;for&quot;)
+7
+&gt;&gt;&gt; s.find(&quot;fora&quot;)
+-1
+&gt;&gt;&gt; s.startswith(&quot;fa&quot;) # 检查字符串是否以 fa 开头
+True
+&gt;&gt;&gt; s.endswith(&quot;reason&quot;) # 检查字符串是否以 reason 结尾
+True
+</code></pre>
+<p>find() 能帮助你找到第一个匹配的子字符串，没有找到则返回 -1</p>
+<h2 id="回文检查">回文检查</h2>
+<ul>
+<li>回文是一种无论从左还是从右读都一样的字符序列。比如 “madam”。在这个例子中，我们检查用户输入的字符串是否是回文，并输出结果</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+s = input(&quot;Please enter a string: &quot;)
+z = s[::-1]  #把输入的字符串s 进行倒序处理形成新的字符串z
+if s == z:
+    print(&quot;The string is a palindrome&quot;)
+else:
+    print(&quot;The string is not a palindrome&quot;)
+</code></pre>
+<h2 id="单词计数">单词计数</h2>
+<p>在讲解单词计数之前我们先了解一个概念：格式化操作符（%）</p>
+<pre><code>print(&quot;my name is %s.I am %d years old&quot; % ('Shixiaolou',4))
+</code></pre>
+<p>在这个例子中，%s 为第一个格式符，表示一个字符串；%d 为第二个格式符，表示一个整数。格式符为真实值预留位置，并控制显示的格式。常用的有</p>
+<ul>
+<li>%s 字符串（用 str() 函数进行字符串转换）</li>
+<li>%r 字符串（用 repr() 函数进行字符串转换）</li>
+<li>%d 十进制整数</li>
+<li>%f 浮点数</li>
+<li>%% 字符 %</li>
+</ul>
+<p>那么接下来我们对用户输入的一行文本进行单词计数</p>
+<pre><code>#!/usr/bin/env python3
+s = input(&quot;Enter a line: &quot;)
+print(&quot;The number of words in the line are %d&quot; % (len(s.split(&quot; &quot;))))
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A1%A8%E7%A4%BA">字符串表示</a></li>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%96%B9%E6%B3%95">字符串的方法</a></li>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%89%A5%E7%A6%BB">字符串剥离</a></li>
+<li><a href="#%E6%96%87%E6%9C%AC%E6%90%9C%E7%B4%A2">文本搜索</a></li>
+<li><a href="#%E5%9B%9E%E6%96%87%E6%A3%80%E6%9F%A5">回文检查</a></li>
+<li><a href="#%E5%8D%95%E8%AF%8D%E8%AE%A1%E6%95%B0">单词计数</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/python-ji-chu-7-shu-ju-jie-gou/">
+              <h3 class="post-title">
+                Python基础6-数据结构
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/y-rui" target="_blank">y-rui</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,254 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python基础13-Collections 模块 | NoteForStudy</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1608466007398">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Python基础13-Collections 模块 | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="
+collections 是 Python 内建的一个集合模块，提供了许多有用的集合类
+
+Counter
+在这个实验我们会学习 Collections 模块。这个模块实现了一些很好的数据结构，它们能帮助你解决各种实际问题
+&gt;&gt;&..." />
+    <meta name="keywords" content="Python,实验楼" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1608466007398" alt="">
+  </a>
+  <h1 class="site-title">
+    NoteForStudy
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/y-rui" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Python基础13-Collections 模块
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-19
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+                <a href="https://y-rui.github.io/tag/uGwwKRarA/" class="post-tag">
+                  # Python
+                </a>
+              
+                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
+                  # 实验楼
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <ul>
+<li>collections 是 Python 内建的一个集合模块，提供了许多有用的集合类</li>
+</ul>
+<h2 id="counter">Counter</h2>
+<p>在这个实验我们会学习 Collections 模块。这个模块实现了一些很好的数据结构，它们能帮助你解决各种实际问题</p>
+<pre><code>&gt;&gt;&gt; import collections
+</code></pre>
+<ul>
+<li><code>Counter</code> 是一个有助于 <em>hashable</em> 对象计数的 dict 子类。它是一个无序的集合，其中 hashable 对象的元素存储为字典的键，它们的计数存储为字典的值，计数可以为任意整数，包括零和负数</li>
+<li>我们可以这样查看 <code>Counter</code> 的帮助信息，事实上这些信息来源于 Counter 的文档字符串<code>(collections.Counter.__doc__)</code></li>
+</ul>
+<pre><code>&gt;&gt;&gt; help(Collections.Counter)
+</code></pre>
+<p>下面我们来看一个例子，例子中我们查看 Python 的 LICENSE 文件中某些单词出现的次数</p>
+<pre><code>&gt;&gt;&gt; from collections import Counter
+&gt;&gt;&gt; import re
+&gt;&gt;&gt; path = '/usr/lib/python3.5/LICENSE.txt'
+&gt;&gt;&gt; words = re.findall('\w+', open(path).read().lower())
+&gt;&gt;&gt; Counter(words).most_common(10)
+[('the', 80), ('or', 78), ('1', 66), ('of', 61), ('to', 50), ('and', 48), ('python', 46), ('in', 38), ('license', 37), ('any', 37)]
+</code></pre>
+<p>Counter 对象有一个叫做 elements() 的方法，其返回的序列中，依照计数重复元素相同次数，元素顺序是无序的</p>
+<pre><code>&gt;&gt;&gt; c = Counter(a=4, b=2, c=0, d=-2)
+&gt;&gt;&gt; list(c.elements())
+['b','b','a', 'a', 'a', 'a']
+</code></pre>
+<p>most_common() 方法返回最常见的元素及其计数，顺序为最常见到最少</p>
+<pre><code>&gt;&gt;&gt; Counter('abracadabra').most_common(3)
+[('a', 5), ('r', 2), ('b', 2)]
+</code></pre>
+<h2 id="defaultdict">defaultdict</h2>
+<ul>
+<li><code>defaultdict</code> 是内建 dict 类的子类，它覆写了一个方法并添加了一个可写的实例变量。其余功能与字典相同</li>
+</ul>
+<p><code>defaultdict()</code> 第一个参数提供了 <code>default_factory</code> 属性的初始值，默认值为 <code>None</code>，<br>
+<code>default_factory</code> 属性值将作为字典的默认数据类型。所有剩余的参数与字典的构造方法相同，包括关键字参数</p>
+<p>同样的功能使用 <code>defaultdict</code> 比使用 <code>dict.setdefault</code> 方法快</p>
+<pre><code>&gt;&gt;&gt; from collections import defaultdict
+&gt;&gt;&gt; s = [('yellow', 1), ('blue', 2), ('yellow', 3), ('blue', 4), ('red', 1)]
+&gt;&gt;&gt; d = defaultdict(list)
+&gt;&gt;&gt; for k, v in s:
+...     d[k].append(v)
+...
+&gt;&gt;&gt; d.items()
+dict_items([('blue', [2, 4]), ('red', [1]), ('yellow', [1, 3])])
+</code></pre>
+<p>在例子中你可以看到，即使 defaultdict 对象不存在某个键，它会自动创建一个空列表</p>
+<h2 id="namedtuple">namedtuple</h2>
+<p>命名元组有助于对元组每个位置赋予意义，并且让我们的代码有更好的可读性和自文档性。你可以在任何使用元组地方使用命名元组。在例子中我们会创建一个命名元组以展示为元组每个位置保存信息</p>
+<pre><code>&gt;&gt;&gt; from collections import namedtuple
+&gt;&gt;&gt; Point = namedtuple('Point', ['x', 'y'])  # 定义命名元组
+&gt;&gt;&gt; p = Point(10, y=20)  # 创建一个对象
+&gt;&gt;&gt; p
+Point(x=10, y=20)
+&gt;&gt;&gt; p.x + p.y
+30
+&gt;&gt;&gt; p[0] + p[1]  # 像普通元组那样访问元素
+30
+&gt;&gt;&gt; x, y = p     # 元组拆封
+&gt;&gt;&gt; x
+10
+&gt;&gt;&gt; y
+20
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#counter">Counter</a></li>
+<li><a href="#defaultdict">defaultdict</a></li>
+<li><a href="#namedtuple">namedtuple</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/python-ji-chu-12-mo-kuai/">
+              <h3 class="post-title">
+                Python基础12-模块
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/y-rui" target="_blank">y-rui</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,493 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python基础17-测试 | NoteForStudy</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1608466007398">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Python基础17-测试 | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="单元测试
+
+在计算机编程中，单元测试（英语：Unit Testing）又称为模块测试, 是针对程序模块（软件设计的最小单位）来进行正确性检验的测试工作。程序单元是应用的最小可测试部件。在过程化编程中，一个单元就是单个程序、函数、过程等；对于..." />
+    <meta name="keywords" content="Python,实验楼" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1608466007398" alt="">
+  </a>
+  <h1 class="site-title">
+    NoteForStudy
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/y-rui" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Python基础17-测试
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-23
+              </span>
+              <span>
+                6 min read
+              </span>
+              
+                <a href="https://y-rui.github.io/tag/uGwwKRarA/" class="post-tag">
+                  # Python
+                </a>
+              
+                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
+                  # 实验楼
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="单元测试">单元测试</h2>
+<ul>
+<li>在计算机编程中，单元测试（英语：Unit Testing）又称为模块测试, 是针对程序模块（软件设计的最小单位）来进行正确性检验的测试工作。程序单元是应用的最小可测试部件。在过程化编程中，一个单元就是单个程序、函数、过程等；对于面向对象编程，最小单元就是方法，包括基类（超类）、抽象类、或者派生类（子类）中的方法</li>
+</ul>
+<p><strong>单元测试模块</strong><br>
+在 Python 里我们有 unittest 这个模块来帮助我们进行单元测试</p>
+<p><strong>阶乘计算程序</strong></p>
+<pre><code>import sys
+
+def fact(n):
+    &quot;&quot;&quot;
+    阶乘函数
+
+    :arg n: 数字
+    :returns: n 的阶乘
+
+    &quot;&quot;&quot;
+    if n == 0:
+        return 1
+    return n * fact(n -1)
+
+def div(n):
+    &quot;&quot;&quot;
+    只是做除法
+    &quot;&quot;&quot;
+    res = 10 / n
+    return res
+
+
+def main(n):
+    res = fact(n)
+    print(res)
+
+if __name__ == '__main__':
+    if len(sys.argv) &gt; 1:
+        main(int(sys.argv[1]))
+</code></pre>
+<h2 id="第一个测试用例">第一个测试用例</h2>
+<p>测试哪个函数？</p>
+<p>正如你所看到的， fact(n) 这个函数执行所有的计算，所以我们至少应该测试这个函数</p>
+<p>编辑 /home/shiyanlou/factorial_test.py 文件，代码如下</p>
+<pre><code>import unittest
+from factorial import fact
+
+class TestFactorial(unittest.TestCase):
+    &quot;&quot;&quot;
+    我们的基本测试类
+    &quot;&quot;&quot;
+
+    def test_fact(self):
+        &quot;&quot;&quot;
+        实际测试
+        任何以 `test_` 开头的方法都被视作测试用例
+        &quot;&quot;&quot;
+        res = fact(5)
+        self.assertEqual(res, 120)
+
+
+if __name__ == '__main__':
+    unittest.main()
+</code></pre>
+<p>运行测试</p>
+<pre><code>$ python3 factorial_test.py
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+</code></pre>
+<p><strong>说明</strong><br>
+我们首先导入了 unittest 模块，然后测试我们需要测试的函数</p>
+<p>测试用例是通过子类化  <code>unittest.TestCase</code>  创建的</p>
+<p>现在我们打开测试文件并且把 120 更改为 121，然后看看会发生什么</p>
+<h2 id="各类-assert-语句">各类 assert 语句</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Checks that</th>
+<th>New in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>assertEqual(a, b)</td>
+<td>a == b</td>
+<td></td>
+</tr>
+<tr>
+<td>assertNotEqual(a, b)</td>
+<td>a != b</td>
+<td></td>
+</tr>
+<tr>
+<td>assertTrue(x)</td>
+<td>bool(x) is True</td>
+<td></td>
+</tr>
+<tr>
+<td>assertFalse(x)</td>
+<td>bool(x) is False</td>
+<td></td>
+</tr>
+<tr>
+<td>assertIs(a, b)</td>
+<td>a is b</td>
+<td>2.7</td>
+</tr>
+<tr>
+<td>assertIsNot(a, b)</td>
+<td>a is not b</td>
+<td>2.7</td>
+</tr>
+<tr>
+<td>assertIsNone(x)</td>
+<td>x is None</td>
+<td>2.7</td>
+</tr>
+<tr>
+<td>assertIsNotNone(x)</td>
+<td>x is not None</td>
+<td>2.7</td>
+</tr>
+<tr>
+<td>assertIn(a, b)</td>
+<td>a in b</td>
+<td>2.7</td>
+</tr>
+<tr>
+<td>assertNotIn(a, b)</td>
+<td>a not in b</td>
+<td>2.7</td>
+</tr>
+<tr>
+<td>assertIsInstance(a, b)</td>
+<td>isinstance(a, b)</td>
+<td>2.7</td>
+</tr>
+<tr>
+<td>assertNotIsInstance(a, b)</td>
+<td>not isinstance(a, b))</td>
+<td>2.7</td>
+</tr>
+</tbody>
+</table>
+<h2 id="异常测试">异常测试</h2>
+<p>如果我们在 factorial.py 中调用 div(0)，我们能看到异常被抛出</p>
+<p>我们也能测试这些异常，就像这样</p>
+<pre><code>self.assertRaises(ZeroDivisionError, div, 0)
+</code></pre>
+<p>完整代码</p>
+<pre><code>import unittest
+from factorial import fact, div
+
+class TestFactorial(unittest.TestCase):
+    &quot;&quot;&quot;
+    我们的基本测试类
+    &quot;&quot;&quot;
+
+    def test_fact(self):
+        &quot;&quot;&quot;
+        实际测试
+        任何以 `test_` 开头的方法都被视作测试用例
+        &quot;&quot;&quot;
+        res = fact(5)
+        self.assertEqual(res, 120)
+
+    def test_error(self):
+        &quot;&quot;&quot;
+        测试由运行时错误引发的异常
+        &quot;&quot;&quot;
+        self.assertRaises(ZeroDivisionError, div, 0)
+
+
+
+if __name__ == '__main__':
+    unittest.main()
+</code></pre>
+<h2 id="mounttabpy">mounttab.py</h2>
+<p>mounttab.py 中只有一个 mount_details() 函数，函数分析并打印挂载详细信息</p>
+<pre><code>import os
+
+
+def mount_details():
+    &quot;&quot;&quot;
+    打印挂载详细信息
+    &quot;&quot;&quot;
+    if os.path.exists('/proc/mounts'):
+        fd = open('/proc/mounts')
+        for line in fd:
+            line = line.strip()
+            words = line.split()
+            print('{} on {} type {}'.format(words[0],words[1],words[2]), end=' ')
+            if len(words) &gt; 5:
+                print('({})'.format(' '.join(words[3:-2])))
+            else:
+                print()
+        fd.close()
+
+
+if __name__ == '__main__':
+    mount_details()
+</code></pre>
+<p><strong>重构 mounttab.py</strong><br>
+现在我们在 mounttab2.py 中重构了上面的代码并且有一个我们能容易的测试的新函数 parse_mounts()</p>
+<pre><code>import os
+
+def parse_mounts():
+    &quot;&quot;&quot;
+    分析 /proc/mounts 并 返回元祖的列表
+    &quot;&quot;&quot;
+    result = []
+    if os.path.exists('/proc/mounts'):
+        fd = open('/proc/mounts')
+        for line in fd:
+            line = line.strip()
+            words = line.split()
+            if len(words) &gt; 5:
+                res = (words[0],words[1],words[2],'({})'.format(' '.join(words[3:-2])))
+            else:
+               res = (words[0],words[1],words[2])
+            result.append(res)
+        fd.close()
+    return result
+
+def mount_details():
+    &quot;&quot;&quot;
+    打印挂载详细信息
+    &quot;&quot;&quot;
+    result = parse_mounts()
+    for line in result:
+        if len(line) == 4:
+            print('{} on {} type {} {}'.format(*line))
+        else:
+            print('{} on {} type {}'.format(*line))
+
+
+if __name__ == '__main__':
+    mount_details()
+</code></pre>
+<p>同样我们测试代码，编写 mounttest.py 文件</p>
+<pre><code>#!/usr/bin/env python
+import unittest
+from mounttab2 import parse_mounts
+
+class TestMount(unittest.TestCase):
+    &quot;&quot;&quot;
+    我们的基本测试类
+    &quot;&quot;&quot;
+
+    def test_parsemount(self):
+        &quot;&quot;&quot;
+        实际测试
+        任何以 `test_` 开头的方法都被视作测试用例
+        &quot;&quot;&quot;
+        result = parse_mounts()
+        self.assertIsInstance(result, list)
+        self.assertIsInstance(result[0], tuple)
+
+    def test_rootext4(self):
+        &quot;&quot;&quot;
+        测试找出根文件系统
+        &quot;&quot;&quot;
+        result = parse_mounts()
+        for line in result:
+            if line[1] == '/' and line[2] != 'rootfs':
+                self.assertEqual(line[2], 'ext4')
+
+
+if __name__ == '__main__':
+    unittest.main()
+</code></pre>
+<p>运行程序</p>
+<pre><code>$ python3 mounttest.py
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+OK
+</code></pre>
+<h2 id="测试覆盖率">测试覆盖率</h2>
+<p>测试覆盖率是找到代码库未经测试的部分的简单方法。它并不会告诉你的测试好不好</p>
+<p>在 Python 中我们已经有了一个不错的覆盖率工具来帮助我们。你可以在实验楼环境中安装它</p>
+<pre><code>$ sudo pip3 install coverage
+</code></pre>
+<p><strong>覆盖率示例</strong></p>
+<pre><code>$ coverage3 run mounttest.py
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.013s
+
+OK
+$ coverage3 report -m
+Name           Stmts   Miss  Cover   Missing
+--------------------------------------------
+mounttab2.py      22      7    68%   16, 25-30, 34
+mounttest.py      14      0   100%
+--------------------------------------------
+TOTAL             36      7    81%
+</code></pre>
+<p>我们还可以使用下面的命令以 HTML 文件的形式输出覆盖率结果，然后在浏览器中查看它</p>
+<pre><code>$ coverage3 html
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95">单元测试</a></li>
+<li><a href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B">第一个测试用例</a></li>
+<li><a href="#%E5%90%84%E7%B1%BB-assert-%E8%AF%AD%E5%8F%A5">各类 assert 语句</a></li>
+<li><a href="#%E5%BC%82%E5%B8%B8%E6%B5%8B%E8%AF%95">异常测试</a></li>
+<li><a href="#mounttabpy">mounttab.py</a></li>
+<li><a href="#%E6%B5%8B%E8%AF%95%E8%A6%86%E7%9B%96%E7%8E%87">测试覆盖率</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/python-ji-chu-16-virtualenv/">
+              <h3 class="post-title">
+                Python基础16-Virtualenv
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/y-rui" target="_blank">y-rui</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

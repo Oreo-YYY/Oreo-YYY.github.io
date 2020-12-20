@@ -1,0 +1,428 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python基础15-迭代器、生成器、装饰器 | NoteForStudy</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1608466007398">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Python基础15-迭代器、生成器、装饰器 | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="迭代器
+Python 迭代器（Iterators）对象在遵守迭代器协议时需要支持如下两种方法
+
+__iter__()，返回迭代器对象自身。这用在 for 和 in 语句中
+__next__()，返回迭代器的下一个值。如果没有下一个值可以返回..." />
+    <meta name="keywords" content="Python,实验楼" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1608466007398" alt="">
+  </a>
+  <h1 class="site-title">
+    NoteForStudy
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/y-rui" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Python基础15-迭代器、生成器、装饰器
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-22
+              </span>
+              <span>
+                9 min read
+              </span>
+              
+                <a href="https://y-rui.github.io/tag/uGwwKRarA/" class="post-tag">
+                  # Python
+                </a>
+              
+                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
+                  # 实验楼
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="迭代器">迭代器</h2>
+<p>Python 迭代器（<em>Iterators</em>）对象在遵守迭代器协议时需要支持如下两种方法</p>
+<ul>
+<li><code>__iter__()</code>，返回迭代器对象自身。这用在 for 和 in 语句中</li>
+<li><code>__next__()</code>，返回迭代器的下一个值。如果没有下一个值可以返回，那么应该抛出 <code>StopIteration</code> 异常</li>
+</ul>
+<pre><code>class Counter(object):
+    def __init__(self, low, high):
+        self.current = low
+        self.high = high
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        #返回下一个值直到当前值大于 high
+        if self.current &gt; self.high:
+            raise StopIteration
+        else:
+            self.current += 1
+            return self.current - 1
+</code></pre>
+<p>现在我们能把这个迭代器用在我们的代码里</p>
+<pre><code>&gt;&gt;&gt; c = Counter(5,10)
+&gt;&gt;&gt; for i in c:
+...   print(i, end=' ')
+...
+5 6 7 8 9 10
+</code></pre>
+<p>请记住迭代器只能被使用一次。这意味着迭代器一旦抛出 StopIteration，它会持续抛出相同的异常</p>
+<pre><code>&gt;&gt;&gt; c = Counter(5,6)
+&gt;&gt;&gt; next(c)
+5
+&gt;&gt;&gt; next(c)
+6
+&gt;&gt;&gt; next(c)
+Traceback (most recent call last):
+File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+File &quot;&lt;stdin&gt;&quot;, line 11, in next
+StopIteration
+&gt;&gt;&gt; next(c)
+Traceback (most recent call last):
+File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+File &quot;&lt;stdin&gt;&quot;, line 11, in next
+StopIteration
+</code></pre>
+<p>我们已经看过在 for 循环中使用迭代器的例子了，下面的例子试图展示迭代器被隐藏的细节</p>
+<pre><code>&gt;&gt;&gt; iterator = iter(c)
+&gt;&gt;&gt; while True:
+...     try:
+...         x = iterator.__next__()
+...         print(x, end=' ')
+...     except StopIteration as e:
+...         break
+...
+5 6 7 8 9 10
+</code></pre>
+<h2 id="生成器">生成器</h2>
+<p>在这一节我们学习有关 Python 生成器（<em>Generators</em>）的知识。生成器是更简单的创建迭代器的方法，这通过在函数中使用 yield 关键字完成</p>
+<pre><code>&gt;&gt;&gt; def my_generator():
+...     print(&quot;Inside my generator&quot;)
+...     yield 'a'
+...     yield 'b'
+...     yield 'c'
+...
+&gt;&gt;&gt; my_generator()
+&lt;generator object my_generator at 0x7fbcfa0a6aa0&gt;
+</code></pre>
+<p>在上面的例子中我们使用 yield 语句创建了一个简单的生成器。我们能在 for 循环中使用它，就像我们使用任何其它迭代器一样</p>
+<pre><code>&gt;&gt;&gt; for char in my_generator():
+...     print(char)
+...
+Inside my generator
+a
+b
+c
+</code></pre>
+<p>在下一个例子里，我们会使用一个生成器函数完成与 Counter 类相同的功能，并且把它用在 for 循环中</p>
+<pre><code>&gt;&gt;&gt; def counter_generator(low, high):
+...     while low &lt;= high:
+...        yield low
+...        low += 1
+...
+&gt;&gt;&gt; for i in counter_generator(5,10):
+...     print(i, end=' ')
+...
+5 6 7 8 9 10
+</code></pre>
+<p>在 While 循环中，每当执行到 yield 语句时，返回变量 low 的值并且生成器状态转为挂起。在下一次调用生成器时，生成器从之前冻结的地方恢复执行然后变量 low 的值增一。生成器继续 while 循环并且再次来到 yield 语句...</p>
+<p>当你调用生成器函数时它返回一个生成器对象。如果你把这个对象传入 <code>dir()</code> 函数，你会在返回的结果中找到 <code>__iter__</code> 和 <code>__next__</code> 两个方法名</p>
+<p>我们通常使用生成器进行惰性求值。这样使用生成器是处理大数据的好方法。如果你不想在内存中加载所有数据，你可以使用生成器，一次只传递给你一部分数据</p>
+<p><code>os.path.walk()</code> 函数是最典型的这样的例子，它使用一个回调函数和当前的 <code>os.walk</code> 生成器。使用生成器实现节约内存</p>
+<p>我们可以使用生成器产生无限多的值。以下是一个这样的例子</p>
+<pre><code>&gt;&gt;&gt; def infinite_generator(start=0):
+...     while True:
+...         yield start
+...         start += 1
+...
+&gt;&gt;&gt; for num in infinite_generator(4):
+...     print(num, end=' ')
+...     if num &gt; 20:
+...         break
+...
+4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21
+</code></pre>
+<p>如果我们回到 <code>my_generator()</code> 这个例子，我们会发现生成器的一个特点：它们是不可重复使用的</p>
+<pre><code>&gt;&gt;&gt; g = my_generator()
+&gt;&gt;&gt; for c in g:
+...     print(c)
+...
+Inside my generator
+a
+b
+c
+&gt;&gt;&gt; for c in g:
+...     print(c)
+...
+</code></pre>
+<p>我们无法创建一个可重复使用的生成器，但可以创建一个对象，将它的 <code>__iter__</code> 方法调用得到一个生成器，举例如下</p>
+<pre><code>&gt;&gt;&gt; class Counter(object):
+...     def __init__(self, low, high):
+...         self.low = low
+...         self.high = high
+...     def __iter__(self):
+...          counter = self.low
+...          while self.high &gt;= counter:
+...              yield counter
+...              counter += 1
+...
+&gt;&gt;&gt; gobj = Counter(5, 10)
+&gt;&gt;&gt; for num in gobj:
+...     print(num, end=' ')
+...
+5 6 7 8 9 10
+&gt;&gt;&gt; for num in gobj:
+...     print(num, end=' ')
+...
+5 6 7 8 9 10
+</code></pre>
+<p>上面的 gobj 并不是生成器或迭代器，因为它不具有 <code>__next__</code> 方法，只是一个可迭代对象，生成器是一定不能重复循环的。而 <code>gobj.__iter__()</code> 是一个生成器，因为它是一个带有 yield 关键字的函数</p>
+<p>如果想要使类的实例变成迭代器，可以用 <code>__iter__</code> + <code>__next__</code> 方法实现</p>
+<pre><code>&gt;&gt;&gt; from collections import Iterator
+&gt;&gt;&gt; class Test():
+...:     def __init__(self, a, b):
+...:         self.a = a
+...:         self.b = b
+...:     def __iter__(self):
+...:         return self
+...:     def __next__(self):
+...:         self.a += 1
+...:         if self.a &gt; self.b:
+...:             raise StopIteration()
+...:         return self.a
+...:
+
+&gt;&gt;&gt; test = Test(5, 10)
+
+&gt;&gt;&gt; isinstance(test, Iterator)
+True
+</code></pre>
+<h2 id="生成器表达式">生成器表达式</h2>
+<ul>
+<li>在这一节我们学习生成器表达式（<em>Generator expressions</em>），生成器表达式是列表推导式和生成器的一个高性能，内存使用效率高的推广</li>
+</ul>
+<p>举个例子，我们尝试对 1 到 9 的所有数字进行平方求和</p>
+<pre><code>&gt;&gt;&gt; sum([x*x for x in range(1,10)])
+</code></pre>
+<p>这个例子实际上首先在内存中创建了一个平方数值的列表，然后遍历这个列表，最终求和后释放内存。你能理解一个大列表的内存占用情况是怎样的</p>
+<p>我们可以通过使用生成器表达式来节省内存使用</p>
+<pre><code>&gt;&gt;&gt; sum(x*x for x in range(1,10))
+</code></pre>
+<p>生成器表达式的语法要求其总是直接在在一对括号内，并且不能在两边有逗号。这基本上意味着下面这些例子都是有效的生成器表达式用法示例</p>
+<pre><code>&gt;&gt;&gt; sum(x*x for x in range(1,10))
+285
+&gt;&gt;&gt; g = (x*x for x in range(1,10))
+&gt;&gt;&gt; g
+&lt;generator object &lt;genexpr&gt; at 0x7fc559516b90&gt;
+</code></pre>
+<p>我们可以把生成器和生成器表达式联系起来，在下面的例子中我们会读取文件 '/var/log/cron' 并且查看任意指定任务（例中我们搜索 'anacron' ）是否成功运行</p>
+<p>我们可以用 shell 命令 <code>tail -f /etc/crontab |grep anacron</code> 完成同样的事（按 Ctrl + C 终止命令执行）</p>
+<pre><code>&gt;&gt;&gt; jobtext = 'anacron'
+&gt;&gt;&gt; all = (line for line in open('/etc/crontab', 'r') )
+&gt;&gt;&gt; job = ( line for line in all if line.find(jobtext) != -1)
+&gt;&gt;&gt; text = next(job)
+&gt;&gt;&gt; text
+'25 6\t* * *\troot\ttest -x /usr/sbin/anacron || ( cd / &amp;&amp; run-parts --report /etc/cron.daily )\n'
+&gt;&gt;&gt; text = next(job)
+&gt;&gt;&gt; text
+'47 6\t* * 7\troot\ttest -x /usr/sbin/anacron || ( cd / &amp;&amp; run-parts --report /etc/cron.weekly )\n'
+&gt;&gt;&gt; text = next(job)
+&gt;&gt;&gt; text
+'52 6\t1 * *\troot\ttest -x /usr/sbin/anacron || ( cd / &amp;&amp; run-parts --report /etc/cron.monthly )\n'
+</code></pre>
+<p>你可以写一个 for 循环遍历所有行</p>
+<h2 id="闭包">闭包</h2>
+<ul>
+<li>闭包（<em>Closures</em>）是由另外一个函数返回的函数。我们使用闭包去除重复代码。在下面的例子中我们创建了一个简单的闭包来对数字求和</li>
+</ul>
+<pre><code>&gt;&gt;&gt; def add_number(num):
+...     def adder(number):
+...         #adder 是一个闭包
+...         return num + number
+...     return adder
+...
+&gt;&gt;&gt; a_10 = add_number(10)
+&gt;&gt;&gt; a_10(21)
+31
+&gt;&gt;&gt; a_10(34)
+44
+&gt;&gt;&gt; a_5 = add_number(5)
+&gt;&gt;&gt; a_5(3)
+8
+</code></pre>
+<p>adder 是一个闭包，把一个给定的数字与预定义的一个数字相加</p>
+<h2 id="装饰器">装饰器</h2>
+<ul>
+<li>装饰器（<em>Decorators</em>）用来给一些对象动态的添加一些新的行为，我们使用过的闭包也是这样的</li>
+</ul>
+<p>我们会创建一个简单的示例，将在函数执行前后打印一些语句</p>
+<pre><code>&gt;&gt;&gt; def my_decorator(func):
+...     def wrapper(*args, **kwargs):
+...         print(&quot;Before call&quot;)
+...         result = func(*args, **kwargs)
+...         print(&quot;After call&quot;)
+...         return result
+...     return wrapper
+...
+&gt;&gt;&gt; @my_decorator
+... def add(a, b):
+...     #我们的求和函数
+...     return a + b
+...
+&gt;&gt;&gt; add(1, 3)
+Before call
+After call
+4
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E8%BF%AD%E4%BB%A3%E5%99%A8">迭代器</a></li>
+<li><a href="#%E7%94%9F%E6%88%90%E5%99%A8">生成器</a></li>
+<li><a href="#%E7%94%9F%E6%88%90%E5%99%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F">生成器表达式</a></li>
+<li><a href="#%E9%97%AD%E5%8C%85">闭包</a></li>
+<li><a href="#%E8%A3%85%E9%A5%B0%E5%99%A8">装饰器</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/python-ji-chu-14-pep8-dai-ma-feng-ge-zhi-nan/">
+              <h3 class="post-title">
+                Python基础14-PEP8 代码风格指南
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/y-rui" target="_blank">y-rui</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

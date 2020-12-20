@@ -1,0 +1,429 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python基础3-运算符和表达式 | NoteForStudy</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1608466007398">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Python基础3-运算符和表达式 | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="运算符
+
+运算符是一些符号，它告诉 Python 解释器去做一些数学或逻辑操作。一些基本的数学操作符如下所示
+
+&gt;&gt;&gt; 2 + 3
+5
+&gt;&gt;&gt; 23.0 - 3
+20.0
+&gt;&gt;&gt; 22 ..." />
+    <meta name="keywords" content="Python,实验楼" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1608466007398" alt="">
+  </a>
+  <h1 class="site-title">
+    NoteForStudy
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/y-rui" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Python基础3-运算符和表达式
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-14
+              </span>
+              <span>
+                7 min read
+              </span>
+              
+                <a href="https://y-rui.github.io/tag/uGwwKRarA/" class="post-tag">
+                  # Python
+                </a>
+              
+                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
+                  # 实验楼
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="运算符">运算符</h2>
+<ul>
+<li>运算符是一些符号，它告诉 Python 解释器去做一些数学或逻辑操作。一些基本的数学操作符如下所示</li>
+</ul>
+<pre><code>&gt;&gt;&gt; 2 + 3
+5
+&gt;&gt;&gt; 23.0 - 3
+20.0
+&gt;&gt;&gt; 22 / 12
+1.8333333333333333
+</code></pre>
+<ul>
+<li>只要有任意一个操作数是浮点数，结果就会是浮点数</li>
+<li>进行除法运算时若是除不尽，结果将会是小数，这很自然，如果要进行整除，使用 // 运算符，它将返回商的整数部分</li>
+<li>% 是求余运算符</li>
+</ul>
+<pre><code>&gt;&gt;&gt; 14 % 3
+2
+</code></pre>
+<p><strong>整数运算示例</strong></p>
+<pre><code>#!/usr/bin/env python3
+days = int(input(&quot;Enter days: &quot;))
+months = days // 30
+days = days % 30
+print(&quot;Months = {} Days = {}&quot;.format(months, days))
+</code></pre>
+<ul>
+<li>在Enter days:后获得用户输入的天数，然后获得月份数和天数，最后把这些数打印出来。你可以使用更容易的办法</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+days = int(input(&quot;Enter days: &quot;))
+print(&quot;Months = {} Days = {}&quot;.format(*divmod(days, 30)))
+</code></pre>
+<ul>
+<li>divmod(num1, num2) 返回一个元组，这个元组包含两个值，第一个是 num1 和 num2 相整除得到的值，第二个是 num1 和 num2 求余得到的值，然后我们用 * 运算符拆封这个元组，得到这两个值</li>
+</ul>
+<p><strong>关系运算符</strong></p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;</td>
+<td>Is less than</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>Is less than or equal to</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>Is greater than or equal to</td>
+</tr>
+<tr>
+<td>==</td>
+<td>Is equal to</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>Is not equal to</td>
+</tr>
+</tbody>
+</table>
+<p>在终端里输入python3进入交互页面,试一试以下一些例子</p>
+<pre><code>&gt;&gt;&gt; 1 &lt; 2
+True
+&gt;&gt;&gt; 3 &gt; 34
+False
+&gt;&gt;&gt; 23 == 45
+False
+&gt;&gt;&gt; 34 != 323
+True
+</code></pre>
+<p><strong>逻辑运算符</strong></p>
+<ul>
+<li>逻辑运算符 and 和 or 也称作短路运算符：它们的参数从左向右解析，一旦结果可以确定就停止。例如，如果 A 和 C 为真而 B 为假，A and B and C 不会解析 C 。作用于一个普通的非逻辑值时，短路运算符的返回值通常是能够最先确定结果的那个操作数</li>
+<li>关系运算可以通过逻辑运算符 and 和 or 组合，比较的结果可以用 not 来取反意。逻辑运算符的优先级又低于关系运算符，在它们之中，not 具有最高的优先级，or 优先级最低，所以 A and not B or C 等于 (A and (notB)) or C。当然，括号也可以用于比较表达式</li>
+</ul>
+<pre><code>&gt;&gt;&gt; 5 and 4   # 首先判断5，肯定为true，那么最终的结果就取决于 and 后面那个的布尔值，4 的布尔值为 true，这样就可以确定整个表达式的值为 true 了，所以返回 4
+4
+&gt;&gt;&gt; 0 and 4   # 首先判断0，因为 0 的布尔值为 false，那么不管 and 后面那个的布尔值是什么，整个表达式的布尔值都应该为 false 了，这个时候就不需要判断 4 了，直接返回最先确定结果的那个数也就是0
+0
+&gt;&gt;&gt; False or 3 or 0
+3
+&gt;&gt;&gt; 2 &gt; 1 and not 3 &gt; 5 or 4
+True
+</code></pre>
+<p><strong>简写运算符</strong></p>
+<ul>
+<li><code>x op= expression</code> 为简写运算的语法形式。其等价于 <code>x = x op expression</code> ，举例如下</li>
+</ul>
+<pre><code>&gt;&gt;&gt; a = 12
+&gt;&gt;&gt; a += 13
+&gt;&gt;&gt; a
+25
+&gt;&gt;&gt; a /= 3
+&gt;&gt;&gt; a
+8.333333333333334
+&gt;&gt;&gt; a += (26 * 32)
+&gt;&gt;&gt; a
+840.3333333333334
+</code></pre>
+<pre><code>#!/usr/bin/env python3
+N = 100
+a = 2
+while a &lt; N:
+    print(str(a))
+    a *= a
+</code></pre>
+<pre><code>cd /home/shiyanlou
+chmod +x shorthand.py
+./shorthand.py
+2
+4
+16
+</code></pre>
+<p><strong>表达式</strong></p>
+<ul>
+<li>通常我们书写表达式的时候，会在每一个运算符左右都放一个空格，这样使代码更可读</li>
+</ul>
+<pre><code>a = 234 * (45 - 56 / 34)
+</code></pre>
+<ul>
+<li>一个用于展示表达式的例子，注意其中运算符的优先级</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+a = 9
+b = 12
+c = 3
+x = a - b / 3 + c * 2 - 1
+y = a - b / (3 + c) * (2 - 1)
+z = a - (b / (3 + c) * 2) - 1
+print(&quot;X = &quot;, x)
+print(&quot;Y = &quot;, y)
+print(&quot;Z = &quot;, z)
+</code></pre>
+<pre><code>cd /home/shiyanlou
+chmod +x evaluationexp.py
+./evaluationexp.py
+X = 10.0
+Y = 7.0
+Z = 4.0
+</code></pre>
+<p>步骤如下</p>
+<pre><code>9 - 12 / 3 + 3 * 2 -1
+9 - 4 + 3 * 2 - 1
+9 - 4 + 6 - 1
+5 + 6 - 1
+11 - 1
+10
+</code></pre>
+<p><strong>类型转换</strong></p>
+<table>
+<thead>
+<tr>
+<th>类型转换函数</th>
+<th>转换路径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>float(string)</td>
+<td>字符串 -&gt; 浮点值</td>
+</tr>
+<tr>
+<td>int(string)</td>
+<td>字符串 -&gt; 整数值</td>
+</tr>
+<tr>
+<td>str(integer)</td>
+<td>整数值 -&gt; 字符串</td>
+</tr>
+<tr>
+<td>str(float)</td>
+<td>浮点值 -&gt; 字符串</td>
+</tr>
+</tbody>
+</table>
+<pre><code>&gt;&gt;&gt; a = 8.126768
+&gt;&gt;&gt; str(a)
+'8.126768'
+</code></pre>
+<p><strong>程序示例</strong><br>
+<code>evaluateequ.py</code></p>
+<ul>
+<li>这个程序计算数列 1/x+1/(x+1)+1/(x+2)+ ... +1/n，我们设 x = 1，n = 10</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+sum = 0
+for i in range(1, 11):
+    sum += 1.0 / i
+    print(&quot;{:2d} {:6.4f}&quot;.format(i , sum))
+</code></pre>
+<p><code>quadraticequation.py</code></p>
+<ul>
+<li>这个程序的名称为 quadratic equation 组合，是二次方程的英文词组。这个程序用来求解二次方程式</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+import math
+a = int(input(&quot;Enter value of a: &quot;))
+b = int(input(&quot;Enter value of b: &quot;))
+c = int(input(&quot;Enter value of c: &quot;))
+d = b * b - 4 * a * c
+if d &lt; 0:
+    print(&quot;ROOTS are imaginary&quot;)
+else:
+    root1 = (-b + math.sqrt(d)) / (2 * a)
+    root2 = (-b - math.sqrt(d)) / (2 * a)
+    print(&quot;Root 1 = &quot;, root1)
+    print(&quot;Root 2 = &quot;, root2)
+</code></pre>
+<p><code>salesmansalary.py</code></p>
+<ul>
+<li>这个程序计算一位数码相机销售人员的工资。他的基本工资是 1500，每售出一台相机他可以得到 200 并且获得 2% 的抽成。程序要求输入相机数量及单价</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+basic_salary = 1500
+bonus_rate = 200
+commission_rate = 0.02
+numberofcamera = int(input(&quot;Enter the number of inputs sold: &quot;))
+price = float(input(&quot;Enter the price of camera: &quot;))
+bonus = (bonus_rate * numberofcamera)
+commission = (commission_rate * price * numberofcamera)
+print(&quot;Bonus        = {:6.2f}&quot;.format(bonus))
+print(&quot;Commission   = {:6.2f}&quot;.format(commission))
+print(&quot;Gross salary = {:6.2f}&quot;.format(basic_salary + bonus + commission))
+</code></pre>
+<pre><code>shiyanlou:~/ ./salesmansalary.py
+Enter the number of inputs sold: 5
+Enter the price of camera: 2000
+Bonus        = 1000.00
+Commission   = 200.00
+Gross salary = 2700.00
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E8%BF%90%E7%AE%97%E7%AC%A6">运算符</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/python-ji-chu-2-bian-liang-he-shu-ju-lei-xing/">
+              <h3 class="post-title">
+                Python基础2-变量和数据类型
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/y-rui" target="_blank">y-rui</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

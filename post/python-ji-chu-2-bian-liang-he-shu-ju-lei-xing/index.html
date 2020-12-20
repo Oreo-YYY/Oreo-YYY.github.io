@@ -1,0 +1,365 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python基础2-变量和数据类型 | NoteForStudy</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1608466007398">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Python基础2-变量和数据类型 | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="关键字和标识符
+False               def                 if                  raise
+None                del                 import..." />
+    <meta name="keywords" content="Python,实验楼" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1608466007398" alt="">
+  </a>
+  <h1 class="site-title">
+    NoteForStudy
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/y-rui" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Python基础2-变量和数据类型
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-10
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+                <a href="https://y-rui.github.io/tag/uGwwKRarA/" class="post-tag">
+                  # Python
+                </a>
+              
+                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
+                  # 实验楼
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="关键字和标识符">关键字和标识符</h2>
+<pre><code>False               def                 if                  raise
+None                del                 import              return
+True                elif                in                  try
+and                 else                is                  while
+as                  except              lambda              with
+assert              finally             nonlocal            yield
+break               for                 not
+class               from                or
+continue            global              pass
+</code></pre>
+<ul>
+<li>在 Python 中 我们不需要为变量指定数据类型。所以你可以直接写出 abc = 1 ，这样变量 abc 就是整数类型。如果你写出 abc = 1.0 ，那么变量 abc 就是浮点类型</li>
+</ul>
+<pre><code>&gt;&gt;&gt; a = 13
+&gt;&gt;&gt; b = 23
+&gt;&gt;&gt; a + b
+36
+</code></pre>
+<ul>
+<li>通过上面的例子你应该理解了如何在 Python 中定义变量，也就是只需要输入变量名和值就行了。Python 也能操作字符串，它们用单引号或双引号括起来，就像下面这样</li>
+</ul>
+<pre><code>&gt;&gt;&gt; 'ShiYanLou'
+'ShiYanLou'
+&gt;&gt;&gt; 'ShiYanLou\'s best'
+&quot;ShiYanLou's best&quot;
+&gt;&gt;&gt; &quot;Hello World!&quot;
+'Hello World!'
+</code></pre>
+<h2 id="从键盘读取输入">从键盘读取输入</h2>
+<pre><code>#!/usr/bin/env python3
+number = int(input(&quot;Enter an integer: &quot;))
+if number &lt;= 100:
+    print(&quot;Your number is less than or equal to 100&quot;)
+else:
+    print(&quot;Your number is greater than 100&quot;)
+</code></pre>
+<ul>
+<li>在执行程序前，别忘了为文件添加可执行权限</li>
+</ul>
+<pre><code>chmod +x testhundred.py
+</code></pre>
+<ul>
+<li>程序运行起来就像这样</li>
+</ul>
+<pre><code>./testhundred.py
+Enter an integer: 13
+Your number is less than or equal to 100
+./testhundred.py
+Enter an integer: 123
+Your number is greater than 100
+</code></pre>
+<ul>
+<li>来计算投资</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+amount = float(input(&quot;Enter amount: &quot;))  # 输入数额
+inrate = float(input(&quot;Enter Interest rate: &quot;))  # 输入利率
+period = int(input(&quot;Enter period: &quot;))  # 输入期限
+value = 0
+year = 1
+while year &lt;= period:
+    value = amount + (inrate * amount)
+    print(&quot;Year {} Rs. {:.2f}&quot;.format(year, value))
+    amount = value
+    year = year + 1
+</code></pre>
+<pre><code>cd /home/shiyanlou
+chmod +x investment.py
+./investment.py
+Enter amount: 10000
+Enter Interest rate: 0.14
+Enter period: 5
+Year 1 Rs. 11400.00
+Year 2 Rs. 12996.00
+Year 3 Rs. 14815.44
+Year 4 Rs. 16889.60
+Year 5 Rs. 19254.15
+</code></pre>
+<ul>
+<li>while year &lt;= period: 的意思是，当 year 的值小于等于 period 的值时，下面的语句将会一直循环执行下去，直到 year 大于 period 时停止循环</li>
+<li>Year {} Rs. {:.2f}&quot;.format(year, value) 称为字符串格式化，大括号和其中的字符会被替换成传入 str.format() 的参数，也即 year 和 value。其中 {:.2f} 的意思是替换为 2 位精度的浮点数</li>
+</ul>
+<h2 id="代码示例">代码示例</h2>
+<p><strong>求 N 个数字的平均值</strong></p>
+<pre><code>#!/usr/bin/env python3
+N = 10
+sum = 0
+count = 0
+print(&quot;please input 10 numbers:&quot;)
+while count &lt; N:
+    number = float(input())
+    sum = sum + number
+    count = count + 1
+average = sum / N
+print(&quot;N = {}, Sum = {}&quot;.format(N, sum))
+print(&quot;Average = {:.2f}&quot;.format(average))
+</code></pre>
+<pre><code>cd /home/shiyanlou
+chmod +x averagen.py
+./averagen.py
+1.2
+3.4
+3.5
+33.2
+2
+4
+6
+2.4
+4
+5.5
+N = 10, Sum = 65.2
+Average = 6.52
+</code></pre>
+<p><strong>温度转换</strong></p>
+<ul>
+<li>在下面的程序里，我们使用公式 C = (F - 32) / 1.8 将华氏温度转为摄氏温度</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+fahrenheit = 0
+print(&quot;Fahrenheit Celsius&quot;)
+while fahrenheit &lt;= 250:
+    celsius = (fahrenheit - 32) / 1.8 # 转换为摄氏度
+    print(&quot;{:5d} {:7.2f}&quot;.format(fahrenheit , celsius))
+    fahrenheit = fahrenheit + 25
+</code></pre>
+<ul>
+<li>{:5d} 的意思是替换为 5 个字符宽度的整数，宽度不足则使用空格填充。 {:7.2f}的意思是替换为为 7 个字符宽度的保留两位的小数，小数点也算一个宽度，宽度不足则使用空格填充。其中7指宽度为 7，.2f指保留两位小数</li>
+</ul>
+<pre><code>cd /home/shiyanlou
+chmod +x temperature.py
+./temperature.py
+Fahrenheit Celsius
+    0  -17.78
+   25   -3.89
+   50   10.00
+   75   23.89
+  100   37.78
+  125   51.67
+  150   65.56
+  175   79.44
+  200   93.33
+  225  107.22
+  250  121.11
+</code></pre>
+<h2 id="单行定义多个变量或赋值">单行定义多个变量或赋值</h2>
+<ul>
+<li>你甚至可以在一行内将多个值赋值给多个变量</li>
+</ul>
+<pre><code>&gt;&gt;&gt; a , b = 45, 54
+&gt;&gt;&gt; a
+45
+&gt;&gt;&gt; b
+54
+</code></pre>
+<ul>
+<li>这个技巧用来交换两个数的值非常方便</li>
+</ul>
+<pre><code>&gt;&gt;&gt; a, b = b , a
+&gt;&gt;&gt; a
+54
+&gt;&gt;&gt; b
+45
+</code></pre>
+<ul>
+<li>要明白这是怎么工作的，你需要学习元组（<em>tuple</em>）这个数据类型。我们是用逗号创建元组。在赋值语句的右边我们创建了一个元组，我们称这为元组封装（<em>tuple packing</em>），赋值语句的左边我们则做的是元组拆封 （<em>tuple unpacking</em>）</li>
+</ul>
+<p>下面是另一个元组拆封的例子</p>
+<pre><code>&gt;&gt;&gt; data = (&quot;shiyanlou&quot;, &quot;China&quot;, &quot;Python&quot;)
+&gt;&gt;&gt; name, country, language = data
+&gt;&gt;&gt; name
+'shiyanlou'
+&gt;&gt;&gt; country
+'China'
+&gt;&gt;&gt; language
+'Python'
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%85%B3%E9%94%AE%E5%AD%97%E5%92%8C%E6%A0%87%E8%AF%86%E7%AC%A6">关键字和标识符</a></li>
+<li><a href="#%E4%BB%8E%E9%94%AE%E7%9B%98%E8%AF%BB%E5%8F%96%E8%BE%93%E5%85%A5">从键盘读取输入</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B">代码示例</a></li>
+<li><a href="#%E5%8D%95%E8%A1%8C%E5%AE%9A%E4%B9%89%E5%A4%9A%E4%B8%AA%E5%8F%98%E9%87%8F%E6%88%96%E8%B5%8B%E5%80%BC">单行定义多个变量或赋值</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/python-ji-chu/">
+              <h3 class="post-title">
+                Python基础1-预备知识
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/y-rui" target="_blank">y-rui</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,366 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python基础14-PEP8 代码风格指南 | NoteForStudy</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1608466007398">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Python基础14-PEP8 代码风格指南 | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="代码排版
+缩进
+每层缩进使用 4 个空格
+续行要么与圆括号、中括号、花括号这样的被包裹元素保持垂直对齐，要么放在 Python 的隐线（注：应该是相对于 def 的内部块）内部，或者使用悬挂缩进。使用悬挂缩进的注意事项：第一行不能有参数，用..." />
+    <meta name="keywords" content="Python,实验楼" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1608466007398" alt="">
+  </a>
+  <h1 class="site-title">
+    NoteForStudy
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/y-rui" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Python基础14-PEP8 代码风格指南
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-21
+              </span>
+              <span>
+                10 min read
+              </span>
+              
+                <a href="https://y-rui.github.io/tag/uGwwKRarA/" class="post-tag">
+                  # Python
+                </a>
+              
+                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
+                  # 实验楼
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="代码排版">代码排版</h2>
+<p><strong>缩进</strong></p>
+<p>每层缩进使用 4 个空格</p>
+<p>续行要么与圆括号、中括号、花括号这样的被包裹元素保持垂直对齐，要么放在 Python 的隐线（注：应该是相对于 def 的内部块）内部，或者使用悬挂缩进。使用悬挂缩进的注意事项：第一行不能有参数，用进一步的缩进来把其他行区分开</p>
+<p>好的示例</p>
+<pre><code># Aligned with opening delimiter.
+foo = long_function_name(var_one, var_two,
+                         var_three, var_four)
+
+# More indentation included to distinguish this from the rest.
+def long_function_name(
+        var_one, var_two, var_three,
+        var_four):
+    print(var_one)
+
+# Hanging indents should add a level.
+foo = long_function_name(
+    var_one, var_two,
+    var_three, var_four)
+</code></pre>
+<p>不好的示例</p>
+<pre><code># Arguments on first line forbidden when not using vertical alignment.
+foo = long_function_name(var_one, var_two,
+    var_three, var_four)
+
+# Further indentation required as indentation is not distinguishable.
+def long_function_name(
+    var_one, var_two, var_three,
+    var_four):
+    print(var_one)
+</code></pre>
+<p>空格规则是可选的</p>
+<pre><code># Hanging indents *may* be indented to other than 4 spaces.
+foo = long_function_name(
+  var_one, var_two,
+  var_three, var_four)
+</code></pre>
+<p>当 if 语句的条件部分足够长，需要将它写入到多个行，值得注意的是两个连在一起的关键字（i.e. if），添加一个空格，给后续的多行条件添加一个左括号形成自然地 4 空格缩进。如果和嵌套在 if 语句内的缩进代码块产生了视觉冲突，也应该被自然缩进 4 个空格。这份增强建议书对于怎样（或是否）把条件行和 if 语句的缩进块在视觉上区分开来是没有明确规定的。可接受的情况包括，但不限于</p>
+<pre><code># No extra indentation.
+if (this_is_one_thing and
+    that_is_another_thing):
+    do_something()
+
+# Add a comment, which will provide some distinction in editors
+# supporting syntax highlighting.
+if (this_is_one_thing and
+    that_is_another_thing):
+    # Since both conditions are true, we can frobnicate.
+    do_something()
+
+# Add some extra indentation on the conditional continuation line.
+if (this_is_one_thing
+        and that_is_another_thing):
+    do_something()
+</code></pre>
+<p>在多行结构中的右圆括号、右中括号、右大括号应该放在最后一行的第一个非空白字符的正下方，如下所示</p>
+<pre><code>my_list = [
+    1, 2, 3,
+    4, 5, 6,
+    ]
+result = some_function_that_takes_arguments(
+    'a', 'b', 'c',
+    'd', 'e', 'f',
+    )
+</code></pre>
+<p>或者放在多行结构的起始行的第一个字符正下方，如下</p>
+<pre><code>my_list = [
+    1, 2, 3,
+    4, 5, 6,
+]
+result = some_function_that_takes_arguments(
+    'a', 'b', 'c',
+    'd', 'e', 'f',
+)
+</code></pre>
+<p><strong>制表符还是空格</strong><br>
+空格是首选的缩进方法</p>
+<p>制表符（Tab）应该被用在那些以前就使用了制表符缩进的地方</p>
+<p>Python 3 不允许混合使用制表符和空格来缩进代码</p>
+<p>混合使用制表符和空格缩进的 Python 2 代码应该改为只使用空格</p>
+<p>当使用-t选项来调用 Python 2 的命令行解释器的时候，会对混合使用制表符和空格的代码发出警告。当使用-tt选项的时候，这些警告会变成错误。这些选项是强烈推荐的！</p>
+<p><strong>每行最大长度</strong><br>
+限制每行的最大长度为 79 个字符</p>
+<p>对于那些约束很少的文本结构（文档字符串或注释）的长块，应该限制每行长度为 72 个字符</p>
+<p>限制编辑窗口的宽度使并排打开两个窗口成为可能，使用通过代码审查工具时，也能很好的通过相邻列展现不同代码版本</p>
+<p>一些工具的默认换行设置打乱了代码的可视结构，使其更难理解。限制编辑器窗口宽为 80 来避免自动换行，即使有些编辑工具在换行的时候会在最后一列放一个标识符。一些基于 Web 的工具可能根本就不提供动态换行</p>
+<p>一些团队更倾向于长的代码行。对于达成了一致意见来统一代码的团队而言，把行提升到 80~100 的长度是可接受的（实际最大长度为 99 个字符），注释和文档字符串的长度还是建议在 72 个字符内</p>
+<p>Python 标准库是非常专业的，限制最大代码长度为 79 个字符（注释和文档字符串最大长度为 72 个字符）</p>
+<p>首选的换行方式是在括号（小中大）内隐式换行（非续行符 \）。长行应该在括号表达式的包裹下换行。这比反斜杠作为续行符更好</p>
+<p>反斜杠有时仍然适用。例如，多个很长的 with 语句不能使用隐式续行，因此反斜杠是可接受的</p>
+<pre><code>with open('/path/to/some/file/you/want/to/read') as file_1, \
+     open('/path/to/some/file/being/written', 'w') as file_2:
+    file_2.write(file_1.read())
+</code></pre>
+<p>（见前面关于 多行 if 语句 的讨论来进一步思考这种多行 with 语句该如何缩进。）</p>
+<p>另一种使用反斜杠续行的案例是 assert 语句</p>
+<p>确保续行的缩进是恰到好处的。遇到二元操作符，首选的断行位置是操作符的后面而不是前面。这有一些例子</p>
+<pre><code>class Rectangle(Blob):
+
+    def __init__(self, width, height,
+                 color='black', emphasis=None, highlight=0):
+        if (width == 0 and height == 0 and
+                color == 'red' and emphasis == 'strong' or
+                highlight &gt; 100):
+            raise ValueError(&quot;sorry, you lose&quot;)
+        if width == 0 and height == 0 and (color == 'red' or
+                                           emphasis is None):
+            raise ValueError(&quot;I don't think so -- values are %s, %s&quot; %
+                             (width, height))
+        Blob.__init__(self, width, height,
+                      color, emphasis, highlight)
+</code></pre>
+<p><strong>空行</strong><br>
+顶级函数和类定义上下使用两个空行分隔</p>
+<p>类内的方法定义使用一个空行分隔</p>
+<p>可以使用额外的空行（有节制的）来分隔相关联的函数组。在一系列相关联的单行代码中空行可以省略（e.g. 一组虚拟的实现）</p>
+<p>在函数中使用空白行（有节制的）来表明逻辑部分</p>
+<p>Python 接受使用换页符（i.e. Ctrl+L）作为空格；许多工具都把 Ctrl+L 作为分页符，因此你可以用它们把你的文件中相似的章节分页。注意，一些编辑器和基于 Web 的代码查看工具可能不把 Ctrl+L 看做分页符，而是在这个位置放一个其它的符号</p>
+<p><strong>源文件编码</strong><br>
+在核心 Python 发布版中的代码应该总是使用UTF-8编码（或者在 Python 2 中使用 ASCII）</p>
+<p>使用 ASCII(Python 2)或 UTF-8(Python 3)的文件不需要有编码声明（注：它们是默认的）</p>
+<p>在标准库中，非缺省的编码应该仅仅用于测试目的，或者注释或文档字符串中的作者名包含非 ASCII 码字符；否则，优先使用 \x、\u、\U 或者 \N 来转义字符串中的非 ASCII 数据</p>
+<p>对于 Python 3.0 和之后的版本，以下是有关标准库的政策（见PEP 3131）：所有 Python 标准库中的标识符必须使用只含 ASCII 的标识，并且只要可行，应该使用英语单词（在多数情况下，缩略语和技术术语哪个不是英语）。此外，字符串和注释也必须是 ASCII。仅有的例外是：(a)测试用例测试非 ASCII 特性时，(b)作者名。作者的名字不是基于拉丁字母的必须提供他们名字的拉丁字母音译</p>
+<p><strong>导入包</strong><br>
+import 不同的模块应该独立一行，如</p>
+<pre><code>import os
+import sys
+</code></pre>
+<p>这样也是可行的</p>
+<pre><code>from subprocess import Popen, PIPE
+</code></pre>
+<p>import 语句应该总是放在文件的顶部，在模块注释和文档字符串之下，在模块全局变量和常量之前</p>
+<p>import 语句分组顺序如下</p>
+<ol>
+<li>导入标准库模块</li>
+<li>导入相关第三方库模块</li>
+<li>导入当前应用程序 / 库模块</li>
+</ol>
+<p>每组之间应该用空行分开<br>
+然后用 <code>__all__</code> 声明本文件内的模块</p>
+<p>绝对导入是推荐的，它们通常是更可读的，并且在错误的包系统配置（如一个目录包含一个以 os.path 结尾的包）下有良好的行为倾向（至少有更清晰的错误消息）</p>
+<pre><code>import mypkg.sibling
+from mypkg import sibling
+from mypkg.sibling import example
+</code></pre>
+<p>当然，相对于绝对导入，相对导入是个可选替代，特别是处理复杂的包结构时，绝对导入会有不必要的冗余</p>
+<pre><code>from . import sibling
+from .sibling import example
+</code></pre>
+<p>标准库代码应该避免复杂的包结构，并且永远使用绝对导入</p>
+<p>应该从不使用隐式的相对导入，而且在 Python 3 中已经被移除</p>
+<p>从一个包含类的模块导入类时，这样写通常是可行的</p>
+<pre><code>from myclass import MyClass
+from foo.bar.yourclass import YourClass
+</code></pre>
+<p>如果上面的方式会本地导致命名冲突，则这样写</p>
+<pre><code>import myclass
+import foo.bar.yourclass
+</code></pre>
+<p>以 <code>myclass.MyClass</code> 和 <code>foo.bar.yourclass.YourClass</code> 这样的方式使用</p>
+<ul>
+<li>应该避免通配符导入（from import *），这会使名称空间里存在的名称变得不清晰，迷惑读者和自动化工具。这里有一个可辩护的通配符导入用例，，重新发布一个内部接口作为公共 API 的一部分（例如，使用纯 Python 实现一个可选的加速器模块的接口，但并不能预知这些定义会被覆盖）</li>
+<li>当以这种方式重新发布名称时，下面关于公共和内部接口的指南仍然适用</li>
+</ul>
+<h2 id="字符串引号">字符串引号</h2>
+<p>在 Python 里面，单引号字符串和双引号字符串是相同的。这份指南对这个不会有所建议。选择一种方式并坚持使用。一个字符串同时包含单引号和双引号字符时，用另外一种来包裹字符串，而不是使用反斜杠来转义，以提高可读性</p>
+<p>对于三引号字符串，总是使用双引号字符来保持与文档字符串约定的一致性</p>
+<h2 id="表达式和语句中的空格">表达式和语句中的空格</h2>
+<h2 id="注释">注释</h2>
+<h2 id="版本注记">版本注记</h2>
+<h2 id="命名约定">命名约定</h2>
+<h2 id="公共和内部接口">公共和内部接口</h2>
+<h2 id="程序编写建议">程序编写建议</h2>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%BB%A3%E7%A0%81%E6%8E%92%E7%89%88">代码排版</a></li>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%BC%95%E5%8F%B7">字符串引号</a></li>
+<li><a href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%AF%AD%E5%8F%A5%E4%B8%AD%E7%9A%84%E7%A9%BA%E6%A0%BC">表达式和语句中的空格</a></li>
+<li><a href="#%E6%B3%A8%E9%87%8A">注释</a></li>
+<li><a href="#%E7%89%88%E6%9C%AC%E6%B3%A8%E8%AE%B0">版本注记</a></li>
+<li><a href="#%E5%91%BD%E5%90%8D%E7%BA%A6%E5%AE%9A">命名约定</a></li>
+<li><a href="#%E5%85%AC%E5%85%B1%E5%92%8C%E5%86%85%E9%83%A8%E6%8E%A5%E5%8F%A3">公共和内部接口</a></li>
+<li><a href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99%E5%BB%BA%E8%AE%AE">程序编写建议</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/python-tiao-zhan-4-lei-he-collection-mo-kuai/">
+              <h3 class="post-title">
+                Python挑战4-类和Collection模块
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/y-rui" target="_blank">y-rui</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,428 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python基础8-函数 | NoteForStudy</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1608466007398">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Python基础8-函数 | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="定义一个函数
+我们使用关键字 def 来定义一个函数，语法描述如下所示
+def 函数名(参数):
+    语句1
+    语句2
+
+让我们编写一个函数，它将接受两个整数作为输入，然后返回总和
+&gt;&gt;&gt; def sum(a, ..." />
+    <meta name="keywords" content="Python,实验楼" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1608466007398" alt="">
+  </a>
+  <h1 class="site-title">
+    NoteForStudy
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/y-rui" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Python基础8-函数
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-16
+              </span>
+              <span>
+                9 min read
+              </span>
+              
+                <a href="https://y-rui.github.io/tag/uGwwKRarA/" class="post-tag">
+                  # Python
+                </a>
+              
+                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
+                  # 实验楼
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="定义一个函数">定义一个函数</h2>
+<p>我们使用关键字 def 来定义一个函数，语法描述如下所示</p>
+<pre><code>def 函数名(参数):
+    语句1
+    语句2
+</code></pre>
+<p>让我们编写一个函数，它将接受两个整数作为输入，然后返回总和</p>
+<pre><code>&gt;&gt;&gt; def sum(a, b):
+...     return a + b
+</code></pre>
+<p>第二行有个 return 关键字，我们把 a + b 的值返回给调用者</p>
+<p>你必须像下面这样调用这个函数</p>
+<pre><code>&gt;&gt;&gt; res = sum(234234, 34453546464)
+&gt;&gt;&gt; res
+34453780698L
+</code></pre>
+<p>还记得我们上一个实验讲过的回文检查程序么，让我们编写一个函数来检查给出的字符串是否为回文，然后返回 True 或者 False</p>
+<pre><code>#!/usr/bin/env python3
+def palindrome(s):
+    return s == s[::-1]
+if __name__ == '__main__':
+    s = input(&quot;Enter a string: &quot;)
+    if palindrome(s):
+        print(&quot;Yay a palindrome&quot;)
+    else:
+        print(&quot;Oh no, not a palindrome&quot;)
+</code></pre>
+<p>将上述代码写入到 testpalindrome.py 文件，执行如下</p>
+<pre><code>python3 testpalindrome.py
+Enter a string: test111
+Oh no, not a palindrome
+
+python3 testpalindrome.py
+Enter a string: 1234321
+Yay a palindrome
+</code></pre>
+<h2 id="局域或全局变量">局域或全局变量</h2>
+<p>我们通过几个例子来弄明白局域或全局变量，首先我们在函数内部和函数调用的代码中都使用同一个变量 a</p>
+<pre><code>#!/usr/bin/env python3
+def change():
+    a = 90
+    print(a)
+a = 9
+print(&quot;Before the function call &quot;, a)
+print(&quot;inside change function&quot;, end=' ')
+change()
+print(&quot;After the function call &quot;, a)
+</code></pre>
+<ul>
+<li>首先我们对 a 赋值 9，然后调用更改函数，这个函数里我们对 a 赋值 90，然后打印 a 的值。调用函数后我们再次打印 a 的值</li>
+<li>当我们在函数里写 a = 90 时，它实际上创建了一个新的名为 a 的局部变量，这个变量只在函数里可用，并且会在函数完成时销毁。所以即使这两个变量的名字都相同，但事实上他们并不是同一个变量</li>
+<li>那么如果我们先定义 a，在函数中是否可以直接使用呢</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+a = 9
+def change():
+    print(a)
+change()
+</code></pre>
+<p>这段代码是没有问题的，可以直接打印输出 9。稍微改动一下</p>
+<pre><code>#!/usr/bin/env python3
+a = 9
+def change():
+    print(a)
+    a = 100
+change()
+</code></pre>
+<ul>
+<li>现在就会报错了：“UnboundLocalError: local variable 'a' referenced before assignment”，原因是当函数中只要用到了变量 a，并且 a 出现在表达式等于号的前面，就会被当作局部变量。当执行到 print(a) 的时候会报错，因为 a 作为函数局部变量是在 print(a) 之后才定义的</li>
+<li>现在我们使用 global 关键字，对函数中的 a 标志为全局变量，让函数内部使用全局变量的 a，那么整个程序中出现的 a 都将是这个</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+a = 9
+def change():
+    global a
+    print(a)
+    a = 100
+print(&quot;Before the function call &quot;, a)
+print(&quot;inside change function&quot;, end=' ')
+change()
+print(&quot;After the function call &quot;, a)
+</code></pre>
+<p>程序中的 end=' ' 参数表示，print 打印后的结尾不用换行，而用空格。默认情况下 print 打印后会在结尾换行</p>
+<p>程序执行的结果，不会报错了，因为函数体内可以访问全局的变量 a</p>
+<pre><code>Before the function call  9
+inside change function 9
+After the function call  100
+</code></pre>
+<p>在函数内使用 global 会有什么作用呢？尝试下面的代码</p>
+<pre><code>#!/usr/bin/env python3
+def change():
+    global a
+    a = 90
+    print(a)
+a = 9
+print(&quot;Before the function call &quot;, a)
+print(&quot;inside change function&quot;, end=' ')
+change()
+print(&quot;After the function call &quot;, a)
+</code></pre>
+<pre><code>Before the function call  9
+inside change function 90
+After the function call  90
+</code></pre>
+<p>这里通过关键字 global 来告诉 a 的定义是全局的，因此在函数内部更改了 a 的值，函数外 a 的值也实际上更改了</p>
+<h2 id="默认参数值">默认参数值</h2>
+<ul>
+<li>函数的参数变量可以有默认值，也就是说如果我们对指定的参数变量没有给出任何值则会赋其默认值</li>
+</ul>
+<pre><code>&gt;&gt;&gt; def test(a , b=-99):
+...     if a &gt; b:
+...         return True
+...     else:
+...         return False
+</code></pre>
+<p>在上面的例子里，我们在函数的参数列表写出 b = -99。这表示如果调用者未给出 b 的值，那么 b 的值默认为 -99。这是一个关于默认参数的非常简单的例子</p>
+<p>你可以通过调用函数测试代码</p>
+<pre><code>&gt;&gt;&gt; test(12, 23)
+False
+&gt;&gt;&gt; test(12)
+True
+</code></pre>
+<ul>
+<li>有两个非常重要的地方，第一个是具有默认值的参数后面不能再有普通参数，比如 f(a,b=90,c) 就是错误的</li>
+<li>第二个是默认值只被赋值一次，因此如果默认值是任何可变对象时会有所不同，比如列表、字典或大多数类的实例</li>
+</ul>
+<p>例如，下面的函数在后续调用过程中会累积（前面）传给它的参数</p>
+<pre><code>&gt;&gt;&gt; def f(a, data=[]):
+...     data.append(a)
+...     return data
+...
+&gt;&gt;&gt; print(f(1))
+[1]
+&gt;&gt;&gt; print(f(2))
+[1, 2]
+&gt;&gt;&gt; print(f(3))
+[1, 2, 3]
+</code></pre>
+<p>要避免这个问题，你可以像下面这样</p>
+<pre><code>&gt;&gt;&gt; def f(a, data=None):
+...     if data is None:
+...         data = []
+...     data.append(a)
+...     return data
+...
+&gt;&gt;&gt; print(f(1))
+[1]
+&gt;&gt;&gt; print(f(2))
+[2]
+</code></pre>
+<h2 id="关键字参数">关键字参数</h2>
+<ul>
+<li>函数可以通过关键字参数的形式来调用，形如 <code>keyword = value</code></li>
+</ul>
+<pre><code>&gt;&gt;&gt; def func(a, b=5, c=10):
+...     print('a is', a, 'and b is', b, 'and c is', c)
+...
+&gt;&gt;&gt; func(12, 24)
+a is 12 and b is 24 and c is 10
+&gt;&gt;&gt; func(12, c = 24)
+a is 12 and b is 5 and c is 24
+&gt;&gt;&gt; func(b=12, c = 24, a = -1)
+a is -1 and b is 12 and c is 24
+</code></pre>
+<p>在上面的例子中你能看见调用函数时使用了变量名，比如 func(12,c = 24)，这样我们将 24 赋给 c 且 b 具有默认值</p>
+<h2 id="强制关键字参数">强制关键字参数</h2>
+<ul>
+<li>我们也能将函数的参数标记为只允许使用关键字参数。用户调用函数时将只能对每一个参数使用相应的关键字参数</li>
+</ul>
+<pre><code>&gt;&gt;&gt; def hello(*, name='User'):
+...     print(&quot;Hello&quot;, name)
+...
+&gt;&gt;&gt; hello('shiyanlou')
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: hello() takes 0 positional arguments but 1 was given
+&gt;&gt;&gt; hello(name='shiyanlou')
+Hello shiyanlou
+</code></pre>
+<h2 id="文档字符串">文档字符串</h2>
+<ul>
+<li>在 Python 里我们使用文档字符串（<em>docstrings</em>）来说明如何使用代码，这在交互模式非常有用，也能用于自动创建文档</li>
+</ul>
+<p>下面我们来看看使用文档字符串的例子</p>
+<pre><code>#!/usr/bin/env python3
+import math
+
+def longest_side(a, b):
+    &quot;&quot;&quot;
+    Function to find the length of the longest side of a right triangle.
+
+    :arg a: Side a of the triangle
+    :arg b: Side b of the triangle
+
+    :return: Length of the longest side c as float
+    &quot;&quot;&quot;
+    return math.sqrt(a*a + b*b)
+
+if __name__ == '__main__':
+    print(longest_side.__doc__)
+    print(longest_side(4,5))
+</code></pre>
+<h2 id="高阶函数">高阶函数</h2>
+<p>高阶函数（<em>Higher-order function</em>）或仿函数（<em>functor</em>）是可以接受函数作为参数的函数</p>
+<ul>
+<li>使用一个或多个函数作为参数</li>
+<li>返回另一个函数作为输出</li>
+</ul>
+<p>Python 里的任何函数都可以作为高阶函数，下面举一个简单的例子</p>
+<pre><code># 创建一个函数，将参数列表中每个元素都变成全大写
+&gt;&gt;&gt; def high(l):
+...     return [i.upper() for i in l]
+...
+# 创建高阶函数，接受一个函数和一个列表作为参数
+&gt;&gt;&gt; def test(h, l):
+...     return h(l)
+...
+&gt;&gt;&gt; l = ['python', 'Linux', 'Git']
+# 运行高阶函数，返回预期的结果
+&gt;&gt;&gt; test(high, l)
+['PYTHON', 'LINUX', 'GIT']
+</code></pre>
+<p><strong>map 函数</strong><br>
+map 是一个在 Python 里非常有用的高阶函数。它接受一个函数和一个序列（迭代器）作为输入，然后对序列（迭代器）的每一个值应用这个函数，返回一个序列（迭代器），其包含应用函数后的结果</p>
+<pre><code>&gt;&gt;&gt; lst = [1, 2, 3, 4, 5]
+&gt;&gt;&gt; def square(num):
+...     &quot;返回所给数字的平方.&quot;
+...     return num * num
+...
+&gt;&gt;&gt; print(list(map(square, lst)))
+[1, 4, 9, 16, 25]
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0">定义一个函数</a></li>
+<li><a href="#%E5%B1%80%E5%9F%9F%E6%88%96%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F">局域或全局变量</a></li>
+<li><a href="#%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%80%BC">默认参数值</a></li>
+<li><a href="#%E5%85%B3%E9%94%AE%E5%AD%97%E5%8F%82%E6%95%B0">关键字参数</a></li>
+<li><a href="#%E5%BC%BA%E5%88%B6%E5%85%B3%E9%94%AE%E5%AD%97%E5%8F%82%E6%95%B0">强制关键字参数</a></li>
+<li><a href="#%E6%96%87%E6%A1%A3%E5%AD%97%E7%AC%A6%E4%B8%B2">文档字符串</a></li>
+<li><a href="#%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0">高阶函数</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/python-ji-chu-7-zi-fu-chuan/">
+              <h3 class="post-title">
+                Python基础7-字符串
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/y-rui" target="_blank">y-rui</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

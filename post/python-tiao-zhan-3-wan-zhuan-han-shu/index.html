@@ -1,0 +1,244 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python挑战3-玩转函数 | NoteForStudy</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1608466007398">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Python挑战3-玩转函数 | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="介绍
+
+本次挑战中我们将实现一个程序，将分钟转为小时和分钟
+注意：代码中不要使用 input() 函数，否则挑战测试会卡住，出现 Timeout 的报错
+
+目标
+
+在 MinutesToHours.py 文件中实现一个函数 Hours()，..." />
+    <meta name="keywords" content="Python,实验楼" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1608466007398" alt="">
+  </a>
+  <h1 class="site-title">
+    NoteForStudy
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/y-rui" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Python挑战3-玩转函数
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-16
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://y-rui.github.io/tag/uGwwKRarA/" class="post-tag">
+                  # Python
+                </a>
+              
+                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
+                  # 实验楼
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="介绍">介绍</h2>
+<ul>
+<li>本次挑战中我们将实现一个程序，将分钟转为小时和分钟</li>
+<li>注意：代码中不要使用 input() 函数，否则挑战测试会卡住，出现 Timeout 的报错</li>
+</ul>
+<h2 id="目标">目标</h2>
+<ul>
+<li>在 MinutesToHours.py 文件中实现一个函数 Hours()，将用户输入的 分钟数 转化为 小时数和分钟数，并要求小时数尽量大。将结果以 XX H, XX M 的形式打印出来</li>
+</ul>
+<h2 id="要求">要求</h2>
+<ol>
+<li>用户能够通过命令行参数输入分钟数，不要使用 input，命令行参数可以使用 sys.argv 来提取。例如程序执行为 python3 MinutesToHours.py 80，传入的参数 80 就是分钟数，程序需要打印出相应的小时数和分钟数，输出为 1 H, 20 M</li>
+<li>如果用户输入的是一个负值，程序需要 raise 来抛出 ValueError 异常</li>
+<li>Hours() 函数调用的时候，需要使用 try...except 处理异常。获取异常后，在屏幕上打印出 Parameter Error 提示用户输入的值有误</li>
+</ol>
+<h2 id="操作实例">操作实例</h2>
+<pre><code>python3 /home/shiyanlou/Code/MinutesToHours.py 80
+1 H, 20 M
+
+python3 /home/shiyanlou/Code/MinutesToHours.py 95
+1 H, 35 M
+
+python3 /home/shiyanlou/Code/MinutesToHours.py -10
+Parameter Error
+
+python3 /home/shiyanlou/Code/MinutesToHours.py abcd
+Parameter Error
+</code></pre>
+<h2 id="提示语">提示语</h2>
+<ul>
+<li>sys.argv 获取命令行参数，注意获取的参数为字符串，可以使用 int() 将字符串转为整数，此处也可能会出现异常情况，例如输入为 &quot;abcd&quot; 是无法转为整数的</li>
+<li>raise 语句</li>
+<li>try...except 语句</li>
+</ul>
+<h2 id="参考代码">参考代码</h2>
+<pre><code>import sys
+# 转换函数
+def Hours(minute):
+    # 如果为负数则 raise 异常
+    if minute &lt; 0:
+        raise ValueError(&quot;Input number cannot be negative&quot;)
+    else:
+        print(&quot;{} H, {} M&quot;.format(int(minute / 60), minute % 60))
+        # 函数调用及异常处理逻辑
+    try:
+        Hours(int(sys.argv[1]))
+    except:
+        print(&quot;Parameter Error&quot;)
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D">介绍</a></li>
+<li><a href="#%E7%9B%AE%E6%A0%87">目标</a></li>
+<li><a href="#%E8%A6%81%E6%B1%82">要求</a></li>
+<li><a href="#%E6%93%8D%E4%BD%9C%E5%AE%9E%E4%BE%8B">操作实例</a></li>
+<li><a href="#%E6%8F%90%E7%A4%BA%E8%AF%AD">提示语</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E4%BB%A3%E7%A0%81">参考代码</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/python-ji-chu-10-yi-chang/">
+              <h3 class="post-title">
+                Python基础10-异常
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/y-rui" target="_blank">y-rui</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,294 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python挑战4-类和Collection模块 | NoteForStudy</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1608466007398">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Python挑战4-类和Collection模块 | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="介绍
+本次挑战中我们将通过改写之前实验中的 student_teacher.py 程序实现更加丰富的功能
+目标
+改写 我们在 类 这个实验中 继承 部分的 student_teacher.py 脚本，实现以下功能
+
+在 Person() 类..." />
+    <meta name="keywords" content="Python,实验楼" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1608466007398" alt="">
+  </a>
+  <h1 class="site-title">
+    NoteForStudy
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/y-rui" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Python挑战4-类和Collection模块
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-20
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+                <a href="https://y-rui.github.io/tag/uGwwKRarA/" class="post-tag">
+                  # Python
+                </a>
+              
+                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
+                  # 实验楼
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="介绍">介绍</h2>
+<p>本次挑战中我们将通过改写之前实验中的 student_teacher.py 程序实现更加丰富的功能</p>
+<h2 id="目标">目标</h2>
+<p>改写 我们在 类 这个实验中 继承 部分的 student_teacher.py 脚本，实现以下功能</p>
+<ul>
+<li>在 Person() 类中增添函数 get_grade()</li>
+<li>对于教师类，get_grade() 函数可以自动统计出老师班上学生的得分情况并按照频率的高低以 A: X, B: X, C: X, D: X 的形式打印出来</li>
+<li>对于学生类，get_grade() 函数则可以以 Pass: X, Fail: X 来统计自己的成绩情况（A,B,C 为 Pass, 如果得了 D 就认为是 Fail）</li>
+</ul>
+<p>student_teacher.py 文件可以通过在 Xfce 终端中输入如下代码来获取</p>
+<pre><code>cd /home/shiyanlou/Code
+wget https://labfile.oss.aliyuncs.com/courses/790/student_teacher.py
+</code></pre>
+<p>要求:</p>
+<ol>
+<li>请把最终的student_teacher.py 代码文件放在 /home/shiyanlou/Code/ 路径下</li>
+<li>根据命令行中的第一个参数 teacher 或者 student 来判断最终输出的格式</li>
+<li>命令行中第二个输入的参数是需要统计的字符串</li>
+</ol>
+<p>执行实例</p>
+<pre><code>$ python3 student_teacher.py teacher ABCCBADDAA
+A: 4, D: 2, B: 2, C: 2
+$ python3 student_teacher.py student ABCCBADDAA
+Pass: 8, Fail: 2
+</code></pre>
+<h2 id="参考代码">参考代码</h2>
+<pre><code>#!/usr/bin/env python3
+import sys
+from collections import Counter
+
+class Person(object):
+    &quot;&quot;&quot;
+    返回具有给定名称的 Person 对象
+    &quot;&quot;&quot;
+
+    def __init__(self, name):
+        self.name = name
+
+    def get_details(self):
+        &quot;&quot;&quot;
+        返回包含人名的字符串
+        &quot;&quot;&quot;
+        return self.name
+
+    def get_grade(self):
+        return 0
+
+
+class Student(Person):
+    &quot;&quot;&quot;
+    返回 Student 对象，采用 name, branch, year 3 个参数
+    &quot;&quot;&quot;
+
+    def __init__(self, name, branch, year,grade):
+        Person.__init__(self, name)
+        self.branch = branch
+        self.year = year
+        self.grade = grade
+
+    def get_details(self):
+        &quot;&quot;&quot;
+        返回包含学生具体信息的字符串
+        &quot;&quot;&quot;
+        return &quot;{} studies {} and is in {} year.&quot;.format(self.name, self.branch, self.year)
+
+    def get_grade(self):
+
+        common = Counter(self.grade).most_common(4)
+        n1 = 0
+        n2 = 0
+        for item in common:
+            if item[0] != 'D':
+                n1 += item[1]
+            else:
+                n2 += item[1]
+        print(&quot;Pass: {}, Fail: {}&quot;.format(n1,n2))
+
+class Teacher(Person):
+    &quot;&quot;&quot;
+    返回 Teacher 对象，采用字符串列表作为参数
+    &quot;&quot;&quot;
+    def __init__(self, name, papers, grade):
+        Person.__init__(self, name)
+        self.papers = papers
+        self.grade = grade
+
+    def get_details(self):
+        return &quot;{} teaches {}&quot;.format(self.name, ','.join(self.papers))
+
+    def get_grade(self):
+        s = []
+        common = Counter(self.grade).most_common(4)
+        for i,j in common:
+            s.append(&quot;{}: {}&quot;.format(i,j))
+        print(', '.join(s))
+
+person1 = Person('Sachin')
+if sys.argv[1] == &quot;student&quot;:
+    student1 = Student('Kushal', 'CSE', 2005, sys.argv[2])
+    student1.get_grade()
+else:
+    teacher1 = Teacher('Prashad', ['C', 'C++'], sys.argv[2])
+    teacher1.get_grade()
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D">介绍</a></li>
+<li><a href="#%E7%9B%AE%E6%A0%87">目标</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E4%BB%A3%E7%A0%81">参考代码</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/python-ji-chu-13-collections-mo-kuai/">
+              <h3 class="post-title">
+                Python基础13-Collections 模块
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/y-rui" target="_blank">y-rui</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,344 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python基础19-Flask 介绍 | NoteForStudy</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1608466007398">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Python基础19-Flask 介绍 | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="基本概念
+什么是 Flask?
+Flask 是一个 web 框架。也就是说 Flask 为你提供工具，库和技术来允许你构建一个 web 应用程序。这个 web 应用程序可以是一些 web 页面、博客、wiki、基于 web 的日历应用或商业..." />
+    <meta name="keywords" content="Python,实验楼" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1608466007398" alt="">
+  </a>
+  <h1 class="site-title">
+    NoteForStudy
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/y-rui" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Python基础19-Flask 介绍
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-24
+              </span>
+              <span>
+                7 min read
+              </span>
+              
+                <a href="https://y-rui.github.io/tag/uGwwKRarA/" class="post-tag">
+                  # Python
+                </a>
+              
+                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
+                  # 实验楼
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="基本概念">基本概念</h2>
+<p><strong>什么是 Flask?</strong><br>
+Flask 是一个 web 框架。也就是说 Flask 为你提供工具，库和技术来允许你构建一个 web 应用程序。这个 web 应用程序可以是一些 web 页面、博客、wiki、基于 web 的日历应用或商业网站。</p>
+<p>Flask 属于微框架（<em>micro-framework</em>）这一类别，微架构通常是很小的不依赖于外部库的框架。这既有优点也有缺点，优点是框架很轻量，更新时依赖少，并且专注安全方面的 bug，缺点是，你不得不自己做更多的工作，或通过添加插件增加自己的依赖列表。Flask 的依赖如下：</p>
+<ul>
+<li>Werkzeug  一个 WSGI 工具包'</li>
+<li>jinja2  模板引擎</li>
+</ul>
+<p>维基百科 WSGI 的介绍：</p>
+<ul>
+<li>Web 服务器网关接口（Python Web Server Gateway Interface，缩写为 WSGI）是为Python语言定义的Web 服务器和Web 应用程序或框架之间的一种简单而通用的接口。自从 WSGI 被开发出来以后，许多其它语言中也出现了类似接口。</li>
+</ul>
+<p><strong>什么是模板引擎？</strong><br>
+你搭建过一个网站吗？你面对过保持网站风格一致的问题吗，你不得不写多次相同的文本吗？你有没有试图改变这种网站的风格？</p>
+<p>如果你的网站只包含几个网页，改变网站风格会花费你一些时间，这确实可行。尽管如此，如果你有许多页面（比如在你商店里的售卖物品列表），这个任务便很艰巨。</p>
+<p>使用模板你可以设置你的页面的基本布局，并提及哪个元素将发生变化。这种方式可以定义您的网页头部并在您的网站的所有页面使它保持一致，如果你需要改变网页头部，你只需要更新一个地方。</p>
+<p>使用模板引擎创建/更新/维护你的应用会节约你很多时间。</p>
+<h2 id="hello-world-应用">&quot;Hello World&quot; 应用</h2>
+<p>我们将使用 flask 完成一个非常基础的应用。</p>
+<p>安装 flask</p>
+<pre><code>$ sudo pip3 install flask
+</code></pre>
+<p>创建项目结构</p>
+<pre><code>$ cd /home/shiyanlou
+$ mkdir -p hello_flask/{templates,static}
+</code></pre>
+<p>这是你的 web 应用的基本结构：</p>
+<pre><code>$ tree hello_flask/
+hello_flask
+|-- static
+`-- templates
+
+2 directories, 0 files
+</code></pre>
+<p>templates 文件夹是存放模板的地方，static 文件夹存放 web 应用所需的静态文件（images, css, javascript）。</p>
+<p>创建应用文件</p>
+<pre><code>$ cd hello_flask
+$ vim hello_flask.py
+</code></pre>
+<p>hello_flask.py 文件里编写如下代码：</p>
+<pre><code>#!/usr/bin/env python3
+
+import flask
+
+
+# Create the application.
+APP = flask.Flask(__name__)
+
+
+@APP.route('/')
+def index():
+    &quot;&quot;&quot; 显示可在 '/' 访问的 index 页面
+    &quot;&quot;&quot;
+    return flask.render_template('index.html')
+
+
+if __name__ == '__main__':
+    APP.debug=True
+    APP.run()
+</code></pre>
+<p>创建模板文件  index.html</p>
+<pre><code>$ vim templates/index.html
+</code></pre>
+<p>index.html 文件内容如下：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+    &lt;title&gt;Hello world!&lt;/title&gt;
+    &lt;link
+      type=&quot;text/css&quot;
+      rel=&quot;stylesheet&quot;
+      href=&quot;{{ url_for('static',
+              filename='hello.css')}}&quot;
+    /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    It works!
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>运行 flask 应用程序</p>
+<pre><code>$ python3 hello_flask.py
+</code></pre>
+<p>访问 http://127.0.0.1:5000/，这应该只是显示黑字白底的 &quot;It works!&quot; 文本</p>
+<h2 id="flask-中使用参数">Flask 中使用参数</h2>
+<p>在本节中我们将要看到如何根据用户使用的  URL 返回网页。</p>
+<p>为此我们更新 hello_flask.py 文件。</p>
+<p>在 hello_flask.py 文件中添加以下条目</p>
+<pre><code>@APP.route('/hello/&lt;name&gt;/')
+def hello(name):
+    &quot;&quot;&quot; Displays the page greats who ever comes to visit it.
+    &quot;&quot;&quot;
+    return flask.render_template('hello.html', name=name)
+</code></pre>
+<p>创建下面这个模板 hello.html</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+    &lt;title&gt;Hello&lt;/title&gt;
+    &lt;link
+      type=&quot;text/css&quot;
+      rel=&quot;stylesheet&quot;
+      href=&quot;{{ url_for('static',
+               filename='hello.css')}}&quot;
+    /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    Hello {{name}}
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>运行 flask 应用</p>
+<pre><code>$ python3 hello_flask.py
+</code></pre>
+<p>访问 http://127.0.0.1:5000/ ，这应该只是显示黑字白底的 &quot;It works!&quot; 文本。</p>
+<p>访问http://127.0.0.1:5000/hello/you，这应该返回文本 &quot;Hello you&quot;</p>
+<p>无论你在 URL 中 /hello/ 后填写的什么，都会出现在返回的网页中。</p>
+<p>这是你第一次使用模板，我们在 hello_flask.py 中建立了 name 变量（参见 hello 函数的 return 行）。通过语法 <code>{{name}}</code>，name 变量之后在页面中显示其自身。</p>
+<h2 id="额外工作">额外工作</h2>
+<p>目前，对于每一个页面我们都创建了一个模板，其实这是不好的做法，我们应该做的是创建一个主模板并且在每个页面使用它。</p>
+<p>创建模板文件 master.html。</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+    &lt;title&gt;{% block title %}{% endblock %} - Hello Flask!&lt;/title&gt;
+    &lt;link
+      type=&quot;text/css&quot;
+      rel=&quot;stylesheet&quot;
+      href=&quot;{{ url_for('static',
+                        filename='hello.css')}}&quot;
+    /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    {% block body %}{% endblock %}
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>调整模板 index.html。</p>
+<pre><code>{% extends &quot;master.html&quot; %} {% block title %}Home{% endblock %} {% block body %}
+It works! {% endblock %}
+</code></pre>
+<p>正如你所看到的，在 master.html 模板中我们定义了两部分，名为 title 和 body 的 blocks。</p>
+<p>在模板 index.html 中，我们声明这个模板扩展自 master.html 模板，然后我们定义了内容来放在这两个部分中（blocks）。在第一个 block title 中，我们放置了 Home 单词，在第二个 block body 中我们定义了我们想要在页面的 body 中有的东西。</p>
+<ul>
+<li>作为练习，更改其他模板 hello.html，同样要使用 master.html。</li>
+<li>在 hello 页面添加首页链接。</li>
+</ul>
+<p>调整模板 hello.html，添加到首页的链接。</p>
+<pre><code>&lt;a href=&quot;{{ url_for('index') }}&quot;&gt;&lt;button&gt;Home&lt;/button&gt;&lt;/a&gt;
+</code></pre>
+<ul>
+<li>作为你的任务，在首页添加到 hello 页面的链接。</li>
+</ul>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">基本概念</a></li>
+<li><a href="#hello-world-%E5%BA%94%E7%94%A8">&quot;Hello World&quot; 应用</a></li>
+<li><a href="#flask-%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%8F%82%E6%95%B0">Flask 中使用参数</a></li>
+<li><a href="#%E9%A2%9D%E5%A4%96%E5%B7%A5%E4%BD%9C">额外工作</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/python-ji-chu-18-xiang-mu-jie-gou/">
+              <h3 class="post-title">
+                Python基础18-项目结构
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/y-rui" target="_blank">y-rui</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,558 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python基础5-循环 | NoteForStudy</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1608466007398">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Python基础5-循环 | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="while 循环
+
+while 语句的语法如下
+
+while condition:
+    statement1
+    statement2
+
+
+想要多次执行的代码必须以正确的缩进放在 while 语句下面。在表达式 condition ..." />
+    <meta name="keywords" content="Python,实验楼" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1608466007398" alt="">
+  </a>
+  <h1 class="site-title">
+    NoteForStudy
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/y-rui" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Python基础5-循环
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-16
+              </span>
+              <span>
+                12 min read
+              </span>
+              
+                <a href="https://y-rui.github.io/tag/uGwwKRarA/" class="post-tag">
+                  # Python
+                </a>
+              
+                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
+                  # 实验楼
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="while-循环">while 循环</h2>
+<ul>
+<li>while 语句的语法如下</li>
+</ul>
+<pre><code>while condition:
+    statement1
+    statement2
+</code></pre>
+<ul>
+<li>想要多次执行的代码必须以正确的缩进放在 while 语句下面。在表达式 condition 为真的时候它们才会执行。同 if-else 一样，非零值为真。启动 python3 交互页面，让我们写一个简单的代码，它按顺序打印 0 到 10 的数字</li>
+</ul>
+<pre><code>&gt;&gt;&gt; n = 0
+&gt;&gt;&gt; while n &lt; 11:
+...     print(n)
+...     n += 1
+...
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</code></pre>
+<ul>
+<li>在第一行我们使 n = 0，然后在 while 语句中把条件设置为 n &lt; 11，这意味着在 while 语句下面缩进的所有行将会被执行，直到 n 的值大于等于 11。在循环里我们只是打印 n 的值然后令它增一</li>
+</ul>
+<p><strong>斐波那契（Fibonacci）数列</strong></p>
+<ul>
+<li>这个数列前两项为 1，之后的每一个项都是前两项之和。所以这个数列看起来就像这样： 1,1,2,3,5,8,13,...</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+a, b = 0, 1
+while b &lt; 100:
+    print(b)
+    a, b = b, a + b
+</code></pre>
+<ul>
+<li>第一行代码中我们初始化 a 和 b。当 b 的值小于 100 的时候，循环执行代码。循环里我们首先打印 b 的值，然后在下一行将 a + b 的值赋值给 b，b 的值赋值给 a</li>
+<li>Python 中赋值语句执行时会先对赋值运算符右边的表达式求值，然后将这个值赋值给左边的变量</li>
+<li>默认情况下，print() 除了打印你提供的字符串之外，还会打印一个换行符，所以每调用一次 print() 就会换一次行，如同上面一样</li>
+<li>你可以通过 print() 的另一个参数 end 来替换这个换行符，就像下面这样</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+a, b = 0, 1
+while b &lt; 100:
+    print(b, end=' ')
+    a, b = b, a + b
+print()
+</code></pre>
+<pre><code>cd /home/shiyanlou
+chmod +x fibonacci2.py
+./fibonacci2.py
+</code></pre>
+<p><strong>幂级数</strong></p>
+<ul>
+<li>我们来写一个程序计算幂级数：e^x = 1 + x + x^2 / 2! + x^3 / 3! + ... + x^n / n! （0 &lt; x &lt; 1）</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+x = float(input(&quot;Enter the value of x: &quot;))
+n = term = num = 1
+result = 1.0
+while n &lt;= 100:
+    term *= x / n
+    result += term
+    n += 1
+    if term &lt; 0.0001:
+        break
+print(&quot;No of Times= {} and Sum= {}&quot;.format(n, result))
+</code></pre>
+<ul>
+<li>在这个程序里我们介绍一个新的关键字 break，它可以终止最里面的循环。这个例子里我们在 if 语句里使用 break</li>
+</ul>
+<pre><code>if term &lt; 0.0001:
+    break
+</code></pre>
+<ul>
+<li>这意味着如果 term 的值小于 0.0001，那么终止循环</li>
+</ul>
+<p><strong>乘法表</strong></p>
+<ul>
+<li>这个例子里我们打印 10 以内的乘法表</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+i = 1
+print(&quot;-&quot; * 50)
+while i &lt; 11:
+    n = 1
+    while n &lt;= 10:
+        print(&quot;{:5d}&quot;.format(i * n), end=' ')
+        n += 1
+    print()
+    i += 1
+print(&quot;-&quot; * 50)
+</code></pre>
+<p>这里我们在 while 循环里使用了另一个 while 循环，这被称为嵌套循环。你应该已经看到一条有趣的语句</p>
+<pre><code>print(&quot;-&quot; * 50)
+</code></pre>
+<p>字符串若是乘上整数 n，将返回由 n 个此字符串拼接起来的新字符串</p>
+<pre><code>&gt;&gt;&gt; 's' * 10
+'ssssssssss'
+&gt;&gt;&gt; print(&quot;*&quot; * 10)
+**********
+&gt;&gt;&gt; print(&quot;#&quot; * 20)
+####################
+&gt;&gt;&gt; print(&quot;--&quot; * 20)
+----------------------------------------
+&gt;&gt;&gt; print(&quot;-&quot; * 40)
+----------------------------------------
+</code></pre>
+<p><strong>一些打印星号的例子</strong></p>
+<ul>
+<li>设计 1</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+row = int(input(&quot;Enter the number of rows: &quot;))
+n = row
+while n &gt;= 0:
+    x =  &quot;*&quot; * n
+    print(x)
+    n -= 1
+</code></pre>
+<ul>
+<li>设计 2</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+n = int(input(&quot;Enter the number of rows: &quot;))
+i = 1
+while i &lt;= n:
+    print(&quot;*&quot; * i)
+    i += 1
+</code></pre>
+<ul>
+<li>设计 3</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+row = int(input(&quot;Enter the number of rows: &quot;))
+n = row
+while n &gt;= 0:
+    x = &quot;*&quot; * n
+    y = &quot; &quot; * (row - n)
+    print(y + x)
+    n -= 1
+</code></pre>
+<h2 id="列表">列表</h2>
+<pre><code>&gt;&gt;&gt; a = [ 1, 342, 223, 'India', 'Fedora']
+&gt;&gt;&gt; a
+[1, 342, 223, 'India', 'Fedora']
+</code></pre>
+<ul>
+<li>你可以将上面的列表想象为一堆有序的盒子，盒子包含有上面提到的值，每个盒子都有自己的编号（红色的数字），编号从零开始，你可以通过编号访问每一个盒子里面的值。对于列表，这里的编号称为索引</li>
+</ul>
+<p>我们像下面这样通过索引来访问列表中的每一个值</p>
+<pre><code>&gt;&gt;&gt; a[0]
+1
+&gt;&gt;&gt; a[4]
+'Fedora'
+</code></pre>
+<p>如果我们使用负数的索引，那将会从列表的末尾开始计数，像下面这样</p>
+<pre><code>&gt;&gt;&gt; a[-1]
+'Fedora'
+</code></pre>
+<p>你甚至可以把它切成不同的部分，这个操作称为切片，例子在下面给出</p>
+<pre><code>&gt;&gt;&gt; a[0:-1]
+[1, 342, 223, 'India']
+&gt;&gt;&gt; a[2:-2]
+[223]
+</code></pre>
+<p>切片并不会改变正在操作的列表，切片操作返回其子列表，这意味着下面的切片操作返回列表一个新的（栈）拷贝副本</p>
+<pre><code>&gt;&gt;&gt; a[:]
+[1, 342, 223, 'India', 'Fedora']
+</code></pre>
+<p>切片的索引有非常有用的默认值；省略的第一个索引默认为零，省略的第二个索引默认为切片的索引的大小。如果是字符串，则为字符串大小</p>
+<pre><code>&gt;&gt;&gt; a[:-2]
+[1, 342, 223]
+&gt;&gt;&gt; a[-2:]
+['India', 'Fedora']
+</code></pre>
+<p>有个办法可以很容易地记住切片的工作方式：切片时的索引是在两个元素之间 。左边第一个元素的索引为 0，而长度为 n 的列表其最后一个元素的右界索引为 n。例如</p>
+<pre><code> +---+-----+-----+---------+----------+
+ | 1 | 342 | 223 | 'India' | 'Fedora' |
+ +---+-----+-----+---------+----------+
+   0    1     2       3        4          5
+  -5   -4    -3      -2       -1
+</code></pre>
+<p>上面的第一行数字给出列表中的索引点 0...5。第二行给出相应的负索引。切片是从 i 到 j 两个数值表示的边界之间的所有元素</p>
+<p>对于非负索引，如果上下都在边界内，切片长度就是两个索引之差。例如 a[2:4] 是 2</p>
+<ul>
+<li>Python 中有关下标的集合都满足左闭右开原则，切片中也是如此，也就是说集合左边界值能取到，右边界值不能取到</li>
+</ul>
+<p>对上面的列表， <code>a[0:5]</code> 用数学表达式可以写为 <code>[0,5)</code>，其索引取值为 0,1,2,3,4，所以能将a中所有值获取到。 你也可以用<code>a[:5]</code>, 效果是一样的</p>
+<p>而a[-5:-1]，因为左闭右开原则，其取值为 -5,-4,-3,-2 是不包含 -1 的</p>
+<p>为了取到最后一个值，你可以使用 a[-5:] ，它代表了取该列表最后 5 个值</p>
+<ul>
+<li>Python 能够优雅地处理那些没有意义的切片索引：一个过大的索引值(即大于列表实际长度)将被列表实际长度所代替，当上边界比下边界大时(即切片左值大于右值)就返回空列表</li>
+</ul>
+<pre><code>&gt;&gt;&gt; a[2:32]
+[223, 'India', 'Fedora']
+&gt;&gt;&gt; a[32:]
+[]
+</code></pre>
+<p>切片操作还可以设置步长，就像下面这样</p>
+<pre><code>&gt;&gt;&gt; a[1::2]
+[342, 'India']
+</code></pre>
+<ul>
+<li>它的意思是，从切片索引 1 到列表末尾，每隔两个元素取值。</li>
+</ul>
+<p>列表也支持连接这样的操作，它返回一个新的列表</p>
+<pre><code>&gt;&gt;&gt; a + [36, 49, 64, 81, 100]
+[1, 342, 223, 'India', 'Fedora', 36, 49, 64, 81, 100]
+</code></pre>
+<p>列表允许修改元素</p>
+<pre><code>&gt;&gt;&gt; cubes = [1, 8, 27, 65, 125]
+&gt;&gt;&gt; cubes[3] = 64
+&gt;&gt;&gt; cubes
+[1, 8, 27, 64, 125]
+</code></pre>
+<p>也可以对切片赋值，此操作可以改变列表的尺寸，或清空它</p>
+<pre><code>&gt;&gt;&gt; letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+&gt;&gt;&gt; letters
+['a', 'b', 'c', 'd', 'e', 'f', 'g']
+&gt;&gt;&gt; # 替换某些值
+&gt;&gt;&gt; letters[2:5] = ['C', 'D', 'E']
+&gt;&gt;&gt; letters
+['a', 'b', 'C', 'D', 'E', 'f', 'g']
+&gt;&gt;&gt; # 现在移除他们
+&gt;&gt;&gt; letters[2:5] = []
+&gt;&gt;&gt; letters
+['a', 'b', 'f', 'g']
+&gt;&gt;&gt; # 通过替换所有元素为空列表来清空这个列表
+&gt;&gt;&gt; letters[:] = []
+&gt;&gt;&gt; letters
+[]
+</code></pre>
+<p>要检查某个值是否存在于列表中，你可以这样做</p>
+<pre><code>&gt;&gt;&gt; a = ['ShiYanLou', 'is', 'cool']
+&gt;&gt;&gt; 'cool' in a
+True
+&gt;&gt;&gt; 'Linux' in a
+False
+</code></pre>
+<p>这意味着我们可以将上面的语句使用在 if 子句中的表达式。通过内建函数 len() 我们可以获得列表的长度</p>
+<pre><code>&gt;&gt;&gt; len(a)
+3
+</code></pre>
+<p>如果你想要检查列表是否为空，请这样做</p>
+<pre><code>if list_name: # 列表不为空
+    pass
+else: # 列表为空
+    pass
+</code></pre>
+<p>列表是允许嵌套的（创建一个包含其它列表的列表），例如</p>
+<pre><code>&gt;&gt;&gt; a = ['a', 'b', 'c']
+&gt;&gt;&gt; n = [1, 2, 3]
+&gt;&gt;&gt; x = [a, n]
+&gt;&gt;&gt; x
+[['a', 'b', 'c'], [1, 2, 3]]
+&gt;&gt;&gt; x[0]
+['a', 'b', 'c']
+&gt;&gt;&gt; x[0][1]
+'b'
+</code></pre>
+<h2 id="for-循环">for 循环</h2>
+<pre><code>&gt;&gt;&gt; a = ['ShiYanLou', 'is', 'powerful']
+&gt;&gt;&gt; for x in a:
+...     print(x)
+...
+ShiYanLou
+is
+powerful
+</code></pre>
+<pre><code>&gt;&gt;&gt; a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+&gt;&gt;&gt; for x in a[::2]:
+...     print(x)
+1
+3
+5
+7
+9
+</code></pre>
+<p><strong>range() 函数</strong></p>
+<ul>
+<li>如果你需要一个数值序列，内置函数  range()  会很方便，它生成一个等差数列（并不是列表）</li>
+</ul>
+<pre><code>&gt;&gt;&gt; for i in range(5):
+...     print(i)
+...
+0
+1
+2
+3
+4
+&gt;&gt;&gt; range(1, 5)
+range(1, 5)
+&gt;&gt;&gt; list(range(1, 5))
+[1, 2, 3, 4]
+&gt;&gt;&gt; list(range(1, 15, 3))
+[1, 4, 7, 10, 13]
+&gt;&gt;&gt; list(range(4, 15, 2))
+[4, 6, 8, 10, 12, 14]
+</code></pre>
+<h2 id="continue-语句">continue 语句</h2>
+<ul>
+<li>如同 break ，我们可以在循环中使用另一个语句 continue。它会跳过其后的代码回到循环开始处执行。这意味着它可以帮助你跳过部分循环</li>
+<li>在下面的例子中，我们要求用户输入一个整数，如果输入的是负数，那么我们会再次要求输入，如果输入的是整数，我们计算这个数的平方。用户输入 0 来跳出这个无限循环</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+while True:
+    n = int(input(&quot;Please enter an Integer: &quot;))
+    if n &lt; 0:
+        continue # 这会返回到循环开始处执行
+    elif n == 0:
+        break
+    print(&quot;Square is &quot;, n ** 2)
+print(&quot;Goodbye&quot;)
+</code></pre>
+<h2 id="循环的-else-语句">循环的 else 语句</h2>
+<ul>
+<li>我们可以在循环后面使用可选的 else 语句。它将会在循环完毕后执行，除非有 break 语句终止了循环</li>
+</ul>
+<pre><code>&gt;&gt;&gt; for i in range(0, 5):
+...     print(i)
+... else:
+...     print(&quot;Bye bye&quot;)
+...
+0
+1
+2
+3
+4
+Bye bye
+</code></pre>
+<h2 id="棍子游戏">棍子游戏</h2>
+<ul>
+<li>这是一个非常简单的游戏。这里有 21 根棍子，首先用户选 1 到 4 根棍子，然后电脑选 1 到 4 根棍子。谁选到最后一根棍子谁就输。判断一下用户有赢的机会吗？如果没有的话，如何修改游戏规则可以使用户有赢的机会呢</li>
+<li>特别说明：用户和电脑一次选的棍子总数只能是 5</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+sticks = 21
+
+print(&quot;There are 21 sticks, you can take 1-4 number of sticks at a time.&quot;)
+print(&quot;Whoever will take the last stick will loose&quot;)
+
+while True:
+    print(&quot;Sticks left: &quot; , sticks)
+    if sticks == 1:
+        print(&quot;You took the last stick, you loose&quot;)
+        break
+    sticks_taken = int(input(&quot;Take sticks(1-4):&quot;))
+    if sticks_taken &gt;= 5 or sticks_taken &lt;= 0:
+        print(&quot;Wrong choice&quot;)
+        continue
+    print(&quot;Computer took: &quot; , (5 - sticks_taken) , &quot;\n&quot;)
+    sticks -= 5
+    ```
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#while-%E5%BE%AA%E7%8E%AF">while 循环</a></li>
+<li><a href="#%E5%88%97%E8%A1%A8">列表</a></li>
+<li><a href="#for-%E5%BE%AA%E7%8E%AF">for 循环</a></li>
+<li><a href="#continue-%E8%AF%AD%E5%8F%A5">continue 语句</a></li>
+<li><a href="#%E5%BE%AA%E7%8E%AF%E7%9A%84-else-%E8%AF%AD%E5%8F%A5">循环的 else 语句</a></li>
+<li><a href="#%E6%A3%8D%E5%AD%90%E6%B8%B8%E6%88%8F">棍子游戏</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/python-ji-chu-5-kong-zhi-liu-if-else/">
+              <h3 class="post-title">
+                Python基础4-控制流If-else
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/y-rui" target="_blank">y-rui</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

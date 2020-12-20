@@ -1,0 +1,249 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python基础4-控制流If-else | NoteForStudy</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1608466007398">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Python基础4-控制流If-else | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="If 语句
+if expression:
+    do this
+
+
+如果表达式 expression 的值为真（不为零的任何值都为真），程序将执行缩进后的内容。务必要使用正确的缩进，在表达式为真的情况将会执行缩进的所有行
+一个简单的例子，..." />
+    <meta name="keywords" content="Python,实验楼" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1608466007398" alt="">
+  </a>
+  <h1 class="site-title">
+    NoteForStudy
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/y-rui" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Python基础4-控制流If-else
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-16
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://y-rui.github.io/tag/uGwwKRarA/" class="post-tag">
+                  # Python
+                </a>
+              
+                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
+                  # 实验楼
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="if-语句">If 语句</h2>
+<pre><code>if expression:
+    do this
+</code></pre>
+<ul>
+<li>如果表达式 expression 的值为真（不为零的任何值都为真），程序将执行缩进后的内容。务必要使用正确的缩进，在表达式为真的情况将会执行缩进的所有行</li>
+<li>一个简单的例子，使用vim写入文件 /home/shiyanlou/number100.py，程序接受用户输入的一个数并且检查这个数是否小于 100</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+number = int(input(&quot;Enter a number: &quot;))
+if number &lt; 100:
+    print(&quot;The number is less than 100&quot;)
+</code></pre>
+<pre><code>cd /home/shiyanlou
+chmod +x number100.py
+./number100.py
+</code></pre>
+<h2 id="else-语句">Else 语句</h2>
+<ul>
+<li>在上面的例子中，我们想要这样做：如果输入数大于 100 则打印 &quot;Greater than&quot;。我们使用 else 语句来做到这一点，它将在 if 语句未满足的情况时工作</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+number = int(input(&quot;Enter a number: &quot;))
+if number &lt; 100:
+    print(&quot;The number is less than 100&quot;)
+else:
+    print(&quot;The number is greater than 100&quot;)
+</code></pre>
+<ul>
+<li>另一个非常基础的例子</li>
+</ul>
+<pre><code>&gt;&gt;&gt; x = int(input(&quot;Please enter an integer: &quot;))
+&gt;&gt;&gt; if x &lt; 0:
+...      x = 0
+...      print('Negative changed to zero')
+... elif x == 0:
+...      print('Zero')
+... elif x == 1:
+...      print('Single')
+... else:
+...      print('More')
+</code></pre>
+<ul>
+<li>在上面的例子中，elif 是 else if 的缩写</li>
+</ul>
+<h2 id="真值检测">真值检测</h2>
+<ul>
+<li>检测真值的优雅方式是这样的</li>
+</ul>
+<pre><code>if x:
+    pass
+</code></pre>
+<ul>
+<li>不要像下面这样做</li>
+</ul>
+<pre><code>if x == True:
+    pass
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#if-%E8%AF%AD%E5%8F%A5">If 语句</a></li>
+<li><a href="#else-%E8%AF%AD%E5%8F%A5">Else 语句</a></li>
+<li><a href="#%E7%9C%9F%E5%80%BC%E6%A3%80%E6%B5%8B">真值检测</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/python-ji-chu-4-yuan-de-mian-ji/">
+              <h3 class="post-title">
+                Python挑战1-圆的面积
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/y-rui" target="_blank">y-rui</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

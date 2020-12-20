@@ -1,0 +1,226 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python基础16-Virtualenv | NoteForStudy</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1608466007398">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Python基础16-Virtualenv | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="
+虚拟的 Python 环境（简称 venv） 是一个能帮助你在本地目录安装不同版本的 Python 模块的 Python 环境，你可以不再需要在你系统中安装所有东西就能开发并测试你的代码
+
+安装 virtualenv
+首先安装 pip3，..." />
+    <meta name="keywords" content="Python,实验楼" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1608466007398" alt="">
+  </a>
+  <h1 class="site-title">
+    NoteForStudy
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/y-rui" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Python基础16-Virtualenv
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-22
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://y-rui.github.io/tag/uGwwKRarA/" class="post-tag">
+                  # Python
+                </a>
+              
+                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
+                  # 实验楼
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <ul>
+<li>虚拟的 Python 环境（简称 venv） 是一个能帮助你在本地目录安装不同版本的 Python 模块的 Python 环境，你可以不再需要在你系统中安装所有东西就能开发并测试你的代码</li>
+</ul>
+<h2 id="安装-virtualenv">安装 virtualenv</h2>
+<p>首先安装 pip3，打开 xfce 终端输入下面的命令</p>
+<pre><code>$ sudo apt-get update
+$ sudo apt-get install python3-pip
+</code></pre>
+<p>用如下命令安装 virtualenv</p>
+<pre><code>$ sudo pip3 install virtualenv
+</code></pre>
+<h2 id="用法">用法</h2>
+<p>我们会创建一个叫做 virtual 的目录，在里面我们会有两个不同的虚拟环境</p>
+<pre><code>$ cd /home/shiyanlou
+$ mkdir virtual
+</code></pre>
+<p>下面的命令创建一个叫做 virt1 的环境</p>
+<pre><code>$ cd virtual
+$ virtualenv virt1
+</code></pre>
+<p>现在我们激活这个 virt1 环境</p>
+<pre><code>$ source virt1/bin/activate
+(virt1)shiyanlou：~/$
+</code></pre>
+<p>提示符的第一部分是当前虚拟环境的名字，当你有多个环境的时候它会帮助你识别你在哪个环境里面</p>
+<p>现在我们将安装 redis 这个 Python 模块</p>
+<pre><code>(virt1)$ sudo pip3 install redis
+</code></pre>
+<p>使用 deactivate 命令关闭虚拟环境</p>
+<pre><code>(virt1)$ deactivate
+$
+</code></pre>
+<p>现在我们将创建另一个虚拟环境 virt2，我们会在里面同样安装 redis 模块，但版本是 2.8 的旧版本</p>
+<pre><code>$ virtualenv virt2
+$ source virt2/bin/activate
+(virt2)$ sudo pip3 install redis==2.8
+</code></pre>
+<p>这样可以为你的所有开发需求拥有许多不同的环境</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85-virtualenv">安装 virtualenv</a></li>
+<li><a href="#%E7%94%A8%E6%B3%95">用法</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/python-ji-chu-15-die-dai-qi-sheng-cheng-qi-zhuang-shi-qi/">
+              <h3 class="post-title">
+                Python基础15-迭代器、生成器、装饰器
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/y-rui" target="_blank">y-rui</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

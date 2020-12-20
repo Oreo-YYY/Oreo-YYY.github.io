@@ -1,0 +1,549 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python基础6-数据结构 | NoteForStudy</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1608466007398">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Python基础6-数据结构 | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="列表
+&gt;&gt;&gt; a = [23, 45, 1, -3434, 43624356, 234]
+&gt;&gt;&gt; a.append(45)
+&gt;&gt;&gt; a
+[23, 45, 1, -3434, 436243..." />
+    <meta name="keywords" content="Python,实验楼" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1608466007398" alt="">
+  </a>
+  <h1 class="site-title">
+    NoteForStudy
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/y-rui" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Python基础6-数据结构
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-16
+              </span>
+              <span>
+                15 min read
+              </span>
+              
+                <a href="https://y-rui.github.io/tag/uGwwKRarA/" class="post-tag">
+                  # Python
+                </a>
+              
+                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
+                  # 实验楼
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="列表">列表</h2>
+<pre><code>&gt;&gt;&gt; a = [23, 45, 1, -3434, 43624356, 234]
+&gt;&gt;&gt; a.append(45)
+&gt;&gt;&gt; a
+[23, 45, 1, -3434, 43624356, 234, 45]
+</code></pre>
+<ul>
+<li>首先我们建立了一个列表 a。然后调用列表的方法 a.append(45) 添加元素 45 到列表末尾。你可以看到元素 45 已经添加到列表的末端了</li>
+<li>有些时候我们需要将数据插入到列表的任何位置，这时我们可以使用列表的 insert() 方法</li>
+</ul>
+<pre><code>&gt;&gt;&gt; a.insert(0, 1) # 在列表索引 0 位置添加元素 1
+&gt;&gt;&gt; a
+[1, 23, 45, 1, -3434, 43624356, 234, 45]
+&gt;&gt;&gt; a.insert(0, 111) # 在列表索引 0 位置添加元素 111
+&gt;&gt;&gt; a
+[111, 1, 23, 45, 1, -3434, 43624356, 234, 45]
+</code></pre>
+<p>列表方法 count(s) 会返回列表元素中 s 的数量。我们来检查一下 45 这个元素在列表中出现了多少次</p>
+<pre><code>&gt;&gt;&gt; a.count(45)
+2
+</code></pre>
+<p>如果你想要在列表中移除任意指定值，你需要使用 remove() 方法</p>
+<pre><code>&gt;&gt;&gt; a.remove(234)
+&gt;&gt;&gt; a
+[111, 1, 23, 45, 1, -3434, 43624356, 45]
+</code></pre>
+<p>现在我们反转整个列表</p>
+<pre><code>&gt;&gt;&gt; a.reverse()
+&gt;&gt;&gt; a
+[45, 43624356, -3434, 1, 45, 23, 1, 111]
+</code></pre>
+<p>怎样将一个列表的所有元素添加到另一个列表的末尾呢，可以使用列表的 extend() 方法</p>
+<pre><code>&gt;&gt;&gt; b = [45, 56, 90]
+&gt;&gt;&gt; a.extend(b) # 添加 b 的元素而不是 b 本身
+&gt;&gt;&gt; a
+[45, 43624356, -3434, 1, 45, 23, 1, 111, 45, 56, 90]
+</code></pre>
+<p>给列表排序，我们使用列表的 sort() 方法，排序的前提是列表的元素是可比较的</p>
+<pre><code>&gt;&gt;&gt; a.sort()
+&gt;&gt;&gt; a
+[-3434, 1, 1, 23, 45, 45, 45, 56, 90, 111, 43624356]
+</code></pre>
+<p>你也能使用 del 关键字删除指定位置的列表元素</p>
+<pre><code>&gt;&gt;&gt; del a[-1]
+&gt;&gt;&gt; a
+[-3434, 1, 1, 23, 45, 45, 45, 56, 90, 111]
+</code></pre>
+<p><strong>将列表用作栈和队列</strong></p>
+<ul>
+<li>栈是我们通常所说的一种 LIFO （Last In First Out 后进先出）数据结构。它的意思是最后进入的数据第一个出来。一个最简单的例子往一端封闭的管道放入一些弹珠然后取出来，如果你想把弹珠取出来，你必须从你最后放入弹珠的位置挨个拿出来</li>
+</ul>
+<pre><code>&gt;&gt;&gt; a = [1, 2, 3, 4, 5, 6]
+&gt;&gt;&gt; a
+[1, 2, 3, 4, 5, 6]
+&gt;&gt;&gt; a.pop()
+6
+&gt;&gt;&gt; a.pop()
+5
+&gt;&gt;&gt; a.pop()
+4
+&gt;&gt;&gt; a.pop()
+3
+&gt;&gt;&gt; a
+[1, 2]
+&gt;&gt;&gt; a.append(34)
+&gt;&gt;&gt; a
+[1, 2, 34]
+</code></pre>
+<p>上面的代码中我们使用了一个新方法 pop()。传入一个参数 i 即 pop(i) 会将第 i 个元素弹出</p>
+<pre><code>&gt;&gt;&gt; a = [1, 2, 3, 4, 5]
+&gt;&gt;&gt; a.append(1)
+&gt;&gt;&gt; a
+[1, 2, 3, 4, 5, 1]
+&gt;&gt;&gt; a.pop(0)
+1
+&gt;&gt;&gt; a.pop(0)
+2
+&gt;&gt;&gt; a
+[3, 4, 5, 1]
+</code></pre>
+<p>我们使用 a.pop(0) 弹出列表中第一个元素</p>
+<p><strong>列表推导式</strong></p>
+<ul>
+<li>列表推导式为从序列中创建列表提供了一个简单的方法。如果没有列表推导式，一般都是这样创建列表的：通过将一些操作应用于序列的每个成员并通过返回的元素创建列表，或者通过满足特定条件的元素创建子序列</li>
+</ul>
+<p>假设我们创建一个 squares 列表，可以像下面这样创建</p>
+<pre><code>&gt;&gt;&gt; squares = []
+&gt;&gt;&gt; for x in range(10):
+...     squares.append(x**2)
+...
+&gt;&gt;&gt; squares
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+</code></pre>
+<p>注意这个 for 循环中的被创建（或被重写）的名为  x  的变量在循环完毕后依然存在。使用如下方法，我们可以计算 squares 的值而不会产生任何的副作用：</p>
+<pre><code>squares = list(map(lambda x: x**2, range(10)))
+</code></pre>
+<p>等价于下面的列表推导式</p>
+<pre><code>squares = [x**2 for x in range(10)]
+</code></pre>
+<p>上面这个方法更加简明且易读</p>
+<ul>
+<li>列表推导式由包含一个表达式的中括号组成，表达式后面跟随一个  for 子句，之后可以有零或多个  for  或  if  子句。结果是一个列表，由表达式依据其后面的 for  和  if  子句上下文计算而来的结果构成</li>
+</ul>
+<p>例如，如下的列表推导式结合两个列表的元素，如果元素之间不相等的话</p>
+<pre><code>&gt;&gt;&gt; [(x, y) for x in [1,2,3] for y in [3,1,4] if x != y]
+[(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]
+</code></pre>
+<p>等同于</p>
+<pre><code>&gt;&gt;&gt; combs = []
+&gt;&gt;&gt; for x in [1,2,3]:
+...     for y in [3,1,4]:
+...         if x != y:
+...             combs.append((x, y))
+...
+&gt;&gt;&gt; combs
+[(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]
+</code></pre>
+<p>值得注意的是在上面两个方法中的 for  和 if 语句的顺序</p>
+<p>列表推导式也可以嵌套</p>
+<pre><code>&gt;&gt;&gt; a=[1,2,3]
+&gt;&gt;&gt; z = [x + 1 for x in [x ** 2 for x in a]]
+&gt;&gt;&gt; z
+[2, 5, 10]
+</code></pre>
+<h2 id="元组">元组</h2>
+<ul>
+<li>元组是由数个逗号分割的值组成</li>
+</ul>
+<pre><code>&gt;&gt;&gt; a = 'Fedora', 'ShiYanLou', 'Kubuntu', 'Pardus'
+&gt;&gt;&gt; a
+('Fedora', 'ShiYanLou', 'Kubuntu', 'Pardus')
+&gt;&gt;&gt; a[1]
+'ShiYanLou'
+&gt;&gt;&gt; for x in a:
+...     print(x, end=' ')
+...
+Fedora ShiYanLou Kubuntu Pardus
+</code></pre>
+<p>你可以对任何一个元组执行拆封操作并赋值给多个变量，就像下面这样</p>
+<pre><code>&gt;&gt;&gt; divmod(15,2)
+(7, 1)
+&gt;&gt;&gt; x, y = divmod(15,2)
+&gt;&gt;&gt; x
+7
+&gt;&gt;&gt; y
+1
+</code></pre>
+<p>元组是不可变类型，这意味着你不能在元组内删除或添加或编辑任何值。如果你尝试这些操作，将会出错</p>
+<pre><code>&gt;&gt;&gt; a = (1, 2, 3, 4)
+&gt;&gt;&gt; del a[0]
+Traceback (most recent call last):
+File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: 'tuple' object doesn't support item deletion
+</code></pre>
+<p>要创建只含有一个元素的元组，在值后面跟一个逗号</p>
+<pre><code>&gt;&gt;&gt; a = (123)
+&gt;&gt;&gt; a
+123
+&gt;&gt;&gt; type(a)
+&lt;class 'int'&gt;
+&gt;&gt;&gt; a = (123, )
+&gt;&gt;&gt; b = 321,
+&gt;&gt;&gt; a
+(123,)
+&gt;&gt;&gt; b
+(321,)
+&gt;&gt;&gt; type(a)
+&lt;class 'tuple'&gt;
+&gt;&gt;&gt; type(b)
+&lt;class 'tuple'&gt;
+</code></pre>
+<p>通过内建函数 type() 你可以知道任意变量的数据类型。还记得我们使用 len() 函数来查询任意序列类型数据的长度吗？</p>
+<pre><code>&gt;&gt;&gt; type(len)
+&lt;class 'builtin_function_or_method'&gt;
+</code></pre>
+<h2 id="集合">集合</h2>
+<ul>
+<li>集合是一个无序不重复元素的集。基本功能包括关系测试和消除重复元素</li>
+<li>集合对象还支持 union（联合），intersection（交），difference（差）和 symmetric difference（对称差集）等数学运算</li>
+<li>大括号或 set() 函数可以用来创建集合</li>
+<li>注意：想要创建空集合，你必须使用 set() 而不是 {}。后者用于创建空字典，我们在下一节中介绍的一种数据结构</li>
+</ul>
+<p>下面是集合的常见操作</p>
+<pre><code>&gt;&gt;&gt; basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
+&gt;&gt;&gt; print(basket)                      # 你可以看到重复的元素被去除
+{'orange', 'banana', 'pear', 'apple'}
+&gt;&gt;&gt; 'orange' in basket
+True
+&gt;&gt;&gt; 'crabgrass' in basket
+False
+
+&gt;&gt;&gt; # 演示对两个单词中的字母进行集合操作
+...
+&gt;&gt;&gt; a = set('abracadabra')
+&gt;&gt;&gt; b = set('alacazam')
+&gt;&gt;&gt; a                                  # a 去重后的字母
+{'a', 'r', 'b', 'c', 'd'}
+&gt;&gt;&gt; a - b                              # a 有而 b 没有的字母
+{'r', 'd', 'b'}
+&gt;&gt;&gt; a | b                              # 存在于 a 或 b 的字母
+{'a', 'c', 'r', 'd', 'b', 'm', 'z', 'l'}
+&gt;&gt;&gt; a &amp; b                              # a 和 b 都有的字母
+{'a', 'c'}
+&gt;&gt;&gt; a ^ b                              # 存在于 a 或 b 但不同时存在的字母
+{'r', 'd', 'b', 'm', 'z', 'l'}
+</code></pre>
+<p>从集合中添加或弹出元素</p>
+<pre><code>&gt;&gt;&gt; a = {'a','e','h','g'}
+&gt;&gt;&gt; a.pop()  # pop 方法随机删除一个元素并打印
+'h'
+&gt;&gt;&gt; a.add('c')
+&gt;&gt;&gt; a
+{'c', 'e', 'g', 'a'}
+</code></pre>
+<h2 id="字典">字典</h2>
+<ul>
+<li>字典是是无序的键值对（key:value）集合，同一个字典内的键必须是互不相同的</li>
+<li>一对大括号 {} 创建一个空字典</li>
+<li>初始化字典时，在大括号内放置一组逗号分隔的键：值对，这也是字典输出的方式</li>
+<li>我们使用键来检索存储在字典中的数据</li>
+</ul>
+<pre><code>&gt;&gt;&gt; data = {'kushal':'Fedora', 'kart_':'Debian', 'Jace':'Mac'}
+&gt;&gt;&gt; data
+{'kushal': 'Fedora', 'Jace': 'Mac', 'kart_': 'Debian'}
+&gt;&gt;&gt; data['kart_']
+'Debian'
+</code></pre>
+<p>创建新的键值对很简单</p>
+<pre><code>&gt;&gt;&gt; data['parthan'] = 'Ubuntu'
+&gt;&gt;&gt; data
+{'kushal': 'Fedora', 'Jace': 'Mac', 'kart_': 'Debian', 'parthan': 'Ubuntu'}
+</code></pre>
+<p>使用 del 关键字删除任意指定的键值对</p>
+<pre><code>&gt;&gt;&gt; del data['kushal']
+&gt;&gt;&gt; data
+{'Jace': 'Mac', 'kart_': 'Debian', 'parthan': 'Ubuntu'
+</code></pre>
+<p>使用 in 关键字查询指定的键是否存在于字典中</p>
+<pre><code>&gt;&gt;&gt; 'ShiYanLou' in data
+False
+</code></pre>
+<p>必须知道的是，字典中的键必须是不可变类型，比如你不能使用列表作为键</p>
+<p>dict() 可以从包含键值对的元组中创建字典</p>
+<pre><code>&gt;&gt;&gt; dict((('Indian','Delhi'),('Bangladesh','Dhaka')))
+{'Indian': 'Delhi', 'Bangladesh': 'Dhaka'}
+</code></pre>
+<p>如果你想要遍历一个字典，使用字典的 items() 方法</p>
+<pre><code>&gt;&gt;&gt; data
+{'Kushal': 'Fedora', 'Jace': 'Mac', 'kart_': 'Debian', 'parthan': 'Ubuntu'}
+&gt;&gt;&gt; for x, y in data.items():
+...     print(&quot;{} uses {}&quot;.format(x, y))
+...
+Kushal uses Fedora
+Jace uses Mac
+kart_ uses Debian
+parthan uses Ubuntu
+</code></pre>
+<ul>
+<li>许多时候我们需要往字典中的元素添加数据，我们首先要判断这个元素是否存在，不存在则创建一个默认值。如果在循环里执行这个操作，每次迭代都需要判断一次，降低程序性能</li>
+</ul>
+<p>我们可以使用 dict.setdefault(key, default) 更有效率的完成这个事情</p>
+<pre><code>&gt;&gt;&gt; data = {}
+&gt;&gt;&gt; data.setdefault('names', []).append('Ruby')
+&gt;&gt;&gt; data
+{'names': ['Ruby']}
+&gt;&gt;&gt; data.setdefault('names', []).append('Python')
+&gt;&gt;&gt; data
+{'names': ['Ruby', 'Python']}
+&gt;&gt;&gt; data.setdefault('names', []).append('C')
+&gt;&gt;&gt; data
+{'names': ['Ruby', 'Python', 'C']}
+</code></pre>
+<p>试图索引一个不存在的键将会抛出一个 keyError 错误。我们可以使用 dict.get(key, default) 来索引键，如果键不存在，那么返回指定的 default 值</p>
+<pre><code>&gt;&gt;&gt; data['foo']
+Traceback (most recent call last):
+File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+KeyError: 'foo'
+&gt;&gt;&gt; data.get('foo', 0)
+0
+</code></pre>
+<p>如果你想要在遍历列表（或任何序列类型）的同时获得元素索引值，你可以使用 <code>enumerate()</code></p>
+<pre><code>&gt;&gt;&gt; for i, j in enumerate(['a', 'b', 'c']):
+...     print(i, j)
+...
+0 a
+1 b
+2 c
+</code></pre>
+<p>你也许需要同时遍历两个序列类型，你可以使用 <code>zip()</code> 函数</p>
+<pre><code>&gt;&gt;&gt; a = ['Pradeepto', 'Kushal']
+&gt;&gt;&gt; b = ['OpenSUSE', 'Fedora']
+&gt;&gt;&gt; for x, y in zip(a, b):
+...     print(&quot;{} uses {}&quot;.format(x, y))
+...
+Pradeepto uses OpenSUSE
+Kushal uses Fedora
+</code></pre>
+<h2 id="程序示例">程序示例</h2>
+<ol>
+<li>判断学生成绩是否达标的程序</li>
+<li>计算两个矩阵的 Hadamard 乘积</li>
+</ol>
+<p><strong>students.py</strong></p>
+<ul>
+<li>这是一个判断学生成绩是否达标的程序，要求输入学生数量，以及各个学生物理、数学、历史三科的成绩，如果总成绩小于 120，程序打印 “failed”，否则打印 “passed”</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+n = int(input(&quot;Enter the number of students: &quot;))
+data = {} # 用来存储数据的字典变量
+Subjects = ('Physics', 'Maths', 'History') # 所有科目
+for i in range(0, n):
+    name = input('Enter the name of the student {}: '.format(i + 1)) # 获得学生名称
+    marks = []
+    for x in Subjects:
+        marks.append(int(input('Enter marks of {}: '.format(x)))) # 获得每一科的分数
+    data[name] = marks
+for x, y in data.items():
+    total =  sum(y)
+    print(&quot;{}'s total marks {}&quot;.format(x, total))
+    if total &lt; 120:
+        print(x, &quot;failed :(&quot;)
+    else:
+        print(x, &quot;passed :)&quot;)
+</code></pre>
+<ul>
+<li>name 和 marks 是变量，name 用来存储学生的名称，marks 是个列表，用来存储输入的学生的成绩数据</li>
+<li>data 是个字典，字典的键值对中，键指的是 name 的值，值指的是 marks 的值。因此会使用 <code>data[name] = marks</code> 将学生数据存入到 data 字典</li>
+<li>最后通过 for 循环遍历字典，x 为学生的 name，y 为学生成绩列表 marks，sum() 函数会将传入的列表进行加和</li>
+</ul>
+<p><strong>matrixmul.py</strong></p>
+<ul>
+<li>这个例子里我们计算两个矩阵的 Hadamard 乘积。要求输入矩阵的行/列数（在这里假设我们使用的是 n × n 的矩阵）</li>
+</ul>
+<pre><code>#!/usr/bin/env python3
+n = int(input(&quot;Enter the value of n: &quot;))
+print(&quot;Enter values for the Matrix A&quot;)
+a = []
+for i in range(n):
+    a.append([int(x) for x in input().split()])
+print(&quot;Enter values for the Matrix B&quot;)
+b = []
+for i in range(n):
+    b.append([int(x) for x in input().split()])
+c = []
+for i in range(n):
+    c.append([a[i][j] * b[i][j] for j in range(n)])
+print(&quot;After matrix multiplication&quot;)
+print(&quot;-&quot; * 7 * n)
+for x in c:
+    for y in x:
+        print(str(y).rjust(5), end=' ')
+    print()
+print(&quot;-&quot; * 7 * n)
+</code></pre>
+<ul>
+<li>这里我们使用了几次列表推导式。<code>[int(x) for x in input().split()]</code> 首先通过 input() 获得用户输入的字符串，再使用 split() 分割字符串得到一系列的数字字符串，然后用 int() 从每个数字字符串创建对应的整数值</li>
+<li>我们也使用了 <code>[a[i][j] * b[i][j] for j in range(n)]</code> 来得到矩阵乘积的每一行数据</li>
+</ul>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%88%97%E8%A1%A8">列表</a></li>
+<li><a href="#%E5%85%83%E7%BB%84">元组</a></li>
+<li><a href="#%E9%9B%86%E5%90%88">集合</a></li>
+<li><a href="#%E5%AD%97%E5%85%B8">字典</a></li>
+<li><a href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B">程序示例</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/python-ji-chu-6-xun-huan/">
+              <h3 class="post-title">
+                Python基础5-循环
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/y-rui" target="_blank">y-rui</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
