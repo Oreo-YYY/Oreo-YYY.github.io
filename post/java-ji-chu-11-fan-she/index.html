@@ -1,0 +1,295 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Java基础11-反射 | NoteForStudy</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1608725857899">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Java基础11-反射 | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="
+ava 反射说的是在运行状态中，对于任何一个类，我们都能够知道这个类有哪些方法和属性。对于任何一个对象，我们都能够对它的方法和属性进行调用。我们把这种动态获取对象信息和调用对象方法的功能称之为反射机制。本节主要讲解 Java 反射机制中的..." />
+    <meta name="keywords" content="Java,实验楼" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1608725857899" alt="">
+  </a>
+  <h1 class="site-title">
+    NoteForStudy
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/y-rui" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Java基础11-反射
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-30
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+                <a href="https://y-rui.github.io/tag/6kU31awxe/" class="post-tag">
+                  # Java
+                </a>
+              
+                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
+                  # 实验楼
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <ul>
+<li>ava 反射说的是在运行状态中，对于任何一个类，我们都能够知道这个类有哪些方法和属性。对于任何一个对象，我们都能够对它的方法和属性进行调用。我们把这种动态获取对象信息和调用对象方法的功能称之为反射机制。本节主要讲解 Java 反射机制中的常用类。</li>
+</ul>
+<h2 id="什么是反射">什么是反射</h2>
+<ul>
+<li>反射是 Java 编程语言的一个特性，它提供了在运行时检查和动态调用类、方法、属性的能力。</li>
+</ul>
+<h2 id="反射能做什么">反射能做什么</h2>
+<ul>
+<li>反射可以在运行时检查类，接口，方法和变量。还可以实例化对象、调用方法、获取和设置变量值。比如当我们不知道一个类中是否拥有某个方法时，我们就可以使用反射来检查是否拥有这个方法。</li>
+</ul>
+<h2 id="反射常用类">反射常用类</h2>
+<p><strong>常用类</strong></p>
+<ul>
+<li>Class：Class 类表示正在运行的 Java 程序中的类和接口。</li>
+<li>Field：提供有关类或接口的单个域的信息和动态访问。如数据类型，访问修饰符，域的名称和值。</li>
+<li>Method：提供有关类或接口上的单个方法的信息和访问权限。如访问修饰符，返回类型，名称，参数类型和方法的异常类型。</li>
+<li>Constructor：提供有关类的单个构造函数的信息和访问权限。例如构造函数的访问修饰符，名称和参数类型。</li>
+<li>Modifier：提供了有关访问修饰符的信息。</li>
+</ul>
+<p><strong>Class</strong><br>
+Class 类没有公共构造方法，可以通过以下方法获取 Class 实例。</p>
+<ul>
+<li>Object 提供的 getClass() 方法。</li>
+<li>类名.Class。</li>
+<li>Class.forName(String className) 方法，className 为类的全限定名。</li>
+</ul>
+<p>Class 类常用方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Field getField(String name)</code></td>
+<td>获取指定的域对象</td>
+</tr>
+<tr>
+<td><code>Field[] getFields()</code></td>
+<td>返回所有的公有域对象数组</td>
+</tr>
+<tr>
+<td><code>Method getDeclaredMethod(String name, Class&lt;?&gt;... parameterTypes)</code></td>
+<td>返回指定的方法对象</td>
+</tr>
+<tr>
+<td><code>Method[] getMethods()</code></td>
+<td>返回所有的公有方法对象数组</td>
+</tr>
+<tr>
+<td><code>Method[] getDeclaredMethods()</code></td>
+<td>返回所有方法对象数组</td>
+</tr>
+<tr>
+<td><code>String getName()</code></td>
+<td>获取全限定名</td>
+</tr>
+</tbody>
+</table>
+<p><strong>编程实战</strong><br>
+在 /home/project/ 目录下新建 ReflectDemo.java。</p>
+<pre><code>import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+
+public class ReflectDemo {
+    public int a;
+    private int b;
+
+    public static void main(String[] args) {
+        Class&lt;ReflectDemo&gt; reflectDemoClass = ReflectDemo.class;
+        //输出所有的域名称
+        for (Field declaredField : reflectDemoClass.getDeclaredFields()) {
+            //可以通过Modifier将具体的权限信息输出，否则只会显示代表权限的数值
+            System.out.println(&quot;域：&quot; + declaredField.getName() + &quot; 修饰符：&quot; + Modifier.toString(declaredField.getModifiers()));
+        }
+        //输出所有的公有域名称
+        for (Field field : reflectDemoClass.getFields()) {
+            System.out.println(&quot;公有域：&quot; + field.getName() + &quot; 修饰符：&quot; + Modifier.toString(field.getModifiers()));
+        }
+        //输出类的所有方法名
+        for (Method declaredMethod : reflectDemoClass.getDeclaredMethods()) {
+            System.out.println(&quot;方法：&quot; + declaredMethod.getName() + &quot; 修饰符：&quot; + Modifier.toString(declaredMethod.getModifiers()));
+        }
+    }
+
+    public void fun1() {
+    }
+
+    private void fun2() {
+    }
+
+}
+</code></pre>
+<p>编译运行：</p>
+<pre><code>javac ReflectDemo.java
+java ReflectDemo
+</code></pre>
+<p>运行结果：</p>
+<pre><code>域：a 修饰符：public
+域：b 修饰符：private
+公有域：a 修饰符：public
+方法：main 修饰符：public static
+方法：fun1 修饰符：public
+方法：fun2 修饰符：private
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E5%B0%84">什么是反射</a></li>
+<li><a href="#%E5%8F%8D%E5%B0%84%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88">反射能做什么</a></li>
+<li><a href="#%E5%8F%8D%E5%B0%84%E5%B8%B8%E7%94%A8%E7%B1%BB">反射常用类</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/java-ji-chu-10-jdbc/">
+              <h3 class="post-title">
+                Java基础10-JDBC
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/y-rui" target="_blank">y-rui</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

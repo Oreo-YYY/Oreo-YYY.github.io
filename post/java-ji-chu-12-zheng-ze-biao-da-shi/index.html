@@ -1,0 +1,234 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Java基础12-正则表达式 | NoteForStudy</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1608725857899">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Java基础12-正则表达式 | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="
+正则表达式，又称规则表达式。（英语：Regular Expression，在代码中常简写为 regex、regexp 或 RE ），计算机科学的一个概念。正则表达式通常被用来检索、替换那些符合某个模式（规则）的文本。
+
+Java 通过 j..." />
+    <meta name="keywords" content="Java,实验楼" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1608725857899" alt="">
+  </a>
+  <h1 class="site-title">
+    NoteForStudy
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/y-rui" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Java基础12-正则表达式
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-30
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://y-rui.github.io/tag/6kU31awxe/" class="post-tag">
+                  # Java
+                </a>
+              
+                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
+                  # 实验楼
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <ul>
+<li>正则表达式，又称规则表达式。（英语：Regular Expression，在代码中常简写为 regex、regexp 或 RE ），计算机科学的一个概念。正则表达式通常被用来检索、替换那些符合某个模式（规则）的文本。</li>
+</ul>
+<p>Java 通过 java.util.regex 包支持正则表达式的的功能。<br>
+Java 使用正则表达式匹配非常简单，这里我们以匹配邮箱地址为例。在 /home/project 目录下新建一个源代码文件 RegexDemo.java。</p>
+<pre><code>import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegexDemo {
+    public static void main(String[] args) {
+//       Pattern类 正则表达式的编译表示。
+        Pattern pattern = Pattern.compile(&quot;^[a-zA-Z0-9_!#$%&amp;'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$&quot;);
+        String[] emails = {&quot;shiyanlou@shiyanlou.com&quot;, &quot;shiyanlou&quot;};
+        for (String email :
+                emails) {
+//Matcher 通过解释Pattern对字符序列执行匹配操作的引擎
+            Matcher matcher = pattern.matcher(email);
+            System.out.println(email + &quot;匹配结果：&quot; + matcher.matches());
+        }
+    }
+}
+</code></pre>
+<p>编译运行：</p>
+<pre><code>$ javac RegexDemo.java
+$ java RegexDemo
+shiyanlou@shiyanlou.com匹配结果：true
+shiyanlou匹配结果：false
+</code></pre>
+<p><strong>练习题：正则表达式</strong><br>
+在 /home/project 目录下新建一个源代码文件 RegexTest.java。你需要完成以下要求：</p>
+<ul>
+<li>从控制台输入一串字符串，使用正则表达式判断其是不是 11 位手机号码。</li>
+<li>如果是 11 位手机号码，输出 true，如果不是输出 false。</li>
+</ul>
+<p>示例：</p>
+<pre><code>输入：
+    13408199578
+输出：
+    true
+</code></pre>
+<p>参考答案</p>
+<pre><code>import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegexTest {
+    public static void main(String[] args) {
+        Pattern pattern = Pattern.compile(&quot;^1([34578])\\d{9}$&quot;);
+        Scanner in = new Scanner(System.in);
+        String phone = in.nextLine();
+        Matcher matcher = pattern.matcher(phone);
+        System.out.println(matcher.matches());
+    }
+}
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/java-ji-chu-11-fan-she/">
+              <h3 class="post-title">
+                Java基础11-反射
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/y-rui" target="_blank">y-rui</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

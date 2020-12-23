@@ -1,0 +1,479 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Java基础13-设计模式 | NoteForStudy</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1608725857899">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Java基础13-设计模式 | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="
+设计模式（Design pattern）代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的..." />
+    <meta name="keywords" content="Java,实验楼" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1608725857899" alt="">
+  </a>
+  <h1 class="site-title">
+    NoteForStudy
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/y-rui" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Java基础13-设计模式
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-30
+              </span>
+              <span>
+                7 min read
+              </span>
+              
+                <a href="https://y-rui.github.io/tag/6kU31awxe/" class="post-tag">
+                  # Java
+                </a>
+              
+                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
+                  # 实验楼
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <ul>
+<li>设计模式（Design pattern）代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。本节主要介绍中介模式、代理模式、责任模式。</li>
+</ul>
+<h2 id="中介模式">中介模式</h2>
+<p><strong>简介</strong></p>
+<ul>
+<li>定义了一个对象，该对象封装了一组对象的交互方式。对象之间的通信将封装在中介对象中。对象不再直接相互通信，而是通过中介进行通信。这减少了通信对象之间的依赖性，从而减少了耦合。</li>
+</ul>
+<p><strong>优点</strong></p>
+<ul>
+<li>避免一组交互对象之间的紧密耦合。</li>
+<li>可以独立地改变一组对象之间的交互。</li>
+</ul>
+<p><strong>类图</strong><br>
+对应中介对象来说，互相交互的对象叫做同事类，中介者对象维护同事类之间的关系，中介对象需要知道所有同事对象，所以也会带来一个问题，当同事类过多时，中介者类将异常复杂。<br>
+<img src="https://y-rui.github.io/post-images/1608725370862.png" alt="" loading="lazy"></p>
+<ol>
+<li>Mediator：抽象中介类，用于与各同事对象之间进行通信。</li>
+<li>ConcreteMediator：具体中介类，协调各同事类。</li>
+<li>Colleague：抽象同事类。</li>
+<li>ConcreteColleague：具体同事类。</li>
+</ol>
+<p><strong>编程实战</strong><br>
+比如我们要实现一个聊天室的功能，聊天室就是中介，而聊天的人就是一个同事类，发送的每个消息都由聊天室转发给其他人。</p>
+<p>在 /home/project 目录下新建以下文件<br>
+AbstractChatRoom.java（Mediator）：</p>
+<pre><code>public abstract class AbstractChatRoom {
+    public abstract void notice(String message, User user);
+}
+</code></pre>
+<p>ChatRoom.java(ConcreteMediator)：</p>
+<pre><code>import java.util.ArrayList;
+import java.util.List;
+
+
+public class ChatRoom extends AbstractChatRoom {
+    private List&lt;User&gt; users = new ArrayList&lt;&gt;();
+
+    public void register(User user) {
+        users.add(user);
+    }
+    @Override
+    public void notice(String message, User user) {
+        for (User u : users) {
+            if (u != user) {
+                u.getMessage(message);
+            }
+        }
+    }
+}
+</code></pre>
+<p>User.java(Colleague)。</p>
+<pre><code>public abstract class User {
+    protected AbstractChatRoom chatRoom;
+
+    public User(AbstractChatRoom chatRoom) {
+        this.chatRoom = chatRoom;
+    }
+
+    /**
+     * 发送消息
+     *
+     * @param msg
+     */
+    public abstract void sendMessage(String msg);
+
+    /**
+     * 接受消息
+     *
+     * @param msg
+     */
+    public abstract void getMessage(String msg);
+}
+</code></pre>
+<p>UserA.java(ConcreteColleague)：</p>
+<pre><code>public class UserA extends User {
+    public UserA(AbstractChatRoom chatRoom) {
+        super(chatRoom);
+    }
+
+    @Override
+    public void sendMessage(String msg) {
+        System.out.println(&quot;用户A发送 &quot; + msg);
+        chatRoom.notice(msg, this);
+    }
+
+    @Override
+    public void getMessage(String msg) {
+        System.out.println(&quot;用户A收到 &quot; + msg);
+    }
+}
+</code></pre>
+<p>UserB.java(ConcreteColleague)：</p>
+<pre><code>public class UserB extends User {
+    public UserB(AbstractChatRoom chatRoom) {
+        super(chatRoom);
+    }
+
+    @Override
+    public void sendMessage(String msg) {
+        System.out.println(&quot;用户B发送 &quot; + msg);
+        chatRoom.notice(msg, this);
+    }
+
+    @Override
+    public void getMessage(String msg) {
+        System.out.println(&quot;用户B收到 &quot; + msg);
+    }
+}
+</code></pre>
+<p>Client.java：</p>
+<pre><code>public class Client {
+    public static void main(String[] args) {
+        ChatRoom chatRoom = new ChatRoom();
+        UserA userA = new UserA(chatRoom);
+        UserB userB = new UserB(chatRoom);
+        chatRoom.register(userA);
+        chatRoom.register(userB);
+        userA.sendMessage(&quot;你好！&quot;);
+        userB.sendMessage(&quot;再见！&quot;);
+    }
+}
+</code></pre>
+<p>编译运行：</p>
+<pre><code>javac Client.java
+java Clent
+用户A发送 你好！
+用户B收到 你好！
+用户B发送 再见！
+用户A收到 再见！
+</code></pre>
+<h2 id="代理模式">代理模式</h2>
+<p><strong>简介</strong></p>
+<ul>
+<li>代理模式：为其他对象提供一种代理以控制对这个对象的访问。在某些情况下，一个对象不适合或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。</li>
+</ul>
+<p><strong>优点</strong></p>
+<ul>
+<li>隐藏原始对象并控制对象的访问。</li>
+<li>访问对象时提供其他的功能。</li>
+</ul>
+<p><strong>类图</strong><br>
+<img src="https://y-rui.github.io/post-images/1608725558580.png" alt="" loading="lazy"><br>
+说明：</p>
+<ul>
+<li>Subject: 一个客户端可用的公开的功能接口。</li>
+<li>RealSubject：实现 Subject 接口的类，提供了接口方法的具体实现。</li>
+<li>Proxy：实现 Subject 接口的代理类，通过 RealSubject 类的业务逻辑方法来实现抽象方法，可以附加自己的操作。</li>
+</ul>
+<p><strong>编程实战</strong><br>
+假设我们需要建设一栋楼房，但是建设之前我们需要购买原材料（如水泥...)，接着才可以开始建设，楼房主体建设完成后，还需要封顶操作。</p>
+<p>在 /home/project/ 目录下新建以下文件<br>
+LouSubject.java：</p>
+<pre><code>public interface LouSubject{
+    void build();
+}
+</code></pre>
+<p>LouRealSubject.java：</p>
+<pre><code>public class LouRealSubject implements LouSubject{
+    @Override
+    public void build(){
+        System.out.println(&quot;建设实验楼&quot;);
+    }
+}
+</code></pre>
+<p>LouProxy.java：</p>
+<pre><code>public class LouProxy implements LouSubject{
+    private LouSubject target;
+    public LouProxy(){
+        this.target = new LouRealSubject();
+    }
+    @Override
+    public void build(){
+        System.out.println(&quot;购买材料&quot;);
+        target.build();
+        System.out.println(&quot;封顶&quot;);
+    }
+}
+</code></pre>
+<p>LouClient.java</p>
+<pre><code>public class LouClient{
+    public static void main(String[] args){
+        LouSubject proxy = new LouProxy();
+        proxy.build();
+    }
+}
+</code></pre>
+<p>编译运行：</p>
+<pre><code>javac LouClient.java
+java LouClient
+购买材料
+建设实验楼
+封顶
+</code></pre>
+<p><strong>责任链模式</strong></p>
+<ul>
+<li>责任链模式是一种由命令对象源和一系列处理对象组成的设计模式。每个处理对象都包含定义它可以处理的命令对象类型的逻辑；其余的传递给链中的下一个处理对象。还存在一种机制，用于将新处理对象添加到该链的末尾。责任链模式在结构上与装饰器模式几乎相同，不同之处在于对于装饰器，所有类都处理请求，而对于责任链，链中的一个类恰好处理请求。</li>
+</ul>
+<p><strong>优点</strong></p>
+<ul>
+<li>避免将请求的发送方与其接收方耦合。</li>
+<li>可以使用多个接收器处理请求。</li>
+</ul>
+<p><strong>类图</strong><br>
+<img src="https://y-rui.github.io/post-images/1608725688081.png" alt="" loading="lazy"><br>
+handler：抽象处理者。<br>
+ConcreteHandler：具体处理者，接受到请求后，可以选择处理请求或者传递给下一个处理者。</p>
+<p><strong>编程实战</strong><br>
+假设我们有一个请假系统，不同的职位可以处理不同的请假请求，比如：<br>
+组长：可以处理两天以内的请求<br>
+厂长：可以处理七天以内的请求<br>
+老板：可以处理十五天以内的请求<br>
+如果组长可以处理，那么就直接处理了，如果组长不可以处理，那么我们再继续往下传递。</p>
+<p>在 /home/project 目录下新建以下文件<br>
+Handler.java：</p>
+<pre><code>public abstract class Handler {
+    /**
+     * 下个处理者
+     */
+    protected Handler successor;
+
+    public void setSuccessor(Handler successor) {
+        this.successor = successor;
+    }
+
+    public abstract void handlerRequest(int heaven);
+}
+</code></pre>
+<p>GroupLeaderHandler.java</p>
+<pre><code>public class GroupLeaderHandler extends Handler {
+    @Override
+    public void handlerRequest(int heaven) {
+        if (heaven &lt;= 2) {
+            System.out.println(&quot;组长处理&quot;);
+        }else {
+            if (super.successor != null) {
+                super.successor.handlerRequest(heaven);
+            }
+        }
+    }
+}
+</code></pre>
+<p>FactoryManagerHandler.java：</p>
+<pre><code>public class FactoryManagerHandler extends Handler{
+    @Override
+    public void handlerRequest(int heaven) {
+        if (heaven &lt;= 7) {
+            System.out.println(&quot;厂长处理&quot;);
+        }else {
+            if (super.successor != null) {
+                super.successor.handlerRequest(heaven);
+            }
+        }
+    }
+}
+</code></pre>
+<p>BossHandler.java：</p>
+<pre><code>public class BossHandler extends Handler {
+    @Override
+    public void handlerRequest(int heaven) {
+        if (heaven &lt;= 15) {
+            System.out.println(&quot;老板处理&quot;);
+        }else {
+            if (super.successor != null) {
+                super.successor.handlerRequest(heaven);
+            }
+        }
+    }
+}
+</code></pre>
+<p>Client.java：</p>
+<pre><code>public class Client {
+    public static void main(String[] args) {
+        Handler groupLeaderHandler = new GroupLeaderHandler();
+        Handler factoryManagerHandler = new FactoryManagerHandler();
+        Handler bossHandler = new BossHandler();
+        groupLeaderHandler.setSuccessor(factoryManagerHandler);
+        factoryManagerHandler.setSuccessor(bossHandler);
+        //请假一天
+        groupLeaderHandler.handlerRequest(1);
+        //请假6天
+        groupLeaderHandler.handlerRequest(6);
+        //请假10天
+        groupLeaderHandler.handlerRequest(10);
+    }
+}
+</code></pre>
+<p>编译运行：</p>
+<pre><code>javac Client.java
+java Client
+组长处理
+厂长处理
+老板处理
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%B8%AD%E4%BB%8B%E6%A8%A1%E5%BC%8F">中介模式</a></li>
+<li><a href="#%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F">代理模式</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/java-ji-chu-12-zheng-ze-biao-da-shi/">
+              <h3 class="post-title">
+                Java基础12-正则表达式
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/y-rui" target="_blank">y-rui</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
