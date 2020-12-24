@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://y-rui.github.io</id>
     <title>NoteForStudy</title>
-    <updated>2020-12-23T12:17:46.341Z</updated>
+    <updated>2020-12-24T14:28:23.151Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://y-rui.github.io"/>
     <link rel="self" href="https://y-rui.github.io/atom.xml"/>
@@ -61,6 +61,98 @@
 <p>设置机器名<br>
 使用 sudo vi /etc/sysconfig/network<br>
 打开配置文件，根据实际情况设置该服务器的机器名，新机器名在重启后生效</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Spring框架基础1-概述]]></title>
+        <id>https://y-rui.github.io/post/spring-kuang-jia-ji-chu-1-gai-shu/</id>
+        <link href="https://y-rui.github.io/post/spring-kuang-jia-ji-chu-1-gai-shu/">
+        </link>
+        <updated>2020-09-01T12:24:16.000Z</updated>
+        <content type="html"><![CDATA[<ul>
+<li>本节课程将介绍什么是 Spring。Spring 是一个容器，通过反转控制（IoC）和依赖注入（DI）来实现高内聚、低耦合的应用。除此之外它可以整合很多第三方框架，它还提供面向切面编程（AOP）的能力，对数据库事务的管理尤其方便。</li>
+</ul>
+<h2 id="spring-是什么">Spring 是什么</h2>
+<p>Spring 是一个开源的轻量级 Java SE（Java 标准版本）/Java EE（Java 企业版本）开发应用框架，其目的是用于简化企业级应用程序开发。在传统应用程序开发中，一个完整的应用是由一组相互协作的对象组成的。所以开发一个应用除了要开发业务逻辑之外，最多的是关注使这些对象协作来完成所需功能的同时，实现低耦合、高内聚。所以，业务逻辑开发是不可避免的。如果有个框架可以帮我们来创建对象及管理这些对象之间的依赖关系，能通过配置方式来创建对象，管理对象之间依赖关系，我们不需要通过工厂和生成器来创建及管理对象之间的依赖关系，这样我们必然会减少许多工作量，加快开发。Spring 框架问世之初主要就是来完成这个功能。</p>
+<p>Spring 框架除了帮我们管理对象及其依赖关系，还提供像通用日志记录、性能统计、安全控制、异常处理等面向切面的能力，可以帮我们管理最头疼的数据库事务，同时，它本身提供了一套简单的 JDBC 访问实现，能与第三方数据库访问框架集成（如 Hibernate、JPA），与各种 Java EE 技术整合（如 Java Mail、任务调度等等），提供一套自己的 Web 层框架 Spring MVC、而且还能非常简单的与第三方 Web 框架集成。从这里我们可以认为 Spring 是一个超级粘合平台，除了自己提供功能外，还提供粘合其他技术和框架的能力，从而使我们可以更自由的选择到底使用什么技术进行开发。而且不管是 JAVA SE（C/S 架构）应用程序还是 JAVA EE（B/S 架构）应用程序都可以使用这个平台进行开发。让我们来深入看一下 Spring 到底能帮我们做些什么？</p>
+<h2 id="spring-能帮我们做什么">Spring 能帮我们做什么</h2>
+<p><strong>Spring 能帮我们根据配置文件创建及组装对象之间的依赖关系</strong><br>
+传统程序开发，创建对象及组装对象间依赖关系由我们在程序内部进行控制，这样会加大各个对象间的耦合，如果我们要修改对象间的依赖关系就必须修改源代码，重新编译、部署。而如果采用 Spring，则由 Spring 根据配置文件来进行创建及组装对象间依赖关系，只需要修改配置文件即可，无需重新编译。</p>
+<p><strong>Spring 面向切面编程能帮助我们无耦合的实现日志记录、性能统计、安全控制</strong><br>
+当我们要进行一些日志记录、权限控制、性能统计等工作时，在传统应用程序当中我们可能在需要的对象或方法中进行，而且比如权限控制、性能统计大部分是重复的，这样代码中就存在大量重复代码，即使把通用部分提取出来，仍旧存在重复调用。</p>
+<p>像性能统计我们可能只是在必要时才进行，在诊断完毕后要删除这些代码；还有日志记录，比如记录一些方法访问日志、数据访问日志等等，这些都会渗透到各个访问方法中；还有权限控制，必须在方法执行时开始进行审核，可见这些工作急需优化。如果采用 Spring，这些日志记录、权限控制、性能统计从业务逻辑中分离出来，通过 Spring 支持的面向切面编程，动态添加这些功能，无需渗透到各个需要的方法或对象中。</p>
+<p>反观其他的解决方案，通过使用“代理设计模式”或“包装器设计模式”，仍需通过编程方式来创建代理对象，仍需耦合这些代理对象，而采用 Spring 面向切面编程能提供一种更好的方式来完成上述功能。通过配置方式，而不需要在现有代码中添加任何额外代码，使现有代码专注业务逻辑。</p>
+<p><strong>Spring 能非常简单的帮我们管理数据库事务</strong><br>
+在传统应用程序当中，我们如何来完成数据库事务管理？需要一系列“获取连接，执行 SQL，提交或回滚事务，关闭连接”，而且还要保证在最后一定要关闭连接，多么可怕的事情，而且也很无聊。如果采用 Spring，我们只需获取连接，执行 SQL，其他的都交给 Spring 来管理，简单方便。</p>
+<p><strong>除以上之外，Spring 还可以：</strong></p>
+<ul>
+<li>与第三方数据库访问框架（如 Hibernate、JPA）无缝集成，而且自己也提供了一套 JDBC 访问模板，来方便数据库访问。</li>
+<li>与第三方 Web（如 Struts、JSF）框架无缝集成，而且自己也提供了一套 Spring MVC 框架，来方便 Web 层搭建。</li>
+<li>与 Java EE（如 Java Mail、任务调度）整合，与更多技术整合（比如缓存框架）。</li>
+</ul>
+<h2 id="spring-的优点">Spring 的优点</h2>
+<p><strong>关键概念</strong></p>
+<ul>
+<li>应用程序：能完成我们所需要功能的成品，比如购物网站、OA 系统。</li>
+<li>框架：能完成一定功能的半成品，比如我们可以使用框架进行购物网站开发。框架做一部分功能，我们自己做一部分功能，辅助高效工作。而且框架规定了你在开发应用程序时的整体架构，提供了一些基础功能，还规定了类和对象的如何创建、如何协作等，从而简化我们的代码编写，让我们专注于业务逻辑开发。</li>
+<li>非侵入式设计：从框架角度可以这样理解，无需继承框架提供的类，这种设计就可以看作是非侵入式设计；如果继承了这些框架类，就是侵入设计。如果以后想更换框架，之前写过的代码几乎无法重用，如果非侵入式设计则之前写过的代码仍然可以继续使用。</li>
+<li>轻量级与重量级：轻量级是相对于重量级而言的，轻量级一般就是非入侵性的、所依赖的东西非常少、资源占用非常少、部署简单等等，其实就是比较容易使用，而重量级正好相反。</li>
+<li>POJO：Plain Ordinary Java Object，简单的 Java 对象。它可以包含业务逻辑或持久化逻辑，但不担当任何特殊角色且不继承或不实现任何其它 Java 框架的类或接口。</li>
+<li>容器：在日常生活中容器就是一种盛放东西的器具，从程序设计角度看就是装对象的对象，因为存在放入、拿出等操作，所以容器还要管理对象的生命周期。</li>
+<li>控制反转：即 Inversion of Control，缩写为 IoC，控制反转还有一个名字叫做依赖注入（Dependency Injection），就是由容器控制程序之间的关系，而非传统实现中，由程序代码直接操控。</li>
+<li>Bean：一般指容器管理对象，在 Spring 中指 Spring IoC 容器管理对象。</li>
+</ul>
+<p><strong>Spring 的优点</strong></p>
+<ul>
+<li>非常轻量级的容器：以集中的、自动化的方式进行应用程序对象创建和装配，除此之外还会负责管理对象生命周期，能组合成复杂的应用程序。Spring 容器是非侵入式的（不需要依赖任何 Spring 特定类），而且完全采用 POJOs 进行开发，使应用程序更容易测试、更容易管理。而且核心 jar 包非常小，Spring 3.0.5 不到 1 M，而且不需要依赖任何应用服务器，可以部署在任何环境（Java SE 或 Java EE）。</li>
+<li>AOP：AOP 是 Aspect Oriented Programming 的缩写，意思是面向切面编程。从另一个角度来考虑程序结构以完善面向对象编程（OOP），<em>即可以通过在编译期间、装载期间或运行期间实现在不修改源代码的情况下给程序动态添加功能的一种技术</em>。通俗点说就是把可重用的功能提取出来，然后将这些通用功能在合适的时候织入到应用程序中。比如安全，日志记录，这些都是通用的功能，我们可以把它们提取出来，然后在程序执行的合适地方植入这些代码并执行它们，从而完成需要的功能并复用了这些功能。</li>
+<li>简单的数据库事务管理：在使用数据库的应用程序当中，自己管理数据库事务是一项很让人头疼的事，而且很容易出现错误，Spring 支持可插入的事务管理支持，而且无需 JavaEE 环境支持，通过 Spring 管理事务可以把我们从事务管理中解放出来来专注业务逻辑。</li>
+<li>JDBC 抽象及 ORM（对象关系映射）框架支持：Spring 使 JDBC 更加容易使用。提供 DAO（数据访问对象）支持，非常方便集成第三方 ORM 框架，比如 Hibernate 等。并且完全支持 Spring 事务和使用 Spring 提供的一致的异常体系。</li>
+<li>灵活的 Web 层支持：Spring 本身提供一套非常强大的 MVC 框架，而且可以非常容易的与第三方 MVC 框架集成，比如 Struts 等。</li>
+<li>简化各种技术集成：提供对 Java Mail、任务调度、JMX、JMS、JNDI、EJB、动态语言、远程访问、Web Service 等的集成。</li>
+</ul>
+<p>Spring 能帮助我们简化应用程序开发，帮助我们创建和组装对象，为我们管理事务，简单的 MVC 框架，可以把 Spring 看作是一个超级粘合平台，能把很多技术整合在一起，形成一个整体，使系统结构更优良、性能更出众，从而加速我们程序开发。有如上优点，我们没有理由不考虑使用它。</p>
+<h2 id="如何学好-spring">如何学好 Spring</h2>
+<p>要学好 Spring，首先要明确 Spring 是个什么东西，能帮我们做些什么事情，知道了这些然后做个简单的例子，这样就基本知道怎么使用 Spring 了。Spring 核心是 IoC 容器，所以一定要透彻理解什么是控制反转（IoC）容器，以及如何配置及使用容器，其他所有技术都是基于容器实现的。理解好 IoC 后，接下来是面向切面编程（AOP），首先还是明确概念，基本配置，最后是实现原理，接下来就是数据库事务管理。其实 Spring 管理事务是通过面向切面编程实现的，所以基础很重要，IoC 容器和 AOP 学好，其余都是基于这两个核心东西的实现，学起来就更加轻松了。</p>
+<h2 id="spring-架构图">Spring 架构图</h2>
+<figure data-type="image" tabindex="1"><img src="https://y-rui.github.io/post-images/1608771232334.png" alt="" loading="lazy"></figure>
+<p><strong>核心容器：包括 Core、Beans、Context、EL 模块</strong></p>
+<ul>
+<li>Core 模块：封装了框架依赖的最底层部分，包括资源访问、类型转换及一些常用工具类。</li>
+<li>Beans 模块：提供了框架的基础部分，包括控制反转（IOC）和依赖注入（DI）。其中 BeanFactory 是容器核心，本质是“工厂设计模式”的实现，而且无需编程实现“单例设计模式”，单例完全由容器控制，而且提倡面向接口编程，而非面向实现编程。所有应用程序对象及对象间关系由框架管理，从而真正从程序逻辑中把维护对象之间的依赖关系提取出来，所有这些依赖关系都由 BeanFactory 来维护。</li>
+<li>Context 模块：以 Core 和 Beans 为基础，集成 Beans 模块功能并添加资源绑定、数据验证、国际化、Java EE 支持、容器生命周期、事件传播等。核心接口是 ApplicationContext。</li>
+<li>EL 模块：提供强大的表达式语言支持，支持访问和修改属性值，方法调用，支持访问及修改数组、容器和索引器，命名变量，支持算数和逻辑运算，支持从 Spring 容器获取 Bean，它也支持列表投影、选择和一般的列表聚合等。</li>
+</ul>
+<p><strong>AOP、Aspects 模块</strong></p>
+<ul>
+<li>AOP 模块：Spring AOP 模块提供了符合 AOP Alliance 规范的面向切面的编程（aspect-oriented programming）实现，提供比如日志记录、权限控制、性能统计等通用功能和业务逻辑分离的技术，并且能动态的把这些功能添加到需要的代码中，这样各专其职，降低业务逻辑和通用功能的耦合。</li>
+<li>Aspects 模块：提供了对 AspectJ 的集成，AspectJ 提供了比 Spring ASP 更强大的功能。</li>
+<li>数据访问/集成模块：该模块包括了 JDBC、ORM、OXM、JMS 和事务管理。</li>
+<li>事务模块：该模块用于 Spring 管理事务，只要是 Spring 管理对象都能得到 Spring 管理事务的好处，无需在代码中进行事务控制了，而且支持编程和声明性的事务管理。</li>
+<li>JDBC 模块：提供了一个 JDBC 的样例模板，使用这些模板能消除传统冗长的 JDBC 编码还有必须的事务控制，而且能享受到 Spring 管理事务的好处。</li>
+<li>ORM 模块：提供与流行的“对象-关系”映射框架的无缝集成，包括 Hibernate、JPA、MyBatis 等。而且可以使用 Spring 事务管理，无需额外控制事务。</li>
+<li>OXM 模块：提供了一个对 Object/XML 映射实现，将 java 对象映射成 XML 数据，或者将 XML 数据映射成 java 对象，Object/XML 映射实现包括 JAXB、Castor、XMLBeans 和 XStream。</li>
+<li>JMS 模块：用于 JMS（Java Messaging Service），提供一套“消息生产者、消息消费者”模板用于更加简单的使用 JMS。JMS 用于用于在两个应用程序之间，或分布式系统中发送消息，进行异步通信。</li>
+<li>Web/Remoting 模块：Web/Remoting 模块包含了 Web、Web-Servlet、Web-Struts、Web-Porlet 模块。</li>
+<li>Web 模块：提供了基础的 Web 功能。例如多文件上传、集成 IoC 容器、远程过程访问（RMI、Hessian、Burlap）以及 Web Service 支持，并提供一个 RestTemplate 类来提供方便的 Restful services 访问。</li>
+<li>Web-Servlet 模块：提供了一个 Spring MVC Web 框架实现。Spring MVC 框架提供了基于注解的请求资源注入、更简单的数据绑定、数据验证等及一套非常易用的 JSP 标签，完全无缝与 Spring 其他技术协作。</li>
+<li>Web-Struts 模块：提供了与 Struts 无缝集成，Struts 1.x 和 Struts 2.x 都支持。</li>
+<li>Test 模块：Spring 支持 Junit 和 TestNG 测试框架，而且还额外提供了一些基于 Spring 的测试功能，比如在测试 Web 框架时，模拟 Http 请求的功能。</li>
+</ul>
+<h2 id="典型应用场景">典型应用场景</h2>
+<p>Spring 可以应用到许多场景，从最简单的标准 Java SE 程序到企业级应用程序都能使用 Spring 来构建。以下介绍几个比较流行的应用场景：</p>
+<ul>
+<li>典型 Web 应用程序应用场景：</li>
+</ul>
+<figure data-type="image" tabindex="2"><img src="https://y-rui.github.io/post-images/1608771369230.png" alt="" loading="lazy"></figure>
+<ul>
+<li>远程访问应用场景：</li>
+</ul>
+<figure data-type="image" tabindex="3"><img src="https://y-rui.github.io/post-images/1608771390589.png" alt="" loading="lazy"></figure>
+<ul>
+<li>EJB 应用场景：</li>
+</ul>
+<figure data-type="image" tabindex="4"><img src="https://y-rui.github.io/post-images/1608771414258.png" alt="" loading="lazy"></figure>
 ]]></content>
     </entry>
     <entry>
@@ -263,7 +355,7 @@ java LouClient
 建设实验楼
 封顶
 </code></pre>
-<p><strong>责任链模式</strong></p>
+<h2 id="责任链模式">责任链模式</h2>
 <ul>
 <li>责任链模式是一种由命令对象源和一系列处理对象组成的设计模式。每个处理对象都包含定义它可以处理的命令对象类型的逻辑；其余的传递给链中的下一个处理对象。还存在一种机制，用于将新处理对象添加到该链的末尾。责任链模式在结构上与装饰器模式几乎相同，不同之处在于对于装饰器，所有类都处理请求，而对于责任链，链中的一个类恰好处理请求。</li>
 </ul>
@@ -4551,261 +4643,6 @@ public class MergerStream {
     }
 }
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Java基础5-异常]]></title>
-        <id>https://y-rui.github.io/post/java-ji-chu-5-yi-chang/</id>
-        <link href="https://y-rui.github.io/post/java-ji-chu-5-yi-chang/">
-        </link>
-        <updated>2020-08-25T10:52:04.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="异常概述">异常概述</h2>
-<ul>
-<li>异常指不期而至的各种状况，它在程序运行的过程中发生。作为开发者，我们都希望自己写的代码永远都不会出现 bug，然而现实告诉我们并没有这样的情景。如果用户在程序的使用过程中因为一些原因造成他的数据丢失，这个用户就可能不会再使用该程序了。所以，对于程序的错误以及外部环境能够对用户造成的影响，我们应当及时报告并且以适当的方式来处理这个错误</li>
-<li>之所以要处理异常，也是为了增强程序的鲁棒性</li>
-</ul>
-<p>异常都是从 Throwable 类派生出来的，而 Throwable 类是直接从 Object 类继承而来</p>
-<h2 id="异常分类">异常分类</h2>
-<p>异常通常有四类</p>
-<ol>
-<li>Error：系统内部错误，这类错误由系统进行处理，程序本身无需捕获处理</li>
-<li>Exception：可以处理的异常</li>
-<li>RuntimeException：可以捕获，也可以不捕获的异常</li>
-<li>继承 Exception 的其他类：必须捕获，通常在 API 文档中会说明这些方法抛出哪些异常</li>
-</ol>
-<p>平时主要关注的异常是 Exception 下的异常，而 Exception 异常下又主要分为两大类异常，一个是派生于 RuntimeExcption 的异常，一个是除了 RuntimeExcption 体系之外的其他异常</p>
-<p>RuntimeExcption 异常（运行时异常）通常有以下几种</p>
-<ul>
-<li>错误的类型转换</li>
-<li>数组访问越界</li>
-<li>访问 null 指针</li>
-<li>算术异常</li>
-</ul>
-<p>一般来说，RuntimeException 都是代码逻辑出现问题</p>
-<p>非 RuntimeException（受检异常，Checked Exception）一般有</p>
-<ul>
-<li>打开一个不存在的文件</li>
-<li>没有找到具有指定名称的类</li>
-<li>操作文件异常</li>
-</ul>
-<p>受检异常是编译器要求必须处理的异常，必须使用 try catch 处理，或者使用 throw 抛出，交给上层调用者处理</p>
-<h2 id="声明及抛出">声明及抛出</h2>
-<p><strong>throw 抛出异常</strong><br>
-当程序运行时数据出现错误或者我们不希望发生的情况出现的话，可以通过抛出异常来处理</p>
-<p>异常抛出语法</p>
-<pre><code>throw new 异常类();
-</code></pre>
-<p>在 /home/project/ 目录下新建 ThrowTest.java</p>
-<pre><code>public class ThrowTest {
-
-    public static void main(String[] args) {
-        Integer a = 1;
-        Integer b = null;
-        //当a或者b为null时，抛出异常
-        if (a == null || b == null) {
-            throw new NullPointerException();
-        } else {
-            System.out.println(a + b);
-        }
-    }
-}
-</code></pre>
-<pre><code>$ javac ThrowTest.java
-$ java ThrowTest
-Exception in thread &quot;main&quot; java.lang.NullPointerException
-    at ThrowTest.main(ThrowTest.java:8)
-</code></pre>
-<p><strong>throws 声明异常</strong><br>
-throws 用于声明异常，表示该方法可能会抛出的异常。如果声明的异常中包括 checked 异常（受检异常），那么调用者必须捕获处理该异常或者使用 throws 继续向上抛出。throws 位于方法体前，多个异常之间使用 , 分割</p>
-<p>修改 /home/project/ 下的 ThrowsTest.java</p>
-<pre><code>import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
-public class ThrowsTest {
-
-    public static void main(String[] args) throws FileNotFoundException {
-        //由方法的调用者捕获异常或者继续向上抛出
-        throwsTest();
-
-    }
-
-    public static void throwsTest() throws FileNotFoundException {
-        new FileInputStream(&quot;/home/project/shiyanlou.file&quot;);
-    }
-}
-</code></pre>
-<p>编译运行</p>
-<pre><code>$ javac ThrowsTest.java
-$ java ThrowsTest
-Exception in thread &quot;main&quot; java.io.FileNotFoundException: /home/project/shiyanlou.file (系统找不到指定的路径。)
-    at java.io.FileInputStream.open0(Native Method)
-    at java.io.FileInputStream.open(FileInputStream.java:195)
-    at java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:138)
-    at java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:93)
-    at ThrowsTest.throwsTest(ThrowsTest.java:13)
-    at ThrowsTest.main(ThrowsTest.java:8)
-</code></pre>
-<h2 id="捕获异常">捕获异常</h2>
-<p>通常抛出异常后，还需要将异常捕获。使用 try 和 catch 语句块来捕获异常，有时候还会用到 finally</p>
-<p>对于上述三个关键词所构成的语句块，try 语句块是必不可少的，catch 和 finally 语句块可以根据情况选择其一或者全选。你可以把可能发生错误或出现问题的语句放到 try 语句块中，将异常发生后要执行的语句放到 catch 语句块中，而 finally 语句块里面放置的语句，不管异常是否发生，它们都会被执行</p>
-<p>你可能想说，那我把所有有关的代码都放到 try 语句块中不就妥当了吗？可是你需要知道，捕获异常对于系统而言，其开销非常大，所以应尽量减少该语句块中放置的语句</p>
-<p><strong>捕获异常编程实例</strong><br>
-在 /home/project/ 目录下新建 CatchException.java</p>
-<pre><code>public class CatchException {
-    public static void main(String[] args) {
-        try {
-            // 下面定义了一个try语句块
-
-            System.out.println(&quot;I am try block.&quot;);
-
-            Class&lt;?&gt; tempClass = Class.forName(&quot;&quot;);
-            // 声明一个空的Class对象用于引发“类未发现异常”
-            System.out.println(&quot;Bye! Try block.&quot;);
-
-        } catch (ClassNotFoundException e) {
-            // 下面定义了一个catch语句块
-            System.out.println(&quot;I am catch block.&quot;);
-
-            e.printStackTrace();
-            //printStackTrace()的意义在于在命令行打印异常信息在程序中出错的位置及原因
-
-            System.out.println(&quot;Goodbye! Catch block.&quot;);
-
-        } finally {
-            // 下面定义了一个finally语句块
-            System.out.println(&quot;I am finally block.&quot;);
-        }
-    }
-}
-</code></pre>
-<p>编译运行</p>
-<pre><code>$ javac CatchException.java
-$ java CatchException
-I am try block.
-I am catch block.
-java.lang.ClassNotFoundException:
-        at java.lang.Class.forName0(Native Method)
-        at java.lang.Class.forName(Unknown Source)
-        at CatchException.main(CatchException.java:8)
-Goodbye! Catch block.
-I am finally block.
-</code></pre>
-<p>请你结合这些输出语句在源代码中的位置，再来体会一下三个语句块的作用</p>
-<p><strong>捕获多个异常</strong><br>
-在一段代码中，可能会由于各种原因抛出多种不同的异常，而对于不同的异常，我们希望用不同的方式来处理它们，而不是笼统的使用同一个方式处理，在这种情况下，可以使用异常匹配，当匹配到对应的异常后，后面的异常将不再进行匹配</p>
-<p><strong>编程实例</strong><br>
-在 /home/project/ 目录下新建源代码文件 MultipleCapturesDemo.java</p>
-<pre><code>import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
-public class MultipleCapturesDemo {
-    public static void main(String[] args) {
-        try {
-            new FileInputStream(&quot;&quot;);
-        } catch (FileNotFoundException e) {
-            System.out.println(&quot;IO 异常&quot;);
-        } catch (Exception e) {
-            System.out.println(&quot;发生异常&quot;);
-        }
-    }
-}
-</code></pre>
-<p>编译运行</p>
-<pre><code>$ javac MultipleCapturesDemo.java
-$ java MultipleCapturesDemo
-IO 异常
-</code></pre>
-<p>在处理异常时，并不要求抛出的异常同 catch 所声明的异常完全匹配，子类的对象也可以匹配父类的处理程序。比如异常 A 继承于异常 B，那么在处理多个异常时，一定要将异常 A 放在异常 B 之前捕获，如果将异常 B 放在异常 A 之前，那么将永远匹配到异常 B，异常 A 将永远不可能执行，并且编译器将会报错</p>
-<h2 id="自定义异常">自定义异常</h2>
-<p>尽管 Java SE 的 API 已经为我们提供了数十种异常类，然而在实际的开发过程中，你仍然可能遇到未知的异常情况。此时，你就需要对异常类进行自定义</p>
-<p>自定义一个异常类非常简单，只需要让它继承 Exception 或其子类就行。在自定义异常类的时候，建议同时提供无参构造方法和带字符串参数的构造方法，后者可以为你在调试时提供更加详细的信息</p>
-<p>百闻不如一见，下面我们尝试自定义一个算术异常类<br>
-在 /home/project/ 目录下创建一个 MyAriException 类<br>
-主要的代码如下</p>
-<pre><code>// MyAriException.java
-public class MyAriException extends ArithmeticException {
-    //自定义异常类，该类继承自ArithmeticException
-
-    public MyAriException() {
-
-    }
-    //实现默认的无参构造方法
-
-    public MyAriException(String msg) {
-        super(msg);
-    }
-    //实现可以自定义输出信息的构造方法，将待输出信息作为参数传入即可
-}
-</code></pre>
-<p>添加一个 ExceptionTest 类作为测试用，在该类的 main() 方法中，可以尝试使用 throw 抛出自定义的异常</p>
-<p>代码片段如下</p>
-<pre><code>// ExceptionTest.java
-import java.util.Arrays;
-
-public class ExceptionTest {
-    public static void main(String[] args) {
-        int[] array = new int[5];
-        //声明一个长度为5的数组
-
-        Arrays.fill(array, 5);
-        //将数组中的所有元素赋值为5
-
-        for (int i = 4; i &gt; -1; i--) {
-            //使用for循环逆序遍历整个数组，i每次递减
-
-            if (i == 0) {
-            // 如果i除以了0，就使用带异常信息的构造方法抛出异常
-
-                throw new MyAriException(&quot;There is an exception occured.&quot;);
-            }
-
-            System.out.println(&quot;array[&quot; + i + &quot;] / &quot; + i + &quot; = &quot; + array[i] / i);
-            // 如果i没有除以0，就输出此结果
-        }
-    }
-}
-</code></pre>
-<p>检查一下代码，编译并运行，期待中的自定义错误信息就展现在控制台中了</p>
-<pre><code>$ javac ExceptionTest.java MyAriException.java
-$ java ExceptionTest
-array[4] / 4 = 1
-array[3] / 3 = 1
-array[2] / 2 = 2
-array[1] / 1 = 5
-Exception in thread &quot;main&quot; MyAriException: There is an exception occured.
-    at ExceptionTest.main(ExceptionTest.java:17)
-</code></pre>
-<h2 id="异常堆栈">异常堆栈</h2>
-<p>当异常抛出后，我们可以通过异常堆栈追踪程序的运行轨迹，以便我们更好的 DEBUG</p>
-<p><strong>编程实例</strong><br>
-在 /home/project 目录下新建一个 ExceptionStackTrace.java</p>
-<pre><code>public class ExceptionStackTrace {
-    private static void method1() {
-        method2();
-    }
-
-    private static void method2() {
-        throw new NullPointerException();
-    }
-    public static void main(String[] args) {
-        try {
-            method1();
-        } catch (Exception e) {
-            //打印堆栈轨迹
-            e.printStackTrace();
-        }
-    }
-}
-</code></pre>
-<p>编译运行</p>
-<pre><code>$ javac ExceptionStackTrace.java
-$ java ExceptionStackTrace
-java.lang.NullPointerException
-    at ExceptionStackTrace.method2(ExceptionStackTrace.java:7)
-    at ExceptionStackTrace.method1(ExceptionStackTrace.java:3)
-    at ExceptionStackTrace.main(ExceptionStackTrace.java:11)
-</code></pre>
-<p>通过上面的异常堆栈轨迹，在对比我们方法的调用过程，可以得出异常信息中首先打印的是距离抛出异常最近的语句，接着是调用该方法的方法，一直到最开始被调用的方法。从下往上看，就可以得出程序运行的轨迹</p>
 ]]></content>
     </entry>
 </feed>
