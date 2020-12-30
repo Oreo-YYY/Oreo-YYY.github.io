@@ -1,0 +1,221 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>详解 FTP、FTPS 与 SFTP | NoteForStudy</title>
+<link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1609347936938">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="详解 FTP、FTPS 与 SFTP | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="FTP、FTPS 与 SFTP 简介
+FTP
+在看相关功能之前，二狗子发现客户端有三种不同的协议，分别是 FTP、FTPS 与 SFTP，为了弄清楚这是什么，二狗子打开了万能的百科。
+首先来了解一下什么是 FTP，维基百科说：FTP 即 文..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://y-rui.github.io">
+  <img class="avatar" src="https://y-rui.github.io/images/avatar.png?v=1609347936938" alt="">
+  </a>
+  <h1 class="site-title">
+    NoteForStudy
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/y-rui" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              详解 FTP、FTPS 与 SFTP
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-12-31
+              </span>
+              <span>
+                7 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="ftp-ftps-与-sftp-简介">FTP、FTPS 与 SFTP 简介</h2>
+<p><strong>FTP</strong><br>
+在看相关功能之前，二狗子发现客户端有三种不同的协议，分别是 FTP、FTPS 与 SFTP，为了弄清楚这是什么，二狗子打开了万能的百科。<br>
+首先来了解一下什么是 FTP，维基百科说：FTP 即 文件传输协议（英语：File Transfer Protocol 的缩写）是一个用于计算机网络上在客户端和服务器之间进行文件传输的应用层协议。完整的 FTP 是由 FTP 服务器 和 FTP 客户端组成的，客户端可以将本地的文件通过 FTP 协议上传到服务器，也可以将服务器的文件下载到本地。它是当今使用的最古老的文件传输协议之一，是一种非常便捷的移动文件的方式。</p>
+<p><strong>FTP 的工作原理</strong><br>
+FTP 连接需要 FTP 服务器和客户端两方在网络上建立通信。建立 FTP 连接时会有两个不同的通信通道。一个被称为命令通道，它的作用是发出和响应指令。另一个为数据通道，用于客户端和服务器端进行数据交互。<br>
+使用 FTP 传输文件时，用户需要通过向 FTP 服务器提供凭据来获得文件传输许可。当然某些公共 FTP 服务器可能不需要凭据即可访问其文件，但是无法保证数据传输的安全性，任何未加密公共网络上的数据发送都是非常危险的，所以为了保护传输数据的安全，由 FTP 衍生而出的就是下面的两种协议：FTPS 与 SFTP。</p>
+<p><strong>FTPS</strong><br>
+接下来二狗子查询了一下，发现 FPTS 有 FTPS 隐式 SSL 和 FTPS 显示 SSL 两种模式，两者都是用 SSL 加密。那么两者有什么区别呢？</p>
+<ul>
+<li>FTPS 隐式 SSL：该模式通常在端口 990 上运行。在这个模式下全部数据的交换都需要在客户端和服务器之间建立 SSL 会话，并且服务器会拒绝任何不使用 SSL 进行的连接尝试。</li>
+<li>FTPS 显式 SSL：显示 SSL 下服务器可以同时支持 FTP 和 FTPS 会话。开始会话前客户端需要先建立与 FTP 服务器的未加密连接，并在发送用户凭证前先发送 AUTH TLS 或 AUTH SSL 命令来请求服务器将命令通道切换到 SSL 加密通道，成功建立通道后再将用户凭证发送到 FTP 服务器，从而保证在会话期间的任何命令都可以通过 SSL 通道自动加密。</li>
+</ul>
+<p>二狗子来给大家简单快速的总结一下。当启用隐式模式时，FTP 的默认端口就被改为 TCP/990，服务器自动建立安全连接，并且要求客户端也必须支持安全连接模式也就是使用 SSL 进行连接。当启用显式模式时，与 FTP 连接方式和默认端口一样，但是需要以命令 AUTH SSL/TLS 类型的命令进行激活安全连接后才能正常传输数据。</p>
+<p><strong>SFTP</strong><br>
+最后大家来一起看看 SFTP，SFTP 是 Secure File Transfer Protocol 的缩写，也叫作安全文件传送协议。</p>
+<p>如果说 FTPS 是在 FTP 协议上增加了一层 SSL ，那么 SFTP 就是是基于网络协议SSH（安全外壳）的协议与前面所说的 FTP 完全不同。SFTP 不使用单独的命令通道和数据通道，而是数据和命令都会通过单个连接以特殊格式的数据包进行传输。</p>
+<p>SFTP 提供了两种验证连接的方法。</p>
+<ul>
+<li>与 FTP 一样，连接时只需要验证用户 ID 和密码就可以了。但是，与FTP不同的是，这些凭据是加密的，这是 SFTP 最主要的安全优势。</li>
+<li>除密码外，还可以通过 SSH 密钥来验证并通过 SFTP 协议连接。</li>
+</ul>
+<p>了解了这几个协议之后，二狗子使用 FTP 客户端工具就更加顺手了，他可以根据自己的需求更改协议以及加密方式，而不用为不懂某个设置而烦恼。<br>
+<img src="https://y-rui.github.io/post-images/1609347666217.png" alt="" loading="lazy"><br>
+但是，新的疑问又出现了，二狗子看到这里的传输设置中的传输模式，有主动和被动之分，这又是什么意思呢。不懂就问的他又打开了 Google…<br>
+<img src="https://y-rui.github.io/post-images/1609347681998.png" alt="" loading="lazy"></p>
+<h2 id="ftp-软件的主动模式和被动模式的区别">FTP 软件的主动模式和被动模式的区别</h2>
+<p><strong>主动模式</strong><br>
+一般 FTP 的默认模式就是主动模式，也称为 port 模式。</p>
+<p>它是通过两个步骤来进行工作的：</p>
+<ul>
+<li>首先客户端上的随机端口与服务器上的 FTP 端口 21 建立命令通道，客户端发送 PORT 命令，指定服务器与客户端其中一个端口连接，并建立数据通道。</li>
+<li>然后服务器从端口 20 连接到为数据通道指定的客户端端口。建立连接后，即可通过这些客户端和服务器端口进行文件传输。</li>
+</ul>
+<p><strong>被动模式</strong><br>
+在传输方式栏，你还可以手动调整为被动传输模式，在该模式下用户端进行文件传输时，会先通过随机端口 A 连接到服务器上的端口 21，并发出 PASV 命令建立命令通道，告诉服务端这次是被动模式连接。之后服务器会打开一个随机端口用于数据传输，而客户端通过与发出命令的端口不同的随机端口 B 建立数据通道，从而进行文件传输。<br>
+<img src="https://y-rui.github.io/post-images/1609347745767.png" alt="" loading="lazy"><br>
+被动模式与主动模式不同的地方就是客户端启动数据连接。在主动模式下，客户端在命令通道上建立连接后，服务器将启动与客户端的数据连接。而在被动模式下，建立命令通道后，由客户端启动与服务器的数据连接。</p>
+<p>因为这个区别，可以得出两者的优势和缺陷。比如主动模式有利于管理 FTP 服务端，因为只需要打开 21 端口的“准入”、20 端口的“准出” 即可，但是由于服务器连接到客户端的端口随机，所以客户端有可能会触发防火墙，甚至直接被防火墙拦截掉。反之被动模式则有利于管理客户端。</p>
+<p>没想到一个看似简单的存储工具居然还有着这么多的分类和区别，不同的模式不同的方式都可以对应不同的需求，看来以后在使用工具的时候还是可以多少了解一点相关知识，能让工具用起来更顺手更舒心~</p>
+<p>| 来自：知乎，作者： 又拍云<br>
+| 链接：https://zhuanlan.zhihu.com/p/208617545</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#ftp-ftps-%E4%B8%8E-sftp-%E7%AE%80%E4%BB%8B">FTP、FTPS 与 SFTP 简介</a></li>
+<li><a href="#ftp-%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%B8%BB%E5%8A%A8%E6%A8%A1%E5%BC%8F%E5%92%8C%E8%A2%AB%E5%8A%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB">FTP 软件的主动模式和被动模式的区别</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://y-rui.github.io/post/macos-xia-mysql80-wang-ji-mi-ma-chong-zhi-cao-zuo/">
+              <h3 class="post-title">
+                MacOS下MySQL8.0忘记密码重置操作
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/y-rui" target="_blank">y-rui</a>
+  <a class="rss" href="https://y-rui.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
