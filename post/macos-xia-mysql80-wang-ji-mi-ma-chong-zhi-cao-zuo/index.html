@@ -2,23 +2,25 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Python基础4-控制流If-else | NoteForStudy</title>
+<title>MacOS下MySQL8.0忘记密码充值操作 | NoteForStudy</title>
 <link rel="shortcut icon" href="https://y-rui.github.io/favicon.ico?v=1609347270104">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://y-rui.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Python基础4-控制流If-else | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="MacOS下MySQL8.0忘记密码充值操作 | NoteForStudy - Atom Feed" href="https://y-rui.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="If 语句
-if expression:
-    do this
+    <meta name="description" content="关闭数据库服务
+跳过权限认证
+// 进入数据库指令文件
+cd /usr/local/mysql/bin
+// 跳过权限认证
+sudo ./mysqld_safe --skip-grant-tables
 
-
-如果表达式 expression 的值为真（不为零的任何值都为真），程序将执行缩进后的内容。务必要使用正确的缩进，在表达式为真的情况将会执行缩进的所有行
-一个简单的例子，..." />
-    <meta name="keywords" content="Python,实验楼" />
+免密码进入数据库
+在上述指令运行后，..." />
+    <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -84,85 +86,58 @@ if expression:
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              Python基础4-控制流If-else
+              MacOS下MySQL8.0忘记密码充值操作
             </h2>
             <div class="post-info">
               <span>
-                2020-08-16
+                2020-12-31
               </span>
               <span>
                 2 min read
               </span>
               
-                <a href="https://y-rui.github.io/tag/uGwwKRarA/" class="post-tag">
-                  # Python
-                </a>
-              
-                <a href="https://y-rui.github.io/tag/ZJvG0o9NN/" class="post-tag">
-                  # 实验楼
-                </a>
-              
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h2 id="if-语句">If 语句</h2>
-<pre><code>if expression:
-    do this
+                <h2 id="关闭数据库服务">关闭数据库服务</h2>
+<h2 id="跳过权限认证">跳过权限认证</h2>
+<pre><code>// 进入数据库指令文件
+cd /usr/local/mysql/bin
+// 跳过权限认证
+sudo ./mysqld_safe --skip-grant-tables
 </code></pre>
-<ul>
-<li>如果表达式 expression 的值为真（不为零的任何值都为真），程序将执行缩进后的内容。务必要使用正确的缩进，在表达式为真的情况将会执行缩进的所有行</li>
-<li>一个简单的例子，使用vim写入文件 /home/shiyanlou/number100.py，程序接受用户输入的一个数并且检查这个数是否小于 100</li>
-</ul>
-<pre><code>#!/usr/bin/env python3
-number = int(input(&quot;Enter a number: &quot;))
-if number &lt; 100:
-    print(&quot;The number is less than 100&quot;)
+<h2 id="免密码进入数据库">免密码进入数据库</h2>
+<p>在上述指令运行后，新开一个终端，同时保持原来那个终端也开着，在新的终端输入指令如下：</p>
+<pre><code>//  执行mysql指令
+/usr/local/mysql/bin/mysql
+// 进入名为&lt;mysql&gt;的数据库
+use mysql
+// 刷新权限
+flush privileges;
+// 修改密码 但不适用于8.0+的版本
+// set password for 'root'@'localhost' = password('新的密码');
+// 8.0+版本修改密码
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root123456';
+
+// 退出mysql
+exit
 </code></pre>
-<pre><code>cd /home/shiyanlou
-chmod +x number100.py
-./number100.py
-</code></pre>
-<h2 id="else-语句">Else 语句</h2>
-<ul>
-<li>在上面的例子中，我们想要这样做：如果输入数大于 100 则打印 &quot;Greater than&quot;。我们使用 else 语句来做到这一点，它将在 if 语句未满足的情况时工作</li>
-</ul>
-<pre><code>#!/usr/bin/env python3
-number = int(input(&quot;Enter a number: &quot;))
-if number &lt; 100:
-    print(&quot;The number is less than 100&quot;)
-else:
-    print(&quot;The number is greater than 100&quot;)
-</code></pre>
-<ul>
-<li>另一个非常基础的例子</li>
-</ul>
-<pre><code>&gt;&gt;&gt; x = int(input(&quot;Please enter an integer: &quot;))
-&gt;&gt;&gt; if x &lt; 0:
-...      x = 0
-...      print('Negative changed to zero')
-... elif x == 0:
-...      print('Zero')
-... elif x == 1:
-...      print('Single')
-... else:
-...      print('More')
-</code></pre>
-<ul>
-<li>在上面的例子中，elif 是 else if 的缩写</li>
-</ul>
-<h2 id="真值检测">真值检测</h2>
-<ul>
-<li>检测真值的优雅方式是这样的</li>
-</ul>
-<pre><code>if x:
-    pass
-</code></pre>
-<ul>
-<li>不要像下面这样做</li>
-</ul>
-<pre><code>if x == True:
-    pass
+<h2 id="配置环境变量">配置环境变量</h2>
+<p>vi ~/.zshrc，在这里面添加：</p>
+<p>export PATH=${PATH}:/usr/local/mysql/bin</p>
+<p>保存后 source ~/.zshrc</p>
+<h2 id="mac-navicat-出现-2003-cant-connect-to-mysql-server-on-127001-61-connection-refused">Mac Navicat 出现 2003 - Can't connect to MySQL server on '127.0.0.1' (61 &quot;Connection refused&quot;)</h2>
+<ol>
+<li>
+<p>首先找到你的数据库鼠标右键编辑链接；</p>
+</li>
+<li>
+<p>找到第二个选项勾选上 useSockt file;</p>
+</li>
+</ol>
+<h2 id="命令行中停止mysql服务">命令行中停止mysql服务</h2>
+<pre><code>sudo /usr/local/mysql/bin/mysqladmin -u root -p root123456 shutdown
 </code></pre>
 
               </div>
@@ -170,9 +145,12 @@ else:
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#if-%E8%AF%AD%E5%8F%A5">If 语句</a></li>
-<li><a href="#else-%E8%AF%AD%E5%8F%A5">Else 语句</a></li>
-<li><a href="#%E7%9C%9F%E5%80%BC%E6%A3%80%E6%B5%8B">真值检测</a></li>
+<li><a href="#%E5%85%B3%E9%97%AD%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9C%8D%E5%8A%A1">关闭数据库服务</a></li>
+<li><a href="#%E8%B7%B3%E8%BF%87%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81">跳过权限认证</a></li>
+<li><a href="#%E5%85%8D%E5%AF%86%E7%A0%81%E8%BF%9B%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93">免密码进入数据库</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F">配置环境变量</a></li>
+<li><a href="#mac-navicat-%E5%87%BA%E7%8E%B0-2003-cant-connect-to-mysql-server-on-127001-61-connection-refused">Mac Navicat 出现 2003 - Can't connect to MySQL server on '127.0.0.1' (61 &quot;Connection refused&quot;)</a></li>
+<li><a href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E5%81%9C%E6%AD%A2mysql%E6%9C%8D%E5%8A%A1">命令行中停止mysql服务</a></li>
 </ul>
 </li>
 </ul>
@@ -185,9 +163,9 @@ else:
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://y-rui.github.io/post/python-ji-chu-4-yuan-de-mian-ji/">
+            <a href="https://y-rui.github.io/post/hadoop-ji-chu-1-hadoop-jie-shao-yu-an-zhuang/">
               <h3 class="post-title">
-                Python挑战1-圆的面积
+                Hadoop基础1-Hadoop 介绍与安装
               </h3>
             </a>
           </div>
